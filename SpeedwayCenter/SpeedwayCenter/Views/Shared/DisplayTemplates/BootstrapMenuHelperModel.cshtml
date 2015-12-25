@@ -16,7 +16,8 @@
                         string url = node.IsClickable ? node.Url : "#";
                         var route = ViewContext.RouteData;
                         var action = route.Values["Action"];
-                        var active = action.ToString() == @node.Action ? "active" : string.Empty;
+                        var controller = route.Values["Controller"];
+                        var active = action.ToString() == @node.Action && controller.ToString() == node.Controller ? "active" : string.Empty;
                         <li class="@active"><a href="@url">@node.Title</a></li>
                         if (node != nodeList.Last())
                         {
