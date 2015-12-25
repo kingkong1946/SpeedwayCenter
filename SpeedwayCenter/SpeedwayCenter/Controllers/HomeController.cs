@@ -19,5 +19,11 @@ namespace SpeedwayCenter.Controllers
             ViewBag.Page = "About";
             return View();
         }
+
+        public ActionResult Contact()
+        {
+            ViewBag.Page = "Contact";
+            return View();
+        }
     }
 }
