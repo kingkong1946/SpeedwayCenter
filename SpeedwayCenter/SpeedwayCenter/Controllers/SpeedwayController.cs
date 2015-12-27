@@ -9,7 +9,6 @@ namespace SpeedwayCenter.Controllers
 {
     public class SpeedwayController : Controller
     {
-        private DbContext context;
         public ActionResult Index()
         {
             return View();

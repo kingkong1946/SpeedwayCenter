@@ -1,7 +1,7 @@
 using System.Configuration;
 using System.Data.Entity;
-using SharpRepository.Ioc.Ninject;
-using SharpRepository.Repository.Ioc;
+using System.Web.Mvc;
+using SpeedwayCenter.Infrastructure;
 using SpeedwayCenter.Models.Entity_Framework;
 
 [assembly: WebActivatorEx.PreApplicationStartMethod(typeof(SpeedwayCenter.App_Start.NinjectWebCommon), "Start")]
@@ -67,13 +67,7 @@ namespace SpeedwayCenter.App_Start
         /// <param name="kernel">The kernel.</param>
         private static void RegisterServices(IKernel kernel)
         {
-            kernel.BindSharpRepository();
-            RepositoryDependencyResolver.SetDependencyResolver(new NinjectDependencyResolver(kernel));
-            kernel.Bind<DbContext>()
-                .To<SpeedwayEntities>()
-                .InRequestScope()
-                .WithConstructorArgument("connectionString",
-                    ConfigurationManager.ConnectionStrings["SpeedwayEntities"].ConnectionString);
+            DependencyResolver.SetResolver(new SpeedwayDependencyResolver(kernel));
         }        
     }
 }

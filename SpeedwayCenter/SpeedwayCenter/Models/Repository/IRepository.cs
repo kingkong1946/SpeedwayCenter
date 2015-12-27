@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace SpeedwayCenter.Models.Repository
 {
-    internal interface IRepository<T> where T: DbContext
+    internal interface IRepository<T> where T: class 
     {
         IQueryable<T> GetAll();
         T Find(int Id);
