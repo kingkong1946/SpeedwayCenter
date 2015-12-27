@@ -8,10 +8,9 @@ using System.Threading.Tasks;
 
 namespace SpeedwayCenter.Models.Repository
 {
-    internal interface IRepository<T> where T: class 
+    public interface IRepository<T> where T: class 
     {
         IQueryable<T> GetAll();
-        T Find(int Id);
         IQueryable<T> FindBy(Expression<Func<T, bool>> predicate);
         void Add(T entity);
         void Delete(T entity);
