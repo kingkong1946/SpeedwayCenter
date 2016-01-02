@@ -153,6 +153,14 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\basic-styles.css" />
+    <Content Include="Content\bootstrap-datepicker.css" />
+    <Content Include="Content\bootstrap-datepicker.min.css" />
+    <Content Include="Content\bootstrap-datepicker.standalone.css" />
+    <Content Include="Content\bootstrap-datepicker.standalone.min.css" />
+    <Content Include="Content\bootstrap-datepicker3.css" />
+    <Content Include="Content\bootstrap-datepicker3.min.css" />
+    <Content Include="Content\bootstrap-datepicker3.standalone.css" />
+    <Content Include="Content\bootstrap-datepicker3.standalone.min.css" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
@@ -192,10 +200,77 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="scripts\jquery-1.9.1.intellisense.js" />
+    <Content Include="scripts\bootstrap-datepicker.js" />
+    <Content Include="scripts\bootstrap-datepicker.min.js" />
     <Content Include="scripts\bootstrap.js" />
     <Content Include="scripts\bootstrap.min.js" />
     <Content Include="scripts\jquery-1.9.1.js" />
     <Content Include="scripts\jquery-1.9.1.min.js" />
+    <Content Include="scripts\locales\bootstrap-datepicker.ar.min.js" />
+    <Content Include="scripts\locales\bootstrap-datepicker.az.min.js" />
+    <Content Include="scripts\locales\bootstrap-datepicker.bg.min.js" />
+    <Content Include="scripts\locales\bootstrap-datepicker.bs.min.js" />
+    <Content Include="scripts\locales\bootstrap-datepicker.ca.min.js" />
+    <Content Include="scripts\locales\bootstrap-datepicker.cs.min.js" />
+    <Content Include="scripts\locales\bootstrap-datepicker.cy.min.js" />
+    <Content Include="scripts\locales\bootstrap-datepicker.da.min.js" />
+    <Content Include="scripts\locales\bootstrap-datepicker.de.min.js" />
+    <Content Include="scripts\locales\bootstrap-datepicker.el.min.js" />
+    <Content Include="scripts\locales\bootstrap-datepicker.en-GB.min.js" />
+    <Content Include="scripts\locales\bootstrap-datepicker.eo.min.js" />
+    <Content Include="scripts\locales\bootstrap-datepicker.es.min.js" />
+    <Content Include="scripts\locales\bootstrap-datepicker.et.min.js" />
+    <Content Include="scripts\locales\bootstrap-datepicker.eu.min.js" />
+    <Content Include="scripts\locales\bootstrap-datepicker.fa.min.js" />
+    <Content Include="scripts\locales\bootstrap-datepicker.fi.min.js" />
+    <Content Include="scripts\locales\bootstrap-datepicker.fo.min.js" />
+    <Content Include="scripts\locales\bootstrap-datepicker.fr-CH.min.js" />
+    <Content Include="scripts\locales\bootstrap-datepicker.fr.min.js" />
+    <Content Include="scripts\locales\bootstrap-datepicker.gl.min.js" />
+    <Content Include="scripts\locales\bootstrap-datepicker.he.min.js" />
+    <Content Include="scripts\locales\bootstrap-datepicker.hr.min.js" />
+    <Content Include="scripts\locales\bootstrap-datepicker.hu.min.js" />
+    <Content Include="scripts\locales\bootstrap-datepicker.hy.min.js" />
+    <Content Include="scripts\locales\bootstrap-datepicker.id.min.js" />
+    <Content Include="scripts\locales\bootstrap-datepicker.is.min.js" />
+    <Content Include="scripts\locales\bootstrap-datepicker.it-CH.min.js" />
+    <Content Include="scripts\locales\bootstrap-datepicker.it.min.js" />
+    <Content Include="scripts\locales\bootstrap-datepicker.ja.min.js" />
+    <Content Include="scripts\locales\bootstrap-datepicker.ka.min.js" />
+    <Content Include="scripts\locales\bootstrap-datepicker.kh.min.js" />
+    <Content Include="scripts\locales\bootstrap-datepicker.kk.min.js" />
+    <Content Include="scripts\locales\bootstrap-datepicker.ko.min.js" />
+    <Content Include="scripts\locales\bootstrap-datepicker.kr.min.js" />
+    <Content Include="scripts\locales\bootstrap-datepicker.lt.min.js" />
+    <Content Include="scripts\locales\bootstrap-datepicker.lv.min.js" />
+    <Content Include="scripts\locales\bootstrap-datepicker.me.min.js" />
+    <Content Include="scripts\locales\bootstrap-datepicker.mk.min.js" />
+    <Content Include="scripts\locales\bootstrap-datepicker.mn.min.js" />
+    <Content Include="scripts\locales\bootstrap-datepicker.ms.min.js" />
+    <Content Include="scripts\locales\bootstrap-datepicker.nb.min.js" />
+    <Content Include="scripts\locales\bootstrap-datepicker.nl-BE.min.js" />
+    <Content Include="scripts\locales\bootstrap-datepicker.nl.min.js" />
+    <Content Include="scripts\locales\bootstrap-datepicker.no.min.js" />
+    <Content Include="scripts\locales\bootstrap-datepicker.pl.min.js" />
+    <Content Include="scripts\locales\bootstrap-datepicker.pt-BR.min.js" />
+    <Content Include="scripts\locales\bootstrap-datepicker.pt.min.js" />
+    <Content Include="scripts\locales\bootstrap-datepicker.ro.min.js" />
+    <Content Include="scripts\locales\bootstrap-datepicker.rs-latin.min.js" />
+    <Content Include="scripts\locales\bootstrap-datepicker.rs.min.js" />
+    <Content Include="scripts\locales\bootstrap-datepicker.ru.min.js" />
+    <Content Include="scripts\locales\bootstrap-datepicker.sk.min.js" />
+    <Content Include="scripts\locales\bootstrap-datepicker.sl.min.js" />
+    <Content Include="scripts\locales\bootstrap-datepicker.sq.min.js" />
+    <Content Include="scripts\locales\bootstrap-datepicker.sr-latin.min.js" />
+    <Content Include="scripts\locales\bootstrap-datepicker.sr.min.js" />
+    <Content Include="scripts\locales\bootstrap-datepicker.sv.min.js" />
+    <Content Include="scripts\locales\bootstrap-datepicker.sw.min.js" />
+    <Content Include="scripts\locales\bootstrap-datepicker.th.min.js" />
+    <Content Include="scripts\locales\bootstrap-datepicker.tr.min.js" />
+    <Content Include="scripts\locales\bootstrap-datepicker.uk.min.js" />
+    <Content Include="scripts\locales\bootstrap-datepicker.vi.min.js" />
+    <Content Include="scripts\locales\bootstrap-datepicker.zh-CN.min.js" />
+    <Content Include="scripts\locales\bootstrap-datepicker.zh-TW.min.js" />
     <Content Include="Web.config" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\_ViewStart.cshtml" />
@@ -212,6 +287,7 @@
     <Compile Include="Models\Entity Framework\Rider.cs">
       <DependentUpon>Speedway.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Entity Framework\RiderExtention.cs" />
     <Compile Include="Models\Entity Framework\Speedway.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -253,6 +329,7 @@
     <Content Include="Views\Shared\DisplayTemplates\CanonicalHelperModel.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\BootstrapMenuHelperModel.cshtml" />
     <Content Include="Views\Speedway\Index.cshtml" />
+    <Content Include="Views\Speedway\Add.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

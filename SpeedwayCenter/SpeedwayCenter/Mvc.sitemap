@@ -7,6 +7,7 @@
     <mvcSiteMapNode title="Riders" controller="Speedway" action="Index"/>
     <mvcSiteMapNode title="About" controller="Home" action="About"/>
     <mvcSiteMapNode title="Contact" controller="Home" action="Contact"/>
+    <mvcSiteMapNode title="Add" controller="Speedway" action="Add"/>
   </mvcSiteMapNode>
 
 </mvcSiteMap>

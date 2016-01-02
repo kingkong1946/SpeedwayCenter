@@ -1,0 +1,39 @@
+﻿@using System.Web.UI.WebControls
+@model SpeedwayCenter.Models.Entity_Framework.Rider
+
+@{
+    ViewBag.Title = "Add";
+}
+
+<div class="col-sm-offset-3 col-sm-6">
+    <form role="form">
+        <div class="form-group input-group-sm">
+            @Html.LabelFor(model => model.FirstName)
+            @Html.TextBoxFor(model => model.FirstName, new { @class = "form-control", @pattern = "{1,20}" })
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.LastName)
+            @Html.TextBoxFor(model => model.LastName, new { @class = "form-control", @pattern = "{1,20}" })
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.BirthDate)
+            @Html.TextBoxFor(model => model.BirthDate, new { @class = "form-control datepicker" })
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.Country)
+            @Html.TextBoxFor(model => model.Country, new { @class = "form-control", @pattern = "{0,20}" })
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.Photo)
+            <input type="file" id="Photo" accept="image/*"/>
+        </div>
+    </form>
+</div>
+<script type="text/javascript">
+    $(function () {
+        $(".datepicker").datepicker({
+            startDate: '-100y',
+            orientation: 'bottom'
+        });
+    });
+</script>

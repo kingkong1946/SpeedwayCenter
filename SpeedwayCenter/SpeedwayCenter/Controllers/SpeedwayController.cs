@@ -11,7 +11,7 @@ namespace SpeedwayCenter.Controllers
 {
     public class SpeedwayController : Controller
     {
-        private IRepository<Rider> _repository;
+        private readonly IRepository<Rider> _repository;
 
         public SpeedwayController(IRepository<Rider> repository)
         {
@@ -22,6 +22,12 @@ namespace SpeedwayCenter.Controllers
         {
             var records = _repository.GetAll();
             return View(records);
+        }
+
+        [HttpGet]
+        public ActionResult Add()
+        {
+            return View();
         }
     }
 }
