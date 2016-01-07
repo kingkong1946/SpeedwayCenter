@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Drawing;
+using System.Drawing.Imaging;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -32,21 +34,29 @@ namespace SpeedwayCenter.Controllers
         }
 
         [HttpPost]
-        public ActionResult Add(Rider rider)
+        public ActionResult Add(Rider rider, HttpPostedFileBase file)
         {
+            if (file != null)
+            {
+                using (var stream = file.InputStream)
+                {
+                    Image photo = new Bitmap(stream);
+                    rider.Photo = photo;
+                }
+            }
             _repository.Add(rider);
             _repository.Save();
             var records = _repository.GetAll();
             return View("Index", records);
         }
-        
+
         public ActionResult Delete(int id)
         {
             var entity = _repository.FindBy(rider => rider.Id == id).FirstOrDefault();
             _repository.Delete(entity);
             _repository.Save();
             var records = _repository.GetAll();
-            return View ("Index", records);
+            return View("Index", records);
         }
     }
 }
