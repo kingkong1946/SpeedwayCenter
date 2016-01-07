@@ -1,3 +1,4 @@
+using System.ComponentModel;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
@@ -38,31 +39,38 @@ namespace SpeedwayCenter.Models.Entity_Framework
         [RegularExpression("^[A-Z][A-Za-z]+", ErrorMessage = "The first letter must be uppercase")]
         public string Country { get; set; }
 
-        public byte[] Image { get; set; }
-        private Image _photo;
+        //[RegularExpression("^\\w+\\.[A-Za-z]{3,4}")]
+        [DisplayName("Photo")]
+        public string Image { get; set; }
+
         [NotMapped]
-        public Image Photo
-        {
-            get
-            {
-                Image tmp;
-                if (_photo != null) tmp = _photo;
-                if (Image == null) return null;
-                using (var ms = new MemoryStream(Image))
-                {
-                    tmp = System.Drawing.Image.FromStream(ms);
-                }
-                return tmp;
-            }
-            set
-            {
-                _photo = value;
-                using (var ms = new MemoryStream())
-                {
-                    _photo.Save(ms, _photo.RawFormat);
-                    Image = ms.ToArray();
-                }
-            }
-        }
+        public string Name => $"{FirstName} {LastName}";
+
+        //public byte[] Image { get; set; }
+        //private Image _photo;
+        //[NotMapped]
+        //public Image Photo
+        //{
+        //    get
+        //    {
+        //        Image tmp;
+        //        if (_photo != null) tmp = _photo;
+        //        if (Image == null) return null;
+        //        using (var ms = new MemoryStream(Image))
+        //        {
+        //            tmp = System.Drawing.Image.FromStream(ms);
+        //        }
+        //        return tmp;
+        //    }
+        //    set
+        //    {
+        //        _photo = value;
+        //        using (var ms = new MemoryStream())
+        //        {
+        //            _photo.Save(ms, _photo.RawFormat);
+        //            Image = ms.ToArray();
+        //        }
+        //    }
+        //}
     }
 }

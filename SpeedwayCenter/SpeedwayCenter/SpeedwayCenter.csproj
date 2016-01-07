@@ -163,6 +163,8 @@
     <Content Include="Content\bootstrap-datepicker3.standalone.min.css" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
+    <Content Include="Content\bootstrap-old.css" />
+    <Content Include="Content\bootstrap-old.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\Images\myPicture.jpg" />
@@ -279,6 +281,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Infrastructure\SpeedwayDependencyResolver.cs" />
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Entity Framework\Rider.cs" />
     <Compile Include="Models\Entity Framework\Speedway.cs" />
     <Compile Include="Models\Repository\Entity.cs" />
@@ -308,6 +311,7 @@
     <Content Include="Views\Shared\DisplayTemplates\BootstrapMenuHelperModel.cshtml" />
     <Content Include="Views\Speedway\Index.cshtml" />
     <Content Include="Views\Speedway\Add.cshtml" />
+    <Content Include="Views\Speedway\Details.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -317,6 +321,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Photos\" />
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />

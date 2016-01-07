@@ -10,6 +10,7 @@ namespace SpeedwayCenter.Models.Entity_Framework
         public Speedway()
             : base("name=Speedway")
         {
+            Database.SetInitializer(new MigrateDatabaseToLatestVersion<Speedway, SpeedwayCenter.Migrations.Configuration>("Speedway"));
         }
 
         public virtual DbSet<Rider> Riders { get; set; }
