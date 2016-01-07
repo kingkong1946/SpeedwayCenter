@@ -11,11 +11,24 @@ namespace SpeedwayCenter.Models.Repository
 {
     public class RiderRepository<T> : Entity<Rider, T> where T : DbContext, new()
     {
-        private Image _image;
-        public Image Image
+        public RiderRepository(T context) : base(context)
         {
-            get { return _image; }
-            set { _image = value; }
         }
+
+        public RiderRepository() : this(new T())
+        {
+        }
+        
+        public void Delete(int i)
+        {
+            var entity = FindBy(rider => rider.Id == i);
+            Delete(entity.FirstOrDefault());
+        }
+        //private Image _image;
+        //public Image Image
+        //{
+        //    get { return _image; }
+        //    set { _image = value; }
+        //}
     }
 }

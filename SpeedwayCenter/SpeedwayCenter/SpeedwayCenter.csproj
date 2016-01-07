@@ -168,16 +168,6 @@
     <Content Include="Content\Images\myPicture.jpg" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
-    <Content Include="Models\Entity Framework\Speedway.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>Speedway.edmx</DependentUpon>
-      <LastGenOutput>Speedway.Context.cs</LastGenOutput>
-    </Content>
-    <Content Include="Models\Entity Framework\Speedway.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>Speedway.edmx</DependentUpon>
-      <LastGenOutput>Speedway.cs</LastGenOutput>
-    </Content>
     <Content Include="scripts\ai.0.15.0-build58334.js" />
     <Content Include="scripts\ai.0.15.0-build58334.min.js" />
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
@@ -189,23 +179,26 @@
     <Content Include="Content\bootstrap-theme.min.css.map" />
     <Content Include="Content\bootstrap-theme.css.map" />
     <Content Include="Mvc.sitemap" />
-    <EntityDeploy Include="Models\Entity Framework\Speedway.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>Speedway.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="Models\Entity Framework\Speedway.edmx.diagram">
-      <DependentUpon>Speedway.edmx</DependentUpon>
-    </Content>
     <None Include="MvcSiteMapSchema.xsd">
       <SubType>Designer</SubType>
     </None>
     <None Include="scripts\jquery-1.9.1.intellisense.js" />
     <Content Include="scripts\bootstrap-datepicker.js" />
     <Content Include="scripts\bootstrap-datepicker.min.js" />
+    <Content Include="scripts\bootstrap-validate.js" />
     <Content Include="scripts\bootstrap.js" />
     <Content Include="scripts\bootstrap.min.js" />
     <Content Include="scripts\jquery-1.9.1.js" />
     <Content Include="scripts\jquery-1.9.1.min.js" />
+    <None Include="scripts\jquery-2.1.4.intellisense.js" />
+    <Content Include="scripts\jquery-2.1.4.js" />
+    <Content Include="scripts\jquery-2.1.4.min.js" />
+    <Content Include="scripts\jquery-2.1.4.min.map" />
+    <None Include="scripts\jquery.validate-vsdoc.js" />
+    <Content Include="scripts\jquery.validate.js" />
+    <Content Include="scripts\jquery.validate.min.js" />
+    <Content Include="scripts\jquery.validate.unobtrusive.js" />
+    <Content Include="scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="scripts\locales\bootstrap-datepicker.ar.min.js" />
     <Content Include="scripts\locales\bootstrap-datepicker.az.min.js" />
     <Content Include="scripts\locales\bootstrap-datepicker.bg.min.js" />
@@ -271,7 +264,9 @@
     <Content Include="scripts\locales\bootstrap-datepicker.vi.min.js" />
     <Content Include="scripts\locales\bootstrap-datepicker.zh-CN.min.js" />
     <Content Include="scripts\locales\bootstrap-datepicker.zh-TW.min.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\_ViewStart.cshtml" />
   </ItemGroup>
@@ -284,25 +279,8 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Infrastructure\SpeedwayDependencyResolver.cs" />
-    <Compile Include="Models\Entity Framework\Rider.cs">
-      <DependentUpon>Speedway.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Entity Framework\RiderExtention.cs" />
-    <Compile Include="Models\Entity Framework\Speedway.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Speedway.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Entity Framework\Speedway.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Speedway.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Entity Framework\Speedway.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Speedway.edmx</DependentUpon>
-    </Compile>
+    <Compile Include="Models\Entity Framework\Rider.cs" />
+    <Compile Include="Models\Entity Framework\Speedway.cs" />
     <Compile Include="Models\Repository\Entity.cs" />
     <Compile Include="Models\Repository\IRepository.cs" />
     <Compile Include="Models\Repository\RiderRepository.cs" />

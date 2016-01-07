@@ -15,12 +15,16 @@ namespace SpeedwayCenter.Models.Repository
         where C : class 
     {
         private bool _disposed;
-        protected T _context = new T();
-        protected DbSet<C> _table;
+        protected T _context;
+        protected DbSet<C> Table;
 
-        public Entity()
+        protected Entity(T context)
         {
-            _table = _context.Set<C>();
+            _context = context;
+        }
+
+        protected Entity() : this(new T())
+        {
         }
 
         public void Dispose()

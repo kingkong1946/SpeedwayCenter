@@ -21,7 +21,7 @@ namespace SpeedwayCenter.Infrastructure
 
         private void AddBindings()
         {
-            _kernel.Bind<IRepository<Rider>>().To<RiderRepository<SpeedwayEntities>>();
+            _kernel.Bind<IRepository<Rider>>().To<RiderRepository<Speedway>>();
         }
 
         public object GetService(Type serviceType)
