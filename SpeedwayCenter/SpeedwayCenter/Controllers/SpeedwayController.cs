@@ -44,7 +44,7 @@ namespace SpeedwayCenter.Controllers
                 //    var formatPosition = file.FileName.IndexOf('.');
                 //    var format = file.FileName.Substring(formatPosition);
                 //    var path = HttpContext.Server.MapPath("~/Photos/" + rider.Id + format);
-                var serverPath = $"~/Photos/{rider.Id}.png";
+                var serverPath = $"~/Photos/{rider.GetHashCode()}.png";
                 var path = HttpContext.Server.MapPath(serverPath);
                 file.SaveAs(path);
                 //using (var image = Image.FromStream(file.InputStream))
@@ -84,6 +84,33 @@ namespace SpeedwayCenter.Controllers
         {
             var entity = _repository.FindBy(rider => rider.Id == id).FirstOrDefault();
             return View(entity);
+        }
+
+        [HttpGet]
+        public ActionResult Edit(int id)
+        {
+            var entity = _repository.FindBy(rider => rider.Id == id).FirstOrDefault();
+            return View(entity);
+        }
+
+        [HttpPost]
+        public ActionResult Edit(Rider rider, HttpPostedFileBase file)
+        {
+            if (file != null)
+            {
+                //TODO Put this code to privates methods
+                if (System.IO.File.Exists(rider.Image))
+                {
+                    System.IO.File.Delete(rider.Image);
+                }
+                var serverPath = HttpContext.Server.MapPath(rider.Image);
+                file.SaveAs(serverPath);
+                rider.Image = serverPath;
+            }
+            _repository.Edit(rider);
+            _repository.Save();
+            var records = _repository.GetAll();
+            return View("Index", records);
         }
     }
 }

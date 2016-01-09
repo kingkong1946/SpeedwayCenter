@@ -312,6 +312,8 @@
     <Content Include="Views\Speedway\Index.cshtml" />
     <Content Include="Views\Speedway\Add.cshtml" />
     <Content Include="Views\Speedway\Details.cshtml" />
+    <Content Include="Views\Speedway\Edit.cshtml" />
+    <Content Include="Views\View.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
