@@ -1,7 +1,15 @@
 ﻿@model MvcSiteMapProvider.Web.Html.Models.MenuHelperModel
 @using System.Web.Mvc.Html
 @using MvcSiteMapProvider.Web.Html.Models
-
+@helper AddNode(SiteMapNodeModel node)
+{
+var url = node.IsClickable ? node.Url : "#";
+var route = ViewContext.RouteData;
+var action = route.Values["Action"];
+var controller = route.Values["Controller"];
+var active = action.ToString() == @node.Action && controller.ToString() == node.Controller ? "active" : string.Empty;
+    <li class="@active"><a href="@url">@node.Title </a></li>
+}
 @helper  TopMenu(List<SiteMapNodeModel> nodeList)
 {
     <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
@@ -13,21 +21,23 @@
                 <ul class="nav navbar-nav">
                     @foreach (SiteMapNodeModel node in nodeList)
                     {
-                        string url = node.IsClickable ? node.Url : "#";
-                        var route = ViewContext.RouteData;
-                        var action = route.Values["Action"];
-                        var controller = route.Values["Controller"];
-                        var active = action.ToString() == @node.Action && controller.ToString() == node.Controller ? "active" : string.Empty;
-                        <li class="@active"><a href="@url">@node.Title</a></li>
                         if (node != nodeList.Last())
                         {
-                            <li class="divider-vertical"></li>
+                            @AddNode(node)
                         }
                     }
                 </ul>
+                @if (nodeList.Last().Controller == ViewContext.RouteData.Values["Controller"].ToString())
+                {
+                    <ul class="nav navbar-nav navbar-right">
+                        @{
+                            var last = nodeList.Last();
+                            @AddNode(last)
+                        }
+                    </ul>
+                            }
             </div>
         </div>
     </nav>
 }
-
 @TopMenu(Model.Nodes)

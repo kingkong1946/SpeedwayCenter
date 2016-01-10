@@ -1,0 +1,19 @@
+﻿@model SpeedwayCenter.Models.Entity_Framework.Rider
+
+@{
+    ViewBag.Title = "Details";
+}
+<div class="col-xs-4 col-xs-offset-4">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <img src="@Url.Content(Model.Image)" class="center-block text-center" alt="Image not found" />
+        </div>
+        <div class="panel-body">
+            <h4 class="text-center">@Model.Name</h4>
+            <h4 class="text-center"><small>Birth: @Model.BirthDate.ToShortDateString()</small></h4>
+        </div>
+        <div class="panel-footer">
+            <h4 class="text-center">@Model.Country</h4>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,38 @@
+﻿@model IEnumerable<SpeedwayCenter.Models.Entity_Framework.Rider>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Riders</h2>
+
+<table class="table">
+    <tr>
+        <th>@Html.DisplayNameFor(model => model.FirstName)</th>
+        <th>@Html.DisplayNameFor(model => model.LastName)</th>
+        <th>@Html.DisplayNameFor(model => model.BirthDate)</th>
+        <th>@Html.DisplayNameFor(model => model.Country)</th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@Html.DisplayFor(modelItem => item.FirstName)</td>
+            <td>@Html.DisplayFor(modelItem => item.LastName)</td>
+            <td>@Html.DisplayFor(modelItem => item.BirthDate)</td>
+            <td>@Html.DisplayFor(modelItem => item.Country)</td>
+            <td>
+                <input type="button" value="Edit" onclick="location.href='@Url.Action("Edit", new {id = item.Id})'" class="btn btn-warning btn-xs" />
+                <input type="button" value="Details" onclick="location.href='@Url.Action("Details", new {id = item.Id})'" class="btn btn-info btn-xs" />
+                <input type="button" value="Delete" onclick="location.href='@Url.Action("Delete", new {id = item.Id})'" class="btn btn-danger btn-xs" />
+            </td>
+        </tr>
+    }
+</table>
+
+<script>
+    $(document).ready(function () {
+        window.history.pushState('Index', 'Index', '@Url.Action("Index")');
+    })
+</script>
