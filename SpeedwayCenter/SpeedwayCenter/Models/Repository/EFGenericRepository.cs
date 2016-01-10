@@ -10,20 +10,19 @@ using SpeedwayCenter.Models.Entity_Framework;
 
 namespace SpeedwayCenter.Models.Repository
 {
-    public abstract class Entity<C, T> : IRepository<C>, IDisposable
+    public abstract class EFGenericRepository<C, T> : IRepository<C>, IDisposable
         where T : DbContext, new()
         where C : class 
     {
         private bool _disposed;
         protected T _context;
-        protected DbSet<C> Table;
 
-        protected Entity(T context)
+        protected EFGenericRepository(T context)
         {
             _context = context;
         }
 
-        protected Entity() : this(new T())
+        protected EFGenericRepository() : this(new T())
         {
         }
 
@@ -34,7 +33,7 @@ namespace SpeedwayCenter.Models.Repository
             _context = null;
         }
 
-        ~Entity()
+        ~EFGenericRepository()
         {
             if (_disposed)
             {
@@ -42,32 +41,33 @@ namespace SpeedwayCenter.Models.Repository
             }
         }
 
-        public IQueryable<C> GetAll()
+        public virtual IQueryable<C> GetAll()
         {
             return _context.Set<C>();
         }
 
-        public IQueryable<C> FindBy(Expression<Func<C, bool>> predicate)
+        public virtual IQueryable<C> FindBy(Expression<Func<C, bool>> predicate)
         {
             return _context.Set<C>().Where(predicate).Select(c => c);
         }
 
-        public void Add(C entity)
+        public virtual void Add(C entity)
         {
             _context.Set<C>().Add(entity);
+            _context.Entry(entity).State = EntityState.Added;
         }
 
-        public void Delete(C entity)
+        public virtual void Delete(C entity)
         {
             _context.Set<C>().Remove(entity);
         }
 
-        public void Edit(C entity)
+        public virtual void Edit(C entity)
         {
             _context.Entry(entity).State = EntityState.Modified;
         }
 
-        public void Save()
+        public virtual void Save()
         {
             _context.SaveChanges();
         }

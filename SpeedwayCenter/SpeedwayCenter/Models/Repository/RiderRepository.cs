@@ -9,7 +9,7 @@ using SpeedwayCenter.Models.Entity_Framework;
 
 namespace SpeedwayCenter.Models.Repository
 {
-    public class RiderRepository<T> : Entity<Rider, T> where T : DbContext, new()
+    public class RiderRepository<T> : EFGenericRepository<Rider, T> where T : DbContext, new()
     {
         public RiderRepository(T context) : base(context)
         {
@@ -24,11 +24,5 @@ namespace SpeedwayCenter.Models.Repository
             var entity = FindBy(rider => rider.Id == i);
             Delete(entity.FirstOrDefault());
         }
-        //private Image _image;
-        //public Image Image
-        //{
-        //    get { return _image; }
-        //    set { _image = value; }
-        //}
     }
 }

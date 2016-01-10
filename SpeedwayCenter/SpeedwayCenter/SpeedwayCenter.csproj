@@ -284,7 +284,7 @@
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Entity Framework\Rider.cs" />
     <Compile Include="Models\Entity Framework\Speedway.cs" />
-    <Compile Include="Models\Repository\Entity.cs" />
+    <Compile Include="Models\Repository\EFGenericRepository.cs" />
     <Compile Include="Models\Repository\IRepository.cs" />
     <Compile Include="Models\Repository\RiderRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -313,7 +313,6 @@
     <Content Include="Views\Speedway\Add.cshtml" />
     <Content Include="Views\Speedway\Details.cshtml" />
     <Content Include="Views\Speedway\Edit.cshtml" />
-    <Content Include="Views\View.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
