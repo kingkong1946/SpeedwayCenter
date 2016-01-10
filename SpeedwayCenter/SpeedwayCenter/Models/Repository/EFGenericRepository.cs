@@ -59,6 +59,10 @@ namespace SpeedwayCenter.Models.Repository
 
         public virtual void Delete(C entity)
         {
+            if (entity == null)
+            {
+                throw new ArgumentNullException("Entity can't be null.");
+            }
             _context.Set<C>().Remove(entity);
         }
 
