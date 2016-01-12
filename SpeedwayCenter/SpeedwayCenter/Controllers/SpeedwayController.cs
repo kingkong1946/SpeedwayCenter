@@ -35,17 +35,22 @@ namespace SpeedwayCenter.Controllers
         {
             return View();
         }
-
+        
         [HttpPost]
         public ActionResult Add(Rider rider, HttpPostedFileBase file)
         {
+            if (rider == null)
+            {
+                throw new ArgumentNullException("Rider is null");
+            }
             if (file != null)
             {
                 //    var formatPosition = file.FileName.IndexOf('.');
                 //    var format = file.FileName.Substring(formatPosition);
                 //    var path = HttpContext.Server.MapPath("~/Photos/" + rider.Id + format);
                 var serverPath = $"~/Photos/{rider.GetHashCode()}.png";
-                var path = HttpContext.Server.MapPath(serverPath);
+                HttpServerUtilityBase server = HttpContext.Server;
+                var path = server.MapPath(serverPath);
                 file.SaveAs(path);
                 //using (var image = Image.FromStream(file.InputStream))
                 //{
@@ -103,8 +108,9 @@ namespace SpeedwayCenter.Controllers
                 {
                     System.IO.File.Delete(rider.Image);
                 }
-                var serverPath = HttpContext.Server.MapPath(rider.Image);
-                file.SaveAs(serverPath);
+                var serverPath = $"~/Photos/{rider.GetHashCode()}.png";
+                var Path = HttpContext.Server.MapPath(serverPath);
+                file.SaveAs(Path);
                 rider.Image = serverPath;
             }
             _repository.Edit(rider);
