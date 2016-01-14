@@ -181,12 +181,39 @@ namespace SpeedwayCenter.Tests
             HttpPostedFileBase newImage = CreateFakeImage();
 
             //Act
-            var result = (ViewResult)target.Edit(editedRider, newImage);
+            var result = (ViewResult)target.Edit(editedRider, newImage, false);
 
             //Assert
             var updatedRider = collection.Find(rider => rider.Id == riderToEdit.Id);
             Assert.AreEqual(newCountry, updatedRider.Country);
             Assert.AreEqual(imagePath, updatedRider.Image);
+        }
+
+        [TestMethod]
+        public void EditAction_RemovePhoto()
+        {
+            //Arrange
+            List<Rider> collection = CreateFakeBase();
+            IRepository<Rider> fakeRepository = CreateFakeRepository(collection);
+            var target = new SpeedwayController(fakeRepository);
+
+            Rider riderToEdit = collection[0];
+            var editedRider = new Rider
+            {
+                Id = riderToEdit.Id,
+                FirstName = riderToEdit.FirstName,
+                LastName = riderToEdit.LastName,
+                BirthDate = riderToEdit.BirthDate,
+                Country = riderToEdit.Country
+            };
+
+            //Act
+            var result = (ViewResult)target.Edit(editedRider, null, true);
+
+            //Assert
+            var updatedRider = collection.Find(rider => rider.Id == riderToEdit.Id);
+            Assert.IsFalse(System.IO.File.Exists(updatedRider.Image));
+            Assert.AreEqual(string.Empty, updatedRider.Image);
         }
 
         [ExpectedException(typeof(NullReferenceException))]
@@ -207,7 +234,7 @@ namespace SpeedwayCenter.Tests
 
             //Act
             //Assert
-            var result = (ViewResult)target.Edit(null, newImage);
+            var result = (ViewResult)target.Edit(null, newImage, false);
         }
         
         [TestMethod]
@@ -231,7 +258,7 @@ namespace SpeedwayCenter.Tests
             };
 
             //Act
-            var result = (ViewResult)target.Edit(editedRider, null);
+            var result = (ViewResult)target.Edit(editedRider, null, false);
 
             //Assert
             var updatedRider = collection.Find(rider => rider.Id == riderToEdit.Id);
@@ -249,7 +276,7 @@ namespace SpeedwayCenter.Tests
 
             //Act
             //Assert
-            var result = (ViewResult)target.Edit(null, null);
+            var result = (ViewResult)target.Edit(null, null, false);
         }
 
         private static HttpPostedFileBase CreateFakeImage()

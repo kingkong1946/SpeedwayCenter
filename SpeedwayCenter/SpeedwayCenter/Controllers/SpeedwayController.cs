@@ -103,8 +103,17 @@ namespace SpeedwayCenter.Controllers
         }
 
         [HttpPost]
-        public ActionResult Edit(Rider rider, HttpPostedFileBase file)
+        public ActionResult Edit(Rider rider, HttpPostedFileBase file, bool remove)
         {
+            if (remove)
+            {
+                //TODO refactor
+                if (System.IO.File.Exists(rider.Image))
+                {
+                    System.IO.File.Delete(rider.Image);
+                }
+                rider.Image = string.Empty;
+            }
             if (file != null)
             {
                 //TODO Put this code to privates methods
