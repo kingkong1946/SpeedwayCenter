@@ -10,7 +10,7 @@ namespace SpeedwayCenter.Migrations
         public Configuration()
         {
             AutomaticMigrationsEnabled = true;
-            AutomaticMigrationDataLossAllowed = false;
+            AutomaticMigrationDataLossAllowed = true;
         }
 
         protected override void Seed(SpeedwayCenter.Models.Entity_Framework.Speedway context)

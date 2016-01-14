@@ -20,12 +20,14 @@ namespace SpeedwayCenter.Models.Entity_Framework
         [Required]
         [StringLength(20)]
         [Display(Name = "First Name")]
+        [Column(TypeName = "nvarchar")]
         [RegularExpression("^[A-Z][A-Za-z]+", ErrorMessage = "The first letter must be uppercase")]
         public string FirstName { get; set; }
 
         [Required]
         [StringLength(20)]
         [Display(Name = "Last Name")]
+        [Column(TypeName = "nvarchar")]
         [RegularExpression("^[A-Z][A-Za-z]+", ErrorMessage = "The first letter must be uppercase")]
         public string LastName { get; set; }
 
@@ -36,6 +38,7 @@ namespace SpeedwayCenter.Models.Entity_Framework
 
         [Required]
         [StringLength(20)]
+        [Column(TypeName = "nvarchar")]
         [RegularExpression("^[A-Z][A-Za-z]+", ErrorMessage = "The first letter must be uppercase")]
         public string Country { get; set; }
 

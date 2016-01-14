@@ -58,6 +58,10 @@ namespace SpeedwayCenter.Controllers
                 //}
                 rider.Image = serverPath;
             }
+            //else
+            //{
+            //    rider.Image = string.Empty;
+            //}
             _repository.Add(rider);
             _repository.Save();
             var records = _repository.GetAll();
@@ -109,8 +113,8 @@ namespace SpeedwayCenter.Controllers
                     System.IO.File.Delete(rider.Image);
                 }
                 var serverPath = $"~/Photos/{rider.GetHashCode()}.png";
-                var Path = HttpContext.Server.MapPath(serverPath);
-                file.SaveAs(Path);
+                var path = HttpContext.Server.MapPath(serverPath);
+                file.SaveAs(path);
                 rider.Image = serverPath;
             }
             _repository.Edit(rider);
