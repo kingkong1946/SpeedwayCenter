@@ -21,14 +21,14 @@ namespace SpeedwayCenter.Models.Entity_Framework
         [StringLength(20)]
         [Display(Name = "First Name")]
         [Column(TypeName = "nvarchar")]
-        [RegularExpression("^[A-Z][A-Za-z]+", ErrorMessage = "The first letter must be uppercase")]
+        [RegularExpression("^[A-Za-z ]+", ErrorMessage = "Invalid characters")]
         public string FirstName { get; set; }
 
         [Required]
         [StringLength(20)]
         [Display(Name = "Last Name")]
         [Column(TypeName = "nvarchar")]
-        [RegularExpression("^[A-Z][A-Za-z]+", ErrorMessage = "The first letter must be uppercase")]
+        [RegularExpression("^[A-Za-z ]+", ErrorMessage = "Invalid characters")]
         public string LastName { get; set; }
 
         [Column(TypeName = "datetime2")]
@@ -39,41 +39,13 @@ namespace SpeedwayCenter.Models.Entity_Framework
         [Required]
         [StringLength(20)]
         [Column(TypeName = "nvarchar")]
-        [RegularExpression("^[A-Z][A-Za-z]+", ErrorMessage = "The first letter must be uppercase")]
+        [RegularExpression("^[A-Za-z ]+", ErrorMessage = "Invalid characters")]
         public string Country { get; set; }
-
-        //[RegularExpression("^\\w+\\.[A-Za-z]{3,4}")]
+        
         [DisplayName("Photo")]
         public string Image { get; set; }
 
         [NotMapped]
         public string Name => $"{FirstName} {LastName}";
-
-        //public byte[] Image { get; set; }
-        //private Image _photo;
-        //[NotMapped]
-        //public Image Photo
-        //{
-        //    get
-        //    {
-        //        Image tmp;
-        //        if (_photo != null) tmp = _photo;
-        //        if (Image == null) return null;
-        //        using (var ms = new MemoryStream(Image))
-        //        {
-        //            tmp = System.Drawing.Image.FromStream(ms);
-        //        }
-        //        return tmp;
-        //    }
-        //    set
-        //    {
-        //        _photo = value;
-        //        using (var ms = new MemoryStream())
-        //        {
-        //            _photo.Save(ms, _photo.RawFormat);
-        //            Image = ms.ToArray();
-        //        }
-        //    }
-        //}
     }
 }

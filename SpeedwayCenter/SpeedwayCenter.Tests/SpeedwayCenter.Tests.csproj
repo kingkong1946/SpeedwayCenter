@@ -107,6 +107,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\NinjectWebCommon.cs" />
+    <Compile Include="HtmlHelperExtensions_Tests.cs" />
     <Compile Include="Fakes\FakeDbContext.cs" />
     <Compile Include="RiderRepository_Test.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

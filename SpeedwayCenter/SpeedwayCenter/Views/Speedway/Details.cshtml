@@ -8,11 +8,11 @@
         <div class="panel-heading">
             @if (string.IsNullOrEmpty(Model.Image))
             {
-                <img src="" class="center-block text-center" alt="Image not found" />
+                <img src="" class="center-block text-center img-responsive" alt="Image not found" />
             }
             else
             {
-                <img src="@Url.Content(Model.Image)" class="center-block text-center" alt="Image not found" />
+                <img src="@Url.Content(Model.Image)" class="center-block text-center img-responsive" alt="Image not found" />
             }
         </div>
         <div class="panel-body">

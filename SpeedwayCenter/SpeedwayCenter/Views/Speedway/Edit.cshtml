@@ -1,13 +1,16 @@
-﻿@model SpeedwayCenter.Models.Entity_Framework.Rider
+﻿@using SpeedwayCenter.Helpers
+@model SpeedwayCenter.Models.Entity_Framework.Rider
 
 @{
     ViewBag.Title = "Edit";
 }
 <div class="col-sm-offset-3 col-sm-6">
-    @using (Html.BeginForm("Edit", "Speedway", FormMethod.Post, new {enctype = "multipart/form-data"}))
+    @using (Html.BeginForm("Edit", "Speedway", FormMethod.Post, new { enctype = "multipart/form-data" }))
     {
         if (ViewData.ModelState.IsValid)
         {
+            @Html.HiddenFor(rider => rider.Id)
+            @Html.HiddenFor(rider => rider.Image)
             <div class="form-group input-group-sm has-feedback">
                 @Html.LabelFor(model => model.FirstName)<br/>
                 @Html.EditorFor(model => model.FirstName, new {htmlAttributes = new {@class = "form-control"}})
@@ -35,7 +38,7 @@
             <div class="form-group input-group-sm">
                 @Html.LabelFor(model => model.Image)
                 <div class="checkbox">
-                    <label><input id="remove" name="remove" type="checkbox" value="false"/>Remove photo</label>
+                    @Html.BootstrapCheckBox("remove", "Remove photo")
                 </div>
                 <input type="file" id="image" accept="image/*" class="btn btn-default" name="file"/>
             </div>
@@ -51,11 +54,11 @@
             if (this.checked === true) {
                 imageButton.addClass("disabled");
                 imageButton.prop('disabled', true);
-                imageButton.prop('value', true);
+                this.prop('value', true);
             } else {
                 imageButton.removeClass("disabled");
                 imageButton.prop('disabled', false);
-                imageButton.prop('value', false);
+                this.prop('value', false);
             }
         })
     })

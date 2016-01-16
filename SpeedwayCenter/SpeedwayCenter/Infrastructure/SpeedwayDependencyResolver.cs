@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Ninject;
+using Ninject.Web.Common;
 using SpeedwayCenter.Models.Entity_Framework;
 using SpeedwayCenter.Models.Repository;
 

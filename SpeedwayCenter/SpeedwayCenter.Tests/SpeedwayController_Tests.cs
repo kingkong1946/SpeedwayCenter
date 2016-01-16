@@ -58,12 +58,11 @@ namespace SpeedwayCenter.Tests
             const int expectedCount = 5;
 
             //Act
-            var result = (ViewResult)target.Add(newRecord, newImage);
+            var result = target.Add(newRecord, newImage);
 
             //Assert
-            List<Rider> model = ((IQueryable<Rider>)result.Model).ToList();
-            Rider actual = model.Find(rider => rider.Id == 5);
-            Assert.AreEqual(expectedCount, model.Count, $"Count is {model.Count}");
+            Rider actual = collection.Find(rider => rider.Id == 5);
+            Assert.AreEqual(expectedCount, collection.Count, $"Count is {collection.Count}");
             Assert.AreEqual(newRecord.Id, actual.Id, "Wrong id");
             Assert.AreEqual(imagePath, actual.Image, $"Actual image path is: {actual.Image}, \nexpected: {imagePath}");
         }
@@ -84,7 +83,7 @@ namespace SpeedwayCenter.Tests
 
             //Act
             //Assert
-            var result = (ViewResult)target.Add(null, newImage);
+            var result = target.Add(null, newImage);
         }
 
         [TestMethod]
@@ -109,12 +108,11 @@ namespace SpeedwayCenter.Tests
             const int expectedCount = 5;
 
             //Act
-            var result = (ViewResult)target.Add(newRecord, null);
+            var result = target.Add(newRecord, null);
 
             //Assert
-            List<Rider> model = ((IQueryable<Rider>)result.Model).ToList();
-            Rider actual = model.Find(rider => rider.Id == 5);
-            Assert.AreEqual(expectedCount, model.Count, $"Count is {model.Count}");
+            Rider actual = collection.Find(rider => rider.Id == 5);
+            Assert.AreEqual(expectedCount, collection.Count, $"Count is {collection.Count}");
             Assert.AreEqual(newRecord.Id, actual.Id, "Wrong id");
             Assert.IsNull(actual.Image);
         }
@@ -133,7 +131,7 @@ namespace SpeedwayCenter.Tests
 
             //Act
             //Assert
-            var result = (ViewResult)target.Add(null, null);
+            var result = target.Add(null, null);
         }
 
         [TestMethod]
@@ -147,12 +145,11 @@ namespace SpeedwayCenter.Tests
             const int expectedCount = 3;
 
             //Act
-            var result = (ViewResult)target.Delete(riderIdToRemove);
+            var result = target.Delete(riderIdToRemove);
 
             //Assert
-            List<Rider> model = ((IQueryable<Rider>)result.Model).ToList();
-            Rider record = model.Find(rider => rider.Id == riderIdToRemove);
-            Assert.AreEqual(expectedCount, model.Count);
+            Rider record = collection.Find(rider => rider.Id == riderIdToRemove);
+            Assert.AreEqual(expectedCount, collection.Count);
             Assert.IsNull(record);
         }
 
@@ -181,7 +178,7 @@ namespace SpeedwayCenter.Tests
             HttpPostedFileBase newImage = CreateFakeImage();
 
             //Act
-            var result = (ViewResult)target.Edit(editedRider, newImage, false);
+            RedirectToRouteResult result = target.Edit(editedRider, newImage, false);
 
             //Assert
             var updatedRider = collection.Find(rider => rider.Id == riderToEdit.Id);
@@ -208,12 +205,29 @@ namespace SpeedwayCenter.Tests
             };
 
             //Act
-            var result = (ViewResult)target.Edit(editedRider, null, true);
+            RedirectToRouteResult result = target.Edit(editedRider, null, true);
 
             //Assert
             var updatedRider = collection.Find(rider => rider.Id == riderToEdit.Id);
-            Assert.IsFalse(System.IO.File.Exists(updatedRider.Image));
             Assert.AreEqual(string.Empty, updatedRider.Image);
+        }
+
+        [TestMethod]
+        public void EditAction_KeepPhoto()
+        {
+            //Arrange
+            List<Rider> collection = CreateFakeBase();
+            IRepository<Rider> fakeRepository = CreateFakeRepository(collection);
+            var target = new SpeedwayController(fakeRepository);
+
+            Rider riderToEdit = collection[0];
+
+            //Act
+            RedirectToRouteResult result = target.Edit(riderToEdit, null, false);
+
+            //Assert
+            var updatedRider = collection.Find(rider => rider.Id == riderToEdit.Id);
+            Assert.AreEqual(riderToEdit.Image, updatedRider.Image);
         }
 
         [ExpectedException(typeof(NullReferenceException))]
@@ -234,7 +248,7 @@ namespace SpeedwayCenter.Tests
 
             //Act
             //Assert
-            var result = (ViewResult)target.Edit(null, newImage, false);
+            RedirectToRouteResult result = target.Edit(null, newImage, false);
         }
         
         [TestMethod]
@@ -258,7 +272,7 @@ namespace SpeedwayCenter.Tests
             };
 
             //Act
-            var result = (ViewResult)target.Edit(editedRider, null, false);
+            RedirectToRouteResult result = target.Edit(editedRider, null, false);
 
             //Assert
             var updatedRider = collection.Find(rider => rider.Id == riderToEdit.Id);
@@ -276,7 +290,7 @@ namespace SpeedwayCenter.Tests
 
             //Act
             //Assert
-            var result = (ViewResult)target.Edit(null, null, false);
+            RedirectToRouteResult result = target.Edit(null, null, false);
         }
 
         private static HttpPostedFileBase CreateFakeImage()

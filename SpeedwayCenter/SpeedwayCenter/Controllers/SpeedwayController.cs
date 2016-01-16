@@ -5,6 +5,7 @@ using System.Diagnostics;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
@@ -37,7 +38,7 @@ namespace SpeedwayCenter.Controllers
         }
         
         [HttpPost]
-        public ActionResult Add(Rider rider, HttpPostedFileBase file)
+        public RedirectToRouteResult Add(Rider rider, HttpPostedFileBase file)
         {
             if (rider == null)
             {
@@ -45,48 +46,27 @@ namespace SpeedwayCenter.Controllers
             }
             if (file != null)
             {
-                //    var formatPosition = file.FileName.IndexOf('.');
-                //    var format = file.FileName.Substring(formatPosition);
-                //    var path = HttpContext.Server.MapPath("~/Photos/" + rider.Id + format);
-                var serverPath = $"~/Photos/{rider.GetHashCode()}.png";
                 HttpServerUtilityBase server = HttpContext.Server;
+                var serverPath = $"~/Photos/{rider.GetHashCode()}.png";
                 var path = server.MapPath(serverPath);
                 file.SaveAs(path);
-                //using (var image = Image.FromStream(file.InputStream))
-                //{
-                //    image.Save(path, ImageFormat.Png);
-                //}
                 rider.Image = serverPath;
             }
-            //else
-            //{
-            //    rider.Image = string.Empty;
-            //}
             _repository.Add(rider);
             _repository.Save();
-            var records = _repository.GetAll();
-            return View("Index", records);
+            return RedirectToAction("Index");
         }
 
-        public ActionResult Delete(int id)
+        public RedirectToRouteResult Delete(int id)
         {
             var entity = _repository.FindBy(rider => rider.Id == id).FirstOrDefault();
-            if (entity == null)
+            if (entity != null)
             {
-                var records = _repository.GetAll(); // TODO the same code in two lines - refactor
-                return View("Index", records);
-            }
-            //else // TODO Uncommnet when error page is completed
-            {
-                if (System.IO.File.Exists(entity.Image))
-                {
-                    System.IO.File.Delete(entity.Image);
-                }
+                RemovePhoto(entity);
                 _repository.Delete(entity);
                 _repository.Save();
-                var records = _repository.GetAll();
-                return View("Index", records);
             }
+            return RedirectToAction("Index");
         }
 
         public ActionResult Details(int id)
@@ -103,24 +83,16 @@ namespace SpeedwayCenter.Controllers
         }
 
         [HttpPost]
-        public ActionResult Edit(Rider rider, HttpPostedFileBase file, bool remove)
+        public RedirectToRouteResult Edit(Rider rider, HttpPostedFileBase file, bool? remove)
         {
-            if (remove)
+            if (remove == true)
             {
-                //TODO refactor
-                if (System.IO.File.Exists(rider.Image))
-                {
-                    System.IO.File.Delete(rider.Image);
-                }
+                RemovePhoto(rider);
                 rider.Image = string.Empty;
             }
             if (file != null)
             {
-                //TODO Put this code to privates methods
-                if (System.IO.File.Exists(rider.Image))
-                {
-                    System.IO.File.Delete(rider.Image);
-                }
+                RemovePhoto(rider);
                 var serverPath = $"~/Photos/{rider.GetHashCode()}.png";
                 var path = HttpContext.Server.MapPath(serverPath);
                 file.SaveAs(path);
@@ -128,8 +100,15 @@ namespace SpeedwayCenter.Controllers
             }
             _repository.Edit(rider);
             _repository.Save();
-            var records = _repository.GetAll();
-            return View("Index", records);
+            return RedirectToAction("Index");
+        }
+
+        private static void RemovePhoto(Rider rider)
+        {
+            if (System.IO.File.Exists(rider.Image))
+            {
+                System.IO.File.Delete(rider.Image);
+            }
         }
     }
 }
