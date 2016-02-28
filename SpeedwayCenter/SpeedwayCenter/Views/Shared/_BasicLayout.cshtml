@@ -1,0 +1,30 @@
+﻿@using MvcSiteMapProvider.Web.Html
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link rel="stylesheet" href="@Url.Content("~/Content/bootstrap-datepicker3.min.css")" />
+    <link rel="stylesheet" href="@Url.Content("~/Content/bootstrap-datepicker3.standalone.min.css")" />
+    @*<link rel="stylesheet" href="@Url.Content("~/Content/bootstrap-theme.min.css")" />*@
+    <link rel="stylesheet" href="@Url.Content("~/Content/bootstrap.min.css")" />
+    <link rel="stylesheet" href="@Url.Content("~/Content/basic-styles.css")"/>
+    <script src="@Url.Content("~/scripts/bootstrap.min.js")" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+    <script src="@Url.Content("~/scripts/jquery-1.9.1.min.js")"></script>
+    <script src="@Url.Content("~/scripts/bootstrap-datepicker.min.js")"></script>
+    <script src="@Url.Content("~/scripts/jquery.validate.min.js")"></script>
+    <script src="@Url.Content("~/scripts/jquery.validate.unobtrusive.min.js")"></script>
+    <script src="@Url.Content("~/scripts/bootstrap-validate.js")"></script>
+    <title>@ViewBag.Title</title>
+</head>
+<body>
+<div class="container">
+    @Html.MvcSiteMap().Menu("BootstrapMenuHelperModel")
+    <section class="row">
+        @RenderBody()
+    </section>
+    <footer class="row">
+        <kbd>Copiright Łukasz Adler @DateTime.Now.Year</kbd>
+    </footer>
+</div>
+</body>
+</html>
