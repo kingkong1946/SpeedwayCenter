@@ -283,8 +283,11 @@
     <Compile Include="Helpers\BootstrapCheckBoxHelper.cs" />
     <Compile Include="Infrastructure\SpeedwayDependencyResolver.cs" />
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Models\Entity Framework\Meeting.cs" />
     <Compile Include="Models\Entity Framework\Rider.cs" />
+    <Compile Include="Models\Entity Framework\Scores.cs" />
     <Compile Include="Models\Entity Framework\Speedway.cs" />
+    <Compile Include="Models\Entity Framework\Team.cs" />
     <Compile Include="Models\Repository\EFGenericRepository.cs" />
     <Compile Include="Models\Repository\IRepository.cs" />
     <Compile Include="Models\Repository\RiderRepository.cs" />
