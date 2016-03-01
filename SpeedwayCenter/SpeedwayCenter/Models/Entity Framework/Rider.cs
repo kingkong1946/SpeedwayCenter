@@ -3,15 +3,14 @@ using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
 using System.Web.Services.Protocols;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.Data.Entity.Spatial;
 
 namespace SpeedwayCenter.Models.Entity_Framework
 {
-    using System;
-    using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-    using System.ComponentModel.DataAnnotations.Schema;
-    using System.Data.Entity.Spatial;
-
     public class Rider
     {
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
@@ -47,5 +46,8 @@ namespace SpeedwayCenter.Models.Entity_Framework
 
         [NotMapped]
         public string Name => $"{FirstName} {LastName}";
+
+        public virtual Team Team { get; set; }
+        public virtual ICollection<Scores> Scores { get; set; }
     }
 }
