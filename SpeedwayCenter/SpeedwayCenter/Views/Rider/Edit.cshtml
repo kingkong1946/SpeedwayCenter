@@ -5,7 +5,7 @@
     ViewBag.Title = "Edit";
 }
 <div class="col-sm-offset-3 col-sm-6">
-    @using (Html.BeginForm("Edit", "Speedway", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    @using (Html.BeginForm("Edit", "Rider", FormMethod.Post, new { enctype = "multipart/form-data" }))
     {
         if (ViewData.ModelState.IsValid)
         {

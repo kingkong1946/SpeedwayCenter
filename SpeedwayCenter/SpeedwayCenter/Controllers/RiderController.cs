@@ -16,11 +16,11 @@ using Image = System.Drawing.Image;
 
 namespace SpeedwayCenter.Controllers
 {
-    public class SpeedwayController : Controller
+    public class RiderController : Controller
     {
         private readonly IRepository<Rider> _repository;
 
-        public SpeedwayController(IRepository<Rider> repository)
+        public RiderController(IRepository<Rider> repository)
         {
             _repository = repository;
         }

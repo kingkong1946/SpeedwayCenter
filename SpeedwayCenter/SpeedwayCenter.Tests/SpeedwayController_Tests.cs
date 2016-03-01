@@ -22,7 +22,7 @@ namespace SpeedwayCenter.Tests
             //Arrange
             List<Rider> collection = CreateFakeBase();
             IRepository<Rider> fakeRepository = CreateFakeRepository(collection);
-            var target = new SpeedwayController(fakeRepository);
+            var target = new RiderController(fakeRepository);
 
             const int expectedCount = 4;
 
@@ -40,7 +40,7 @@ namespace SpeedwayCenter.Tests
             //Arrange
             List<Rider> collection = CreateFakeBase();
             IRepository<Rider> fakeRepository = CreateFakeRepository(collection);
-            var target = new SpeedwayController(fakeRepository);
+            var target = new RiderController(fakeRepository);
             var fakeHttpContextBase = new Mock<HttpContextBase>();
             fakeHttpContextBase.Setup(b => b.Server.MapPath(It.IsAny<string>())).Returns("\\");
             target.ControllerContext = new ControllerContext(fakeHttpContextBase.Object, new RouteData(), target);
@@ -74,7 +74,7 @@ namespace SpeedwayCenter.Tests
             //Arrange
             List<Rider> collection = CreateFakeBase();
             IRepository<Rider> fakeRepository = CreateFakeRepository(collection);
-            var target = new SpeedwayController(fakeRepository);
+            var target = new RiderController(fakeRepository);
             var fakeHttpContextBase = new Mock<HttpContextBase>();
             fakeHttpContextBase.Setup(b => b.Server.MapPath(It.IsAny<string>())).Returns("\\");
             target.ControllerContext = new ControllerContext(fakeHttpContextBase.Object, new RouteData(), target);
@@ -92,7 +92,7 @@ namespace SpeedwayCenter.Tests
             //Arrange
             List<Rider> collection = CreateFakeBase();
             IRepository<Rider> fakeRepository = CreateFakeRepository(collection);
-            var target = new SpeedwayController(fakeRepository);
+            var target = new RiderController(fakeRepository);
             var fakeHttpContextBase = new Mock<HttpContextBase>();
             fakeHttpContextBase.Setup(b => b.Server.MapPath(It.IsAny<string>())).Returns("\\");
             target.ControllerContext = new ControllerContext(fakeHttpContextBase.Object, new RouteData(), target);
@@ -124,7 +124,7 @@ namespace SpeedwayCenter.Tests
             //Arrange
             List<Rider> collection = CreateFakeBase();
             IRepository<Rider> fakeRepository = CreateFakeRepository(collection);
-            var target = new SpeedwayController(fakeRepository);
+            var target = new RiderController(fakeRepository);
             var fakeHttpContextBase = new Mock<HttpContextBase>();
             fakeHttpContextBase.Setup(b => b.Server.MapPath(It.IsAny<string>())).Returns("\\");
             target.ControllerContext = new ControllerContext(fakeHttpContextBase.Object, new RouteData(), target);
@@ -140,7 +140,7 @@ namespace SpeedwayCenter.Tests
             //Arrange
             List<Rider> collection = CreateFakeBase();
             IRepository<Rider> fakeRepository = CreateFakeRepository(collection);
-            var target = new SpeedwayController(fakeRepository);
+            var target = new RiderController(fakeRepository);
             const int riderIdToRemove = 1;
             const int expectedCount = 3;
 
@@ -159,7 +159,7 @@ namespace SpeedwayCenter.Tests
             //Arrange
             List<Rider> collection = CreateFakeBase();
             IRepository<Rider> fakeRepository = CreateFakeRepository(collection);
-            var target = new SpeedwayController(fakeRepository);
+            var target = new RiderController(fakeRepository);
             var fakeHttpContextBase = new Mock<HttpContextBase>();
             fakeHttpContextBase.Setup(b => b.Server.MapPath(It.IsAny<string>())).Returns("\\");
             target.ControllerContext = new ControllerContext(fakeHttpContextBase.Object, new RouteData(), target);
@@ -192,7 +192,7 @@ namespace SpeedwayCenter.Tests
             //Arrange
             List<Rider> collection = CreateFakeBase();
             IRepository<Rider> fakeRepository = CreateFakeRepository(collection);
-            var target = new SpeedwayController(fakeRepository);
+            var target = new RiderController(fakeRepository);
 
             Rider riderToEdit = collection[0];
             var editedRider = new Rider
@@ -218,7 +218,7 @@ namespace SpeedwayCenter.Tests
             //Arrange
             List<Rider> collection = CreateFakeBase();
             IRepository<Rider> fakeRepository = CreateFakeRepository(collection);
-            var target = new SpeedwayController(fakeRepository);
+            var target = new RiderController(fakeRepository);
 
             Rider riderToEdit = collection[0];
 
@@ -237,7 +237,7 @@ namespace SpeedwayCenter.Tests
             //Arrange
             List<Rider> collection = CreateFakeBase();
             IRepository<Rider> fakeRepository = CreateFakeRepository(collection);
-            var target = new SpeedwayController(fakeRepository);
+            var target = new RiderController(fakeRepository);
             var fakeHttpContextBase = new Mock<HttpContextBase>();
             fakeHttpContextBase.Setup(b => b.Server.MapPath(It.IsAny<string>())).Returns("\\");
             target.ControllerContext = new ControllerContext(fakeHttpContextBase.Object, new RouteData(), target);
@@ -257,7 +257,7 @@ namespace SpeedwayCenter.Tests
             //Arrange
             List<Rider> collection = CreateFakeBase();
             IRepository<Rider> fakeRepository = CreateFakeRepository(collection);
-            var target = new SpeedwayController(fakeRepository);
+            var target = new RiderController(fakeRepository);
 
             Rider riderToEdit = collection[0];
             var newCountry = "AnotherCountry";
@@ -286,7 +286,7 @@ namespace SpeedwayCenter.Tests
             //Arrange
             List<Rider> collection = CreateFakeBase();
             IRepository<Rider> fakeRepository = CreateFakeRepository(collection);
-            var target = new SpeedwayController(fakeRepository);
+            var target = new RiderController(fakeRepository);
 
             //Act
             //Assert

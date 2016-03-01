@@ -1,0 +1,31 @@
+﻿@model MvcSiteMapProvider.Web.Html.Models.MenuHelperModel
+@using System.Web.Mvc.Html
+@using MvcSiteMapProvider.Web.Html.Models
+@helper AddNode(SiteMapNodeModel node)
+{
+var url = node.IsClickable ? node.Url : "#";
+var route = ViewContext.RouteData;
+var action = route.Values["Action"];
+var controller = route.Values["Controller"];
+var active = action.ToString() == @node.Action && controller.ToString() == node.Controller ? "active" : string.Empty;
+    <li class="@active"><a href="@url">@node.Title </a></li>
+}
+@helper  TopMenu(List<SiteMapNodeModel> nodeList)
+{
+    <nav class="navbar navbar-inverse navbar-fixed-bottom" role="navigation">
+        <div class="container-fluid">
+            <div class="collapse navbar-collapse">
+                @if (nodeList.Last().Controller == ViewContext.RouteData.Values["Controller"].ToString())
+                {
+                    <ul class="nav navbar-nav navbar-right">
+                        @{
+                            var last = nodeList.Last();
+                            @AddNode(last)
+                        }
+                    </ul>
+                            }
+            </div>
+        </div>
+    </nav>
+}
+@TopMenu(Model.Nodes)

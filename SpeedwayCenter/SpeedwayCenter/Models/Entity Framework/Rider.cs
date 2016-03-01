@@ -21,7 +21,7 @@ namespace SpeedwayCenter.Models.Entity_Framework
         [StringLength(20)]
         [Display(Name = "First Name")]
         [Column(TypeName = "nvarchar")]
-        [RegularExpression("^[A-Za-z ]+", ErrorMessage = "Invalid characters")]
+        [RegularExpression("^[A-Za-z ]+ ", ErrorMessage = "Invalid characters")]
         public string FirstName { get; set; }
 
         [Required]

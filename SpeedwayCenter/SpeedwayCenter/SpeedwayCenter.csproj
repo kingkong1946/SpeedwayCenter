@@ -276,7 +276,8 @@
     <Compile Include="App_Start\NinjectWebCommon.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\SpeedwayController.cs" />
+    <Compile Include="Controllers\RiderController.cs" />
+    <Compile Include="Controllers\TeamController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -310,10 +311,11 @@
     <Content Include="Views\Shared\DisplayTemplates\MenuHelperModel.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\CanonicalHelperModel.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\BootstrapMenuHelperModel.cshtml" />
-    <Content Include="Views\Speedway\Index.cshtml" />
-    <Content Include="Views\Speedway\Add.cshtml" />
-    <Content Include="Views\Speedway\Details.cshtml" />
-    <Content Include="Views\Speedway\Edit.cshtml" />
+    <Content Include="Views\Rider\Index.cshtml" />
+    <Content Include="Views\Rider\Add.cshtml" />
+    <Content Include="Views\Rider\Details.cshtml" />
+    <Content Include="Views\Rider\Edit.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\BootstrapSpeedwayMenuHelperModel.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -324,6 +326,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Photos\" />
+    <Folder Include="Views\Team\" />
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />
