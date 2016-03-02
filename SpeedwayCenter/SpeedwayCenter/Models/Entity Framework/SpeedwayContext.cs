@@ -5,12 +5,12 @@ namespace SpeedwayCenter.Models.Entity_Framework
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Linq;
 
-    public partial class Speedway : DbContext
+    public partial class SpeedwayContext : DbContext
     {
-        public Speedway()
-            : base("name=Speedway")
+        public SpeedwayContext()
+            : base("name=SpeedwayContext")
         {
-            Database.SetInitializer(new MigrateDatabaseToLatestVersion<Speedway, SpeedwayCenter.Migrations.Configuration>("Speedway"));
+            Database.SetInitializer(new MigrateDatabaseToLatestVersion<SpeedwayContext, SpeedwayCenter.Migrations.Configuration>("SpeedwayContext"));
         }
 
         public virtual DbSet<Rider> Riders { get; set; }

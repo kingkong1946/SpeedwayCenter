@@ -287,10 +287,13 @@
     <Compile Include="Models\Entity Framework\Meeting.cs" />
     <Compile Include="Models\Entity Framework\Rider.cs" />
     <Compile Include="Models\Entity Framework\Scores.cs" />
-    <Compile Include="Models\Entity Framework\Speedway.cs" />
+    <Compile Include="Models\Entity Framework\SpeedwayContext.cs" />
     <Compile Include="Models\Entity Framework\Team.cs" />
     <Compile Include="Models\Repository\EFGenericRepository.cs" />
+    <Compile Include="Models\Repository\IQueryRepository.cs" />
     <Compile Include="Models\Repository\IRepository.cs" />
+    <Compile Include="Models\Repository\QueryRepository.cs" />
+    <Compile Include="Models\Repository\Repository.cs" />
     <Compile Include="Models\Repository\RiderRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

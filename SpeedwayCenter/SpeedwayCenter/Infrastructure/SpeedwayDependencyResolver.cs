@@ -12,7 +12,7 @@ namespace SpeedwayCenter.Infrastructure
 {
     public class SpeedwayDependencyResolver : IDependencyResolver
     {
-        private IKernel _kernel;
+        private readonly IKernel _kernel;
 
         public SpeedwayDependencyResolver(IKernel kernel)
         {
@@ -22,7 +22,10 @@ namespace SpeedwayCenter.Infrastructure
 
         private void AddBindings()
         {
-            _kernel.Bind<IRepository<Rider>>().To<RiderRepository<Speedway>>();
+            _kernel
+                .Bind<IQueryRepository<Rider>>()
+                .To<QueryRepository<SpeedwayContext, Rider>>()
+                .WithConstructorArgument("context", new SpeedwayContext());
         }
 
         public object GetService(Type serviceType)

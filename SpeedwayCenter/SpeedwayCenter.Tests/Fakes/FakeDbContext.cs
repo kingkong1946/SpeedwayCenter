@@ -5,6 +5,6 @@ namespace SpeedwayCenter.Tests.Fakes
 {
     public class FakeDbContext : DbContext
     {
-        public virtual DbSet<Rider> Riders { get; set; }
+        public virtual DbSet<FakeModel> Models { get; set; }
     }
 }

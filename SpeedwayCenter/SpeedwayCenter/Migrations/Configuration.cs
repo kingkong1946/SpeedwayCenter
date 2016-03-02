@@ -5,7 +5,7 @@ namespace SpeedwayCenter.Migrations
     using System.Data.Entity.Migrations;
     using System.Linq;
 
-    internal sealed class Configuration : DbMigrationsConfiguration<SpeedwayCenter.Models.Entity_Framework.Speedway>
+    internal sealed class Configuration : DbMigrationsConfiguration<SpeedwayCenter.Models.Entity_Framework.SpeedwayContext>
     {
         public Configuration()
         {
@@ -13,7 +13,7 @@ namespace SpeedwayCenter.Migrations
             AutomaticMigrationDataLossAllowed = true;
         }
 
-        protected override void Seed(SpeedwayCenter.Models.Entity_Framework.Speedway context)
+        protected override void Seed(SpeedwayCenter.Models.Entity_Framework.SpeedwayContext context)
         {
             //  This method will be called after migrating to the latest version.
 
