@@ -6,8 +6,8 @@
   <mvcSiteMapNode title="Index" controller="Home" action="Index">
     <mvcSiteMapNode title="About" controller="Home" action="About"/>
     <mvcSiteMapNode title="Contact" controller="Home" action="Contact"/>
-    <mvcSiteMapNode title="Riders" controller="Riders" action="Index"/>
-    <mvcSiteMapNode title="Teams" controller="Teams" action="Index"/>
+    <mvcSiteMapNode title="Riders" controller="Rider" action="Index"/>
+    <mvcSiteMapNode title="Teams" controller="Team" action="Index"/>
     <mvcSiteMapNode title="Fixture" controller="Fixture" action="Index"/>
     <mvcSiteMapNode title="Table" controller="Table" action="Index"/>
   </mvcSiteMapNode>

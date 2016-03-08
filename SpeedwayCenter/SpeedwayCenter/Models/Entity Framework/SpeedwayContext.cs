@@ -8,7 +8,7 @@ namespace SpeedwayCenter.Models.Entity_Framework
     public partial class SpeedwayContext : DbContext
     {
         public SpeedwayContext()
-            : base("name=SpeedwayContext")
+            : base("name=Speedway")
         {
             Database.SetInitializer(new MigrateDatabaseToLatestVersion<SpeedwayContext, SpeedwayCenter.Migrations.Configuration>("SpeedwayContext"));
         }
@@ -28,6 +28,41 @@ namespace SpeedwayCenter.Models.Entity_Framework
             modelBuilder.Entity<Rider>()
                 .Property(e => e.Country)
                 .IsFixedLength();
+
+            modelBuilder.Entity<Rider>()
+                .HasOptional(e => e.Team)
+                .WithMany(e => e.Riders);
+
+            modelBuilder.Entity<Rider>()
+                .HasMany(e => e.Scores)
+                .WithOptional(e => e.Rider)
+                .HasForeignKey(e => e.Rider);
+
+
+            modelBuilder.Entity<Meeting>()
+                .Property(e => e.City)
+                .IsFixedLength();
+
+            modelBuilder.Entity<Meeting>()
+                .HasRequired(e => e.HomeTeam)
+                .WithMany(e => e.HomeMeetings);
+
+            modelBuilder.Entity<Meeting>()
+                .HasRequired(e => e.AwayTeam)
+                .WithMany(e => e.AwayMeetings);
+
+            modelBuilder.Entity<Meeting>()
+                .HasMany(e => e.Scores)
+                .WithRequired(e => e.Meeting);
+
+
+            modelBuilder.Entity<Scores>()
+                .HasRequired(e => e.Rider)
+                .WithMany(e => e.Scores);
+
+            modelBuilder.Entity<Scores>()
+                .HasRequired(e => e.Meeting)
+                .WithMany(e => e.Scores);
         }
     }
 }

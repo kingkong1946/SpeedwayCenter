@@ -25,7 +25,7 @@ namespace SpeedwayCenter.Models.Repository
 
         public IQueryable<T> GetAll()
         {
-            return _context.Set<T>().AsQueryable();
+            return _context.Set<T>().Local.AsQueryable();
         }
 
         public IQueryable<T> FindBy(Expression<Func<T, bool>> predicate)
