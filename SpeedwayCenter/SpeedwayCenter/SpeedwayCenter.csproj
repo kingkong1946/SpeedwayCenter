@@ -286,7 +286,7 @@
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Entity Framework\Meeting.cs" />
     <Compile Include="Models\Entity Framework\Rider.cs" />
-    <Compile Include="Models\Entity Framework\Scores.cs" />
+    <Compile Include="Models\Entity Framework\Score.cs" />
     <Compile Include="Models\Entity Framework\SpeedwayContext.cs" />
     <Compile Include="Models\Entity Framework\Team.cs" />
     <Compile Include="Models\Repository\EFGenericRepository.cs" />

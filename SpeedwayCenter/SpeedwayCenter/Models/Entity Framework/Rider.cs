@@ -48,6 +48,6 @@ namespace SpeedwayCenter.Models.Entity_Framework
         public string Name => $"{FirstName} {LastName}";
 
         public virtual Team Team { get; set; }
-        public virtual ICollection<Scores> Scores { get; set; }
+        public virtual ICollection<Score> Scores { get; set; }
     }
 }
