@@ -322,6 +322,7 @@
     <Content Include="Views\Rider\Details.cshtml" />
     <Content Include="Views\Rider\Edit.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\BootstrapSpeedwayMenuHelperModel.cshtml" />
+    <Content Include="Views\Team\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -332,7 +333,6 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Photos\" />
-    <Folder Include="Views\Team\" />
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />

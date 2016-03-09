@@ -10,16 +10,17 @@ namespace SpeedwayCenter.Controllers
 {
     public class TeamController : Controller
     {
-        private IRepository<Team> _repository;
+        private readonly IQueryRepository<Team> _queryRepository;
 
-        public TeamController(IRepository<Team> repository)
+        public TeamController(IQueryRepository<Team> queryRepository)
         {
-            _repository = repository;
+            _queryRepository = queryRepository;
         }
 
         public ActionResult Index()
         {
-            return View();
+            var records = _queryRepository.GetAll().Take(10);
+            return View(records);
         }
     }
 }

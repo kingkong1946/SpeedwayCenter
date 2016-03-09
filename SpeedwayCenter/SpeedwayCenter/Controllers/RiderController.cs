@@ -27,7 +27,7 @@ namespace SpeedwayCenter.Controllers
 
         public ActionResult Index()
         {
-            var records = _repository.GetAll();
+            var records = _repository.GetAll().Take(10);
             return View(records);
         }
 
