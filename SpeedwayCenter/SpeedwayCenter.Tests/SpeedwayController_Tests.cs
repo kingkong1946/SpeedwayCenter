@@ -16,23 +16,23 @@ namespace SpeedwayCenter.Tests
     [TestClass]
     public class SpeedwayController_Tests
     {
-        [TestMethod]
-        public void IndexAction()
-        {
-            //Arrange
-            List<Rider> collection = CreateFakeBase();
-            IQueryRepository<Rider> fakeRepository = CreateFakeRepository(collection);
-            var target = new RiderController(fakeRepository);
+        //[TestMethod]
+        //public void IndexAction()
+        //{
+        //    //Arrange
+        //    List<Rider> collection = CreateFakeBase();
+        //    IQueryRepository<Rider> fakeRepository = CreateFakeRepository(collection);
+        //    var target = new RiderController(fakeRepository);
 
-            const int expectedCount = 4;
+        //    const int expectedCount = 4;
 
-            //Act
-            var result = (ViewResult)target.Index();
+        //    //Act
+        //    var result = (ViewResult)target.Index();
 
-            //Assert
-            var model = (IQueryable<Rider>)result.Model;
-            Assert.AreEqual(expectedCount, model.Count());
-        }
+        //    //Assert
+        //    var model = (IQueryable<Rider>)result.Model;
+        //    Assert.AreEqual(expectedCount, model.Count());
+        //}
 
         //[TestMethod]
         //public void AddAction()

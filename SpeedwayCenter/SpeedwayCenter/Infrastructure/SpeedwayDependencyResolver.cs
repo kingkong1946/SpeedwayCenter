@@ -5,7 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using Ninject;
 using Ninject.Web.Common;
-using SpeedwayCenter.Models.Entity_Framework;
+using SpeedwayCenter.Models.FluentApi;
 using SpeedwayCenter.Models.Repository;
 
 namespace SpeedwayCenter.Infrastructure
@@ -24,23 +24,23 @@ namespace SpeedwayCenter.Infrastructure
         {
             _kernel
                 .Bind<IQueryRepository<Rider>>()
-                .To<QueryRepository<SpeedwayContext, Rider>>()
-                .WithConstructorArgument("context", new SpeedwayContext());
+                .To<QueryRepository<SpeedwayCenterContext, Rider>>()
+                .WithConstructorArgument("context", new SpeedwayCenterContext());
 
-            _kernel
-                .Bind<IQueryRepository<Team>>()
-                .To<QueryRepository<SpeedwayContext, Team>>()
-                .WithConstructorArgument("context", new SpeedwayContext());
+            //_kernel
+            //    .Bind<IQueryRepository<Team>>()
+            //    .To<QueryRepository<SpeedwayCenterContext, Team>>()
+            //    .WithConstructorArgument("context", new SpeedwayCenterContext());
 
-            _kernel
-                .Bind<IQueryRepository<Meeting>>()
-                .To<QueryRepository<SpeedwayContext, Meeting>>()
-                .WithConstructorArgument("context", new SpeedwayContext());
+            //_kernel
+            //    .Bind<IQueryRepository<Meeting>>()
+            //    .To<QueryRepository<SpeedwayCenterContext, Meeting>>()
+            //    .WithConstructorArgument("context", new SpeedwayCenterContext());
 
-            _kernel
-                .Bind<IQueryRepository<Score>>()
-                .To<QueryRepository<SpeedwayContext, Score>>()
-                .WithConstructorArgument("context", new SpeedwayContext());
+            //_kernel
+            //    .Bind<IQueryRepository<Score>>()
+            //    .To<QueryRepository<SpeedwayCenterContext, Score>>()
+            //    .WithConstructorArgument("context", new SpeedwayCenterContext());
         }
 
         public object GetService(Type serviceType)

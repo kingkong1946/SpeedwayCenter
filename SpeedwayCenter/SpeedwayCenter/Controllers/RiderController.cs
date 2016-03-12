@@ -10,7 +10,7 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
 using System.Web.UI.WebControls;
-using SpeedwayCenter.Models.Entity_Framework;
+using SpeedwayCenter.Models.FluentApi;
 using SpeedwayCenter.Models.Repository;
 using Image = System.Drawing.Image;
 

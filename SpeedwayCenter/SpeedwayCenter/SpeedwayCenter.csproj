@@ -284,11 +284,19 @@
     <Compile Include="Helpers\BootstrapCheckBoxHelper.cs" />
     <Compile Include="Infrastructure\SpeedwayDependencyResolver.cs" />
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Models\Entity Framework\Heat.cs" />
     <Compile Include="Models\Entity Framework\Meeting.cs" />
     <Compile Include="Models\Entity Framework\Rider.cs" />
     <Compile Include="Models\Entity Framework\Score.cs" />
     <Compile Include="Models\Entity Framework\SpeedwayContext.cs" />
     <Compile Include="Models\Entity Framework\Team.cs" />
+    <Compile Include="Models\FluentApi\League.cs" />
+    <Compile Include="Models\FluentApi\Meeting.cs" />
+    <Compile Include="Models\FluentApi\Season.cs" />
+    <Compile Include="Models\FluentApi\TeamMeeting.cs" />
+    <Compile Include="Models\FluentApi\Rider.cs" />
+    <Compile Include="Models\FluentApi\SpeedwayCenterContext.cs" />
+    <Compile Include="Models\FluentApi\Team.cs" />
     <Compile Include="Models\Repository\EFGenericRepository.cs" />
     <Compile Include="Models\Repository\IQueryRepository.cs" />
     <Compile Include="Models\Repository\IRepository.cs" />
@@ -333,6 +341,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Photos\" />
+    <Folder Include="ViewModels\" />
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />
