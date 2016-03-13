@@ -6,7 +6,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace SpeedwayCenter.Tests
 {
     [TestClass]
-    public class HtmlHelperExtensions_Tests
+    public class Extensions_Tests
     {
         [TestMethod]
         public void BootstrapCheckbox()
@@ -26,6 +26,16 @@ namespace SpeedwayCenter.Tests
             
             //Assert
             Assert.AreEqual(expected, result.ToString());
+        }
+
+        [TestMethod]
+        public void DateConverter()
+        {
+            //Arrange
+
+
+            //Act
+            //Assert
         }
     }
 }

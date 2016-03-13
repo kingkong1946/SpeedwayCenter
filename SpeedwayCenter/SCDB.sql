@@ -298,3 +298,41 @@ BEGIN
 END
 EXEC(@command)
 GO
+
+-- 2016-03-13
+USE [SpeedwayCenter]
+GO
+
+IF OBJECT_ID(N'[SeasonsTeamsRiders]') IS NOT NULL 
+BEGIN
+
+DROP TABLE dbo.SeasonsTeamsRiders
+
+END
+GO
+
+DECLARE @command AS nvarchar(MAX)
+IF OBJECT_ID(N'[TeamsSeasons]') IS NOT NULL 
+BEGIN
+	SET @command = 'ALTER TABLE dbo.TeamsSeasons ADD 
+    [Year] int
+   ,[ExtraName] nvarchar(60)'
+END
+ELSE 
+BEGIN
+
+    SET @command = 'CREATE TABLE [TeamsSeasons] (
+     [Id]           uniqueidentifier    NOT NULL
+    ,[TeamId]       uniqueidentifier    NOT NULL
+    ,[SeasonId]     uniqueidentifier    NOT NULL
+    ,[Year]         int                 NOT NULL
+    ,[ExtraName]    nvarchar(60)        NOT NULL
+
+     CONSTRAINT PK_SeasonTeamId PRIMARY KEY ([Id])
+
+     CONSTRAINT FK_TeamIdForSeason  FOREIGN KEY ([TeamId])      REFERENCES [Teams]([Id])
+    ,CONSTRAINT FK_SeasonId         FOREIGN KEY ([SeasonId])    REFERENCES [Seasons]([Id])
+)'
+END
+EXEC(@command)
+GO

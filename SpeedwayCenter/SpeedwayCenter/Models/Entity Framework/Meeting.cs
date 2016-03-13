@@ -37,23 +37,23 @@ namespace SpeedwayCenter.Models.Entity_Framework
 
         public virtual ICollection<Score> Scores { get; set; }
 
-        [NotMapped]
-        public MeetingResult Result
-        {
-            get
-            {
-                int homePoints = 0;
-                var homeTeamRiderIds = HomeTeam.Riders.Select(x => x.Id);
-                foreach (var score in Scores)
-                {
-                    if (homeTeamRiderIds.Contains(score.RiderId))
-                    {
-                        var stringPoints = Regex.Replace(score.Points, @"\w", "0");
-                        var singlePoints = stringPoints.Split(',');
-                        var points = singlePoints.Select(int.Parse);
-                    }
-                }
-            }
-        }
+        //[NotMapped]
+        //public MeetingResult Result
+        //{
+        //    get
+        //    {
+        //        int homePoints = 0;
+        //        var homeTeamRiderIds = HomeTeam.Riders.Select(x => x.Id);
+        //        foreach (var score in Scores)
+        //        {
+        //            if (homeTeamRiderIds.Contains(score.RiderId))
+        //            {
+        //                var stringPoints = Regex.Replace(score.Points, @"\w", "0");
+        //                var singlePoints = stringPoints.Split(',');
+        //                var points = singlePoints.Select(int.Parse);
+        //            }
+        //        }
+        //    }
+        //}
     }
 }

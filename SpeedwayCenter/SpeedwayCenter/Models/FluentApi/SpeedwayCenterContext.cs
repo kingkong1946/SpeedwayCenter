@@ -15,13 +15,26 @@ namespace SpeedwayCenter.Models.FluentApi
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
+            // Temporarily
             modelBuilder.Ignore<Entity_Framework.Rider>();
             modelBuilder.Ignore<Entity_Framework.Team>();
             modelBuilder.Ignore<Entity_Framework.Meeting>();
             modelBuilder.Ignore<Entity_Framework.Score>();
             modelBuilder.Ignore<Entity_Framework.Heat>();
-            //modelBuilder.Entity<Rider>().ToTable("Riders");
-            //modelBuilder.Entity<Team>().ToTable("Teams");
+
+            modelBuilder.Entity<Rider>()
+                .ToTable("Riders");
+            modelBuilder.Entity<Rider>()
+                .Ignore(e => e.ShortBirthDate);
+
+            modelBuilder.Entity<Team>()
+                .ToTable("Teams");
+            modelBuilder.Entity<Team>()
+                .Ignore(e => e.FullName);
+            modelBuilder.Entity<Team>()
+                .HasMany(e => e.Seasons)
+                .WithMany(e => e.Teams);
+            
             base.OnModelCreating(modelBuilder);
         }
     }

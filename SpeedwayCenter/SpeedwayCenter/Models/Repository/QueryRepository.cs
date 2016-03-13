@@ -18,17 +18,17 @@ namespace SpeedwayCenter.Models.Repository
             _context = context;
         }
 
-        public T FindFirst(Expression<Func<T, bool>> predicate)
+        public T FindBy(Expression<Func<T, bool>> predicate)
         {
             return _context.Set<T>().FirstOrDefault(predicate);
         }
 
         public IQueryable<T> GetAll()
         {
-            return _context.Set<T>().Local.AsQueryable();
+            return _context.Set<T>();
         }
 
-        public IQueryable<T> FindBy(Expression<Func<T, bool>> predicate)
+        public IQueryable<T> FindMany(Expression<Func<T, bool>> predicate)
         {
             return _context.Set<T>().Where(predicate).Select(x => x);
         }

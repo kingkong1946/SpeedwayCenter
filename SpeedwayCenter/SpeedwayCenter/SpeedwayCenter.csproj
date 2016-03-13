@@ -283,8 +283,6 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Helpers\BootstrapCheckBoxHelper.cs" />
-    <Compile Include="Helpers\MeetingResult.cs" />
-    <Compile Include="Helpers\TeamExtension.cs" />
     <Compile Include="Infrastructure\SpeedwayDependencyResolver.cs" />
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Entity Framework\Heat.cs" />
@@ -345,7 +343,6 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Photos\" />
-    <Folder Include="ViewModels\" />
     <Folder Include="Views\Table\" />
   </ItemGroup>
   <ItemGroup>

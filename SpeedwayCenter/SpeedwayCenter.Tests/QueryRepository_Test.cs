@@ -59,7 +59,7 @@ namespace SpeedwayCenter.Tests
             var entityExpected = fakeBase.ToList()[0];
 
             //Act
-            var resultCollection = target.FindBy(rider => rider.Desc == "Desc1");
+            var resultCollection = target.FindMany(rider => rider.Desc == "Desc1");
             var result = resultCollection.ToList()[0];
 
             //Assert
@@ -79,7 +79,7 @@ namespace SpeedwayCenter.Tests
             var entityExpected = fakeBase.Where(rider => rider.Desc == "Desc1").Select(rider => rider);
 
             //Act
-            var result = target.FindBy(rider => rider.Desc == "Desc1");
+            var result = target.FindMany(rider => rider.Desc == "Desc1");
 
             //Assert
             Assert.AreEqual(entityExpected.Count(), result.Count());
@@ -95,7 +95,7 @@ namespace SpeedwayCenter.Tests
             const int expectedCount = 0;
 
             //Act
-            var result = target.FindBy(rider => rider.Desc == "Desc1");
+            var result = target.FindMany(rider => rider.Desc == "Desc1");
 
             //Assert
             Assert.AreEqual(expectedCount, result.Count());
@@ -112,7 +112,7 @@ namespace SpeedwayCenter.Tests
             var expected = fakeBase[0];
 
             //Act
-            var result = target.FindFirst(model => model.Desc == "Desc1");
+            var result = target.FindBy(model => model.Desc == "Desc1");
 
             //Assert
             Assert.AreEqual(expected, result);
@@ -128,7 +128,7 @@ namespace SpeedwayCenter.Tests
             QueryRepository<FakeDbContext, FakeModel> target = new QueryRepository<FakeDbContext, FakeModel>(fakeContext);
 
             //Act
-            var result = target.FindFirst(model => model.Desc == "Desc1");
+            var result = target.FindBy(model => model.Desc == "Desc1");
 
             //Assert
             Assert.IsNull(result);
@@ -226,7 +226,7 @@ namespace SpeedwayCenter.Tests
         //    target.Edit(riderToEdit);
 
         //    //Assert
-        //    var resultCollection = target.FindBy(rider => rider.Country == "Finland");
+        //    var resultCollection = target.FindMany(rider => rider.Country == "Finland");
         //    var result = resultCollection.ToList()[0];
         //    Assert.AreEqual(riderToEdit.Country, result.Country);
         //}

@@ -27,10 +27,10 @@ namespace SpeedwayCenter.Infrastructure
                 .To<QueryRepository<SpeedwayCenterContext, Rider>>()
                 .WithConstructorArgument("context", new SpeedwayCenterContext());
 
-            //_kernel
-            //    .Bind<IQueryRepository<Team>>()
-            //    .To<QueryRepository<SpeedwayCenterContext, Team>>()
-            //    .WithConstructorArgument("context", new SpeedwayCenterContext());
+            _kernel
+                .Bind<IQueryRepository<Team>>()
+                .To<QueryRepository<SpeedwayCenterContext, Team>>()
+                .WithConstructorArgument("context", new SpeedwayCenterContext());
 
             //_kernel
             //    .Bind<IQueryRepository<Meeting>>()

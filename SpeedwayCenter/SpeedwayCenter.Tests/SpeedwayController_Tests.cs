@@ -303,7 +303,7 @@ namespace SpeedwayCenter.Tests
         private static IQueryRepository<Rider> CreateFakeRepository(List<Rider> collection)
         {
             var mock = new Mock<IQueryRepository<Rider>>();
-            mock.Setup(rep => rep.FindBy(It.IsAny<Expression<Func<Rider, bool>>>()))
+            mock.Setup(rep => rep.FindMany(It.IsAny<Expression<Func<Rider, bool>>>()))
                 .Returns((Expression<Func<Rider, bool>> func) => collection.AsQueryable().Where(func).Select(rider => rider));
             mock.Setup(rep => rep.GetAll()).Returns(collection.AsQueryable());
             //mock.Setup(rep => rep.Add(It.IsAny<Rider>())).Callback<Rider>(collection.Add);

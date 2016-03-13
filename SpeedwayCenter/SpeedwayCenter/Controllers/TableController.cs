@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using SpeedwayCenter.Models.Entity_Framework;
+using SpeedwayCenter.Models.FluentApi;
 using SpeedwayCenter.Models.Repository;
 using SpeedwayCenter.ViewModels;
 
@@ -20,12 +20,12 @@ namespace SpeedwayCenter.Controllers
 
         public ActionResult Index()
         {
-            var records = _queryRepository.GetAll()
-                .Select(e => new TeamForTableViewModel(
-                    e.Name,
-                    e.AwayMeetings.Sum() + e.HomeMeetings.Sum(),
-                    ));
-            return View(records);
+            //var records = _queryRepository.GetAll()
+            //    .Select(e => new TeamForTableViewModel(
+            //        e.Name,
+            //        e.AwayMeetings.Sum() + e.HomeMeetings.Sum(),
+            //        ));
+            return View(new List<Team>());
         }
     }
 }
