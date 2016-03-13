@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.Entity.ModelConfiguration.Conventions;
+using System.Linq;
+using System.Text.RegularExpressions;
+using SpeedwayCenter.Helpers;
 
 namespace SpeedwayCenter.Models.Entity_Framework
 {
@@ -20,7 +23,7 @@ namespace SpeedwayCenter.Models.Entity_Framework
         [Column(TypeName = "nvarchar")]
         [RegularExpression("^[A-Za-z ]+")]
         public string City { get; set; }
-        
+
         public int HomeTeamId { get; set; }
         public int AwayTeamId { get; set; }
 
@@ -33,5 +36,24 @@ namespace SpeedwayCenter.Models.Entity_Framework
         public virtual Team AwayTeam { get; set; }
 
         public virtual ICollection<Score> Scores { get; set; }
+
+        [NotMapped]
+        public MeetingResult Result
+        {
+            get
+            {
+                int homePoints = 0;
+                var homeTeamRiderIds = HomeTeam.Riders.Select(x => x.Id);
+                foreach (var score in Scores)
+                {
+                    if (homeTeamRiderIds.Contains(score.RiderId))
+                    {
+                        var stringPoints = Regex.Replace(score.Points, @"\w", "0");
+                        var singlePoints = stringPoints.Split(',');
+                        var points = singlePoints.Select(int.Parse);
+                    }
+                }
+            }
+        }
     }
 }

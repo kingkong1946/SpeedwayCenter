@@ -9,7 +9,7 @@ namespace SpeedwayCenter.Models.Entity_Framework
         public int Id { get; set; }
         
         [Required]
-        [RegularExpression(@"([dutwDUTW\d],)+([dutwDUTW\d])")]
+        [RegularExpression(@"([dutwDUTW\d],)*([dutwDUTW\d])")]
         public string Points { get; set; }
 
         public int RiderId { get; set; }
