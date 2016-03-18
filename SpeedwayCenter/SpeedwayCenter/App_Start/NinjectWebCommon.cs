@@ -2,7 +2,6 @@ using System.Configuration;
 using System.Data.Entity;
 using System.Web.Mvc;
 using SpeedwayCenter.Infrastructure;
-using SpeedwayCenter.Models.Entity_Framework;
 
 [assembly: WebActivatorEx.PreApplicationStartMethod(typeof(SpeedwayCenter.App_Start.NinjectWebCommon), "Start")]
 [assembly: WebActivatorEx.ApplicationShutdownMethodAttribute(typeof(SpeedwayCenter.App_Start.NinjectWebCommon), "Stop")]

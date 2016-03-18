@@ -1,5 +1,4 @@
-﻿@using SpeedwayCenter.Models.FluentApi
-@model IEnumerable<Rider>
+﻿@model IEnumerable<SpeedwayCenter.ViewModels.Rider.RiderIndexViewModel>
 
 @{
     ViewBag.Title = "Index";
@@ -11,7 +10,7 @@
     <tr>
         <th>@Html.DisplayNameFor(model => model.Name)</th>
         <th>@Html.DisplayNameFor(model => model.Forname)</th>
-        <th>@Html.DisplayNameFor(model => model.ShortBirthDate)</th>
+        <th>@Html.DisplayNameFor(model => model.BirthDate)</th>
         <th>@Html.DisplayNameFor(model => model.Country)</th>
         @*<th></th>*@
     </tr>
@@ -21,7 +20,7 @@
         <tr>
             <td>@Html.DisplayFor(modelItem => item.Name)</td>
             <td>@Html.DisplayFor(modelItem => item.Forname)</td>
-            <td>@Html.DisplayFor(modelItem => item.ShortBirthDate)</td>
+            <td>@Html.DisplayFor(modelItem => item.BirthDate)</td>
             <td>@Html.DisplayFor(modelItem => item.Country)</td>
             @*<td>
                 <div class="btn-block">

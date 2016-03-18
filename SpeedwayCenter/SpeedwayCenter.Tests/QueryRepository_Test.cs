@@ -5,7 +5,6 @@ using System.Data.Entity;
 using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
-using SpeedwayCenter.Models.Entity_Framework;
 using SpeedwayCenter.Models.Repository;
 using SpeedwayCenter.Tests.Fakes;
 

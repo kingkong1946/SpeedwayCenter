@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using Ninject;
 using Ninject.Web.Common;
 using SpeedwayCenter.Models.FluentApi;
+using SpeedwayCenter.Models.Models;
 using SpeedwayCenter.Models.Repository;
 
 namespace SpeedwayCenter.Infrastructure
@@ -32,10 +33,10 @@ namespace SpeedwayCenter.Infrastructure
                 .To<QueryRepository<SpeedwayCenterContext, Team>>()
                 .WithConstructorArgument("context", new SpeedwayCenterContext());
 
-            //_kernel
-            //    .Bind<IQueryRepository<Meeting>>()
-            //    .To<QueryRepository<SpeedwayCenterContext, Meeting>>()
-            //    .WithConstructorArgument("context", new SpeedwayCenterContext());
+            _kernel
+                .Bind<IQueryRepository<Meeting>>()
+                .To<QueryRepository<SpeedwayCenterContext, Meeting>>()
+                .WithConstructorArgument("context", new SpeedwayCenterContext());
 
             //_kernel
             //    .Bind<IQueryRepository<Score>>()

@@ -1,5 +1,4 @@
 using System.Data.Entity;
-using SpeedwayCenter.Models.Entity_Framework;
 
 namespace SpeedwayCenter.Tests.Fakes
 {

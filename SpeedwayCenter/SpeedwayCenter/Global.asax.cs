@@ -14,7 +14,6 @@ namespace SpeedwayCenter
         {
             AreaRegistration.RegisterAllAreas();
             RouteConfig.RegisterRoutes(RouteTable.Routes);
-            var migrator = new DbMigrator(new Migrations.Configuration());
             //migrator.Update();
         }
     }

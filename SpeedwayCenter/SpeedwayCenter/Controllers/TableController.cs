@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using SpeedwayCenter.Models.FluentApi;
+using SpeedwayCenter.Models.Models;
 using SpeedwayCenter.Models.Repository;
 using SpeedwayCenter.ViewModels;
 
