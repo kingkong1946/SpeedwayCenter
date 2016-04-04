@@ -10,5 +10,17 @@
   {
     "outputFile": "Content/bootstrap/mixins.css",
     "inputFile": "Content/bootstrap/mixins.less"
+  },
+  {
+    "outputFile": "Content/bootstrap/variables.css",
+    "inputFile": "Content/bootstrap/variables.less"
+  },
+  {
+    "outputFile": "Content/bootstrap/navs.css",
+    "inputFile": "Content/bootstrap/navs.less"
+  },
+  {
+    "outputFile": "Content/bootstrap/list-group.css",
+    "inputFile": "Content/bootstrap/list-group.less"
   }
 ]

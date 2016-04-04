@@ -11,8 +11,8 @@ using System.Web.Mvc;
 using System.Web.Routing;
 using System.Web.UI.WebControls;
 using Ninject.Infrastructure.Language;
-using SpeedwayCenter.Models.Models;
-using SpeedwayCenter.Models.Repository;
+using SpeedwayCenter.ORM.Models;
+using SpeedwayCenter.ORM.Repository;
 using SpeedwayCenter.ViewModels.Rider;
 
 namespace SpeedwayCenter.Controllers
@@ -30,7 +30,13 @@ namespace SpeedwayCenter.Controllers
         {
             var records = _repository
                 .GetAll()
-                .Take(10)
+                .Select(r => new
+                {
+                    r.Name,
+                    r.Forname,
+                    r.BirthDate,
+                    r.Country
+                })
                 .ToList();
 
             var viewModel = records.Select(r => new RiderIndexViewModel(

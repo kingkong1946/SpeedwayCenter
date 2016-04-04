@@ -12,7 +12,6 @@
         <th>@Html.DisplayNameFor(model => model.Forname)</th>
         <th>@Html.DisplayNameFor(model => model.BirthDate)</th>
         <th>@Html.DisplayNameFor(model => model.Country)</th>
-        @*<th></th>*@
     </tr>
 
     @foreach (var item in Model)
@@ -22,13 +21,6 @@
             <td>@Html.DisplayFor(modelItem => item.Forname)</td>
             <td>@Html.DisplayFor(modelItem => item.BirthDate)</td>
             <td>@Html.DisplayFor(modelItem => item.Country)</td>
-            @*<td>
-                <div class="btn-block">
-                    <input type="button" value="Edit" onclick="location.href = '@Url.Action("Edit", new {id = item.Id})'" class="btn btn-warning btn-xs" />
-                    <input type="button" value="Details" onclick="location.href = '@Url.Action("Details", new {id = item.Id})'" class="btn btn-info btn-xs" />
-                    <input type="button" value="Delete" onclick="location.href = '@Url.Action("Delete", new {id = item.Id})'" class="btn btn-danger btn-xs" />
-                </div>
-            </td>*@
         </tr>
     }
 </table>

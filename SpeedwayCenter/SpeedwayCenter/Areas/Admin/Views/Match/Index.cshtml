@@ -1,0 +1,43 @@
+﻿@model IEnumerable<SpeedwayCenter.Areas.Admin.ViewModels.Match.AdminIndexMatchViewModel>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminBasicLayout.cshtml";
+}
+
+<h2>Matches</h2>
+
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th>@Html.DisplayNameFor(model => model.Id)</th>
+            <th>@Html.DisplayNameFor(model => model.Name)</th>
+            <th>@Html.DisplayNameFor(model => model.Score)</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr data-href="@Url.Action("Edit", "Match", new {Id = item.Id})">
+                <td>@Html.DisplayFor(model => item.Id)</td>
+                <td>@Html.DisplayFor(model => item.Name)</td>
+                <td>@Html.DisplayFor(model => item.Score)</td>
+                <td>
+                    @using (Html.BeginForm("Delete", "Match", FormMethod.Post))
+                    {
+                        @Html.Hidden("id", item.Id)
+                        <button type="submit" class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-remove"></span></button>
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+<a class="btn btn-success" href="@Url.Action("Add", "Match")">Add</a>
+
+<script>
+    $('tr[data-href]').click(function () {
+        window.location.href = $(this).data('href');
+    });
+</script>

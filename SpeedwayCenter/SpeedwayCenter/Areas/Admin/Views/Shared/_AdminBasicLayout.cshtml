@@ -1,0 +1,40 @@
+﻿@{
+    string rider = ViewContext.RouteData.Values["controller"].ToString() == "Rider" ? "active" : "";
+    string team = ViewContext.RouteData.Values["controller"].ToString() == "Team" ? "active" : "";
+    string match = ViewContext.RouteData.Values["controller"].ToString() == "Match" ? "active" : "";
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link rel="stylesheet" href="@Url.Content("~/Content/bootstrap-datepicker3.min.css")" />
+    <link rel="stylesheet" href="@Url.Content("~/Content/bootstrap-datepicker3.standalone.min.css")" />
+    @*<link rel="stylesheet" href="@Url.Content("~/Content/bootstrap-theme.min.css")" />*@
+    <link rel="stylesheet" href="@Url.Content("~/Content/bootstrap/bootstrap.css")" />
+    <link rel="stylesheet" href="@Url.Content("~/Content/bootstrap/bootswatch.css")" />
+    <link rel="stylesheet" href="@Url.Content("~/Content/basic-styles.css")" />
+    <script src="@Url.Content("~/scripts/jquery-1.9.1.min.js")"></script>
+    <script src="@Url.Content("~/scripts/bootstrap.min.js")" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+    <script src="@Url.Content("~/scripts/bootstrap-datepicker.min.js")"></script>
+    <script src="@Url.Content("~/scripts/jquery.validate.min.js")"></script>
+    <script src="@Url.Content("~/scripts/jquery.validate.unobtrusive.min.js")"></script>
+    <script src="@Url.Content("~/scripts/bootstrap-validate.js")"></script>
+    <title>@ViewBag.Title</title>
+    <meta name="description" content="Speedway Center is a database of Speedway History" />
+</head>
+<body>
+<div class="container">
+    <ul class="nav nav-tabs nav-justified">
+        <li class="@rider"><a href="@Url.Action("Index", "Rider")">Riders</a></li>
+        <li class="@team"><a href="@Url.Action("Index", "Team")">Teams</a></li>
+        <li class="@match"><a href="@Url.Action("Index", "Match")">Matches</a></li>
+    </ul>
+    <section class="row">
+        @RenderBody()
+    </section>
+    <footer class="row">
+        <kbd>Copiright Łukasz Adler @DateTime.Now.Year</kbd>
+    </footer>
+</div>
+</body>
+</html>

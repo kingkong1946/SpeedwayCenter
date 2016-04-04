@@ -5,6 +5,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
+using SpeedwayCenter.ORM;
 
 namespace SpeedwayCenter
 {
@@ -14,7 +15,8 @@ namespace SpeedwayCenter
         {
             AreaRegistration.RegisterAllAreas();
             RouteConfig.RegisterRoutes(RouteTable.Routes);
-            //migrator.Update();
+            var migrator = new DbMigrator(new MigrationConfiguration());
+            migrator.Update();
         }
     }
 }

@@ -7478,7 +7478,7 @@ jQuery.fn.extend({
 	},
 	serializeArray: function() {
 		return this.map(function(){
-			// Can add propHook for "elements" to filter or add form elements
+			// Can add propHook for "elements" to filter or item form elements
 			var elements = jQuery.prop( this, "elements" );
 			return elements ? jQuery.makeArray( elements ) : this;
 		})
