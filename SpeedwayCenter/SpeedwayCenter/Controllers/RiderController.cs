@@ -10,9 +10,10 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
 using System.Web.UI.WebControls;
-using SpeedwayCenter.Models.FluentApi;
-using SpeedwayCenter.Models.Repository;
-using Image = System.Drawing.Image;
+using Ninject.Infrastructure.Language;
+using SpeedwayCenter.ORM.Models;
+using SpeedwayCenter.ORM.Repository;
+using SpeedwayCenter.ViewModels.Rider;
 
 namespace SpeedwayCenter.Controllers
 {
@@ -27,8 +28,25 @@ namespace SpeedwayCenter.Controllers
 
         public ActionResult Index()
         {
-            var records = _repository.GetAll().Take(10);
-            return View(records);
+            var records = _repository
+                .GetAll()
+                .Select(r => new
+                {
+                    r.Name,
+                    r.Forname,
+                    r.BirthDate,
+                    r.Country
+                })
+                .ToList();
+
+            var viewModel = records.Select(r => new RiderIndexViewModel(
+                r.Name,
+                r.Forname,
+                r.BirthDate.ToShortDateString(),
+                r.Country))
+            .ToEnumerable();
+
+            return View(viewModel);
         }
 
         //[HttpGet]
@@ -36,7 +54,7 @@ namespace SpeedwayCenter.Controllers
         //{
         //    return View();
         //}
-        
+
         //[HttpPost]
         //public RedirectToRouteResult Add(Rider rider, HttpPostedFileBase file)
         //{

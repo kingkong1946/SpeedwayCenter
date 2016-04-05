@@ -108,7 +108,7 @@
   <ItemGroup>
     <Compile Include="App_Start\NinjectWebCommon.cs" />
     <Compile Include="Fakes\FakeModel.cs" />
-    <Compile Include="HtmlHelperExtensions_Tests.cs" />
+    <Compile Include="Extensions_Tests.cs" />
     <Compile Include="Fakes\FakeDbContext.cs" />
     <Compile Include="QueryRepository_Test.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

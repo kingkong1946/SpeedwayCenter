@@ -1,4 +1,12 @@
-﻿@using MvcSiteMapProvider.Web.Html
+﻿@{
+    string about = ViewContext.RouteData.Values["action"].ToString() == "About" ? "active" : "";
+    string contact = ViewContext.RouteData.Values["action"].ToString() == "Contact" ? "active" : "";
+    string rider = ViewContext.RouteData.Values["controller"].ToString() == "Rider" ? "active" : "";
+    string teams = ViewContext.RouteData.Values["controller"].ToString() == "Teams" ? "active" : "";
+    string fixtures = ViewContext.RouteData.Values["controller"].ToString() == "Fixtures" ? "active" : "";
+    string table = ViewContext.RouteData.Values["controller"].ToString() == "Table" ? "active" : "";
+}
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -6,25 +14,46 @@
     <link rel="stylesheet" href="@Url.Content("~/Content/bootstrap-datepicker3.min.css")" />
     <link rel="stylesheet" href="@Url.Content("~/Content/bootstrap-datepicker3.standalone.min.css")" />
     @*<link rel="stylesheet" href="@Url.Content("~/Content/bootstrap-theme.min.css")" />*@
-    <link rel="stylesheet" href="@Url.Content("~/Content/bootstrap.min.css")" />
-    <link rel="stylesheet" href="@Url.Content("~/Content/basic-styles.css")"/>
-    <script src="@Url.Content("~/scripts/bootstrap.min.js")" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="@Url.Content("~/Content/bootstrap/bootstrap.css")" />
+    <link rel="stylesheet" href="@Url.Content("~/Content/bootstrap/bootswatch.css")" />
+    <link rel="stylesheet" href="@Url.Content("~/Content/basic-styles.css")" />
     <script src="@Url.Content("~/scripts/jquery-1.9.1.min.js")"></script>
+    <script src="@Url.Content("~/scripts/bootstrap.min.js")" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
     <script src="@Url.Content("~/scripts/bootstrap-datepicker.min.js")"></script>
     <script src="@Url.Content("~/scripts/jquery.validate.min.js")"></script>
     <script src="@Url.Content("~/scripts/jquery.validate.unobtrusive.min.js")"></script>
     <script src="@Url.Content("~/scripts/bootstrap-validate.js")"></script>
     <title>@ViewBag.Title</title>
+    <meta name="description" content="Speedway Center is a database of Speedway History" />
 </head>
 <body>
-<div class="container">
-    @Html.MvcSiteMap().Menu("BootstrapMenuHelperModel")
-    <section class="row">
-        @RenderBody()
-    </section>
-    <footer class="row">
-        <kbd>Copiright Łukasz Adler @DateTime.Now.Year</kbd>
-    </footer>
-</div>
+    <div class="container">
+        <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="@Url.Action("Index", "Home")">Speedway Center</a>
+                </div>
+                <div class="collapse navbar-collapse">
+                    <ul class="nav navbar-nav">
+                        <li class="@rider"><a href="@Url.Action("Index", "Rider")">Riders</a></li>
+                        <li class="@teams"><a href="@Url.Action("Index", "Team")">Teams</a></li>
+                        <li class="@fixtures"><a href="@Url.Action("Index", "Fixtures")">Fixtures</a></li>
+                        <li class="@table"><a href="@Url.Action("Index", "Table")">Table</a></li>
+                    </ul>
+                    <ul class="nav navbar-nav navbar-right">
+                        <li class="@about"><a href="@Url.Action("About", "Home")">About</a></li>
+                        <li class="@contact"><a href="@Url.Action("Contact", "Home")">Contact</a></li>
+                        <li><a href="@Url.Action("Index", "Login")"><span class="glyphicon glyphicon-user"></span></a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <section class="row">
+            @RenderBody()
+        </section>
+        <footer class="row">
+            <kbd>Copiright Łukasz Adler @DateTime.Now.Year</kbd>
+        </footer>
+    </div>
 </body>
 </html>

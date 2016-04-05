@@ -1,0 +1,37 @@
+﻿@using System.Web.UI.WebControls
+@model SpeedwayCenter.ViewModels.LoginViewModel
+@{
+    ViewBag.Title = "Index";
+}
+<div class="col-xs-4 col-xs-offset-4">
+    @using (Html.BeginForm())
+    {
+        <div class="panel panel-info">
+            <div class="panel-heading">
+                <h3 class="panel-title">UserName</h3>
+            </div>
+            <div class="panel-body">
+                <div class="form-group form-group-sm">
+                    @Html.LabelFor(model => model.UserName)
+                    @Html.TextBoxFor(model => model.UserName, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.UserName)
+                </div>
+                <div class="form-group form-group-sm">
+                    @Html.LabelFor(model => model.Password)
+                    @Html.PasswordFor(model => model.Password, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.Password)
+                    @{
+                        var modelState = ViewData.ModelState["NotFound"];
+                        if (modelState != null)
+                        {
+                            @modelState.Errors[0].ErrorMessage
+                        }
+                    }
+                </div>
+            </div>
+            <div class="panel-footer">
+                <input class="btn btn-default btn-sm pull-right" type="submit" value="Submit" /><div class="clearfix"></div>
+            </div>
+        </div>
+    }
+</div>

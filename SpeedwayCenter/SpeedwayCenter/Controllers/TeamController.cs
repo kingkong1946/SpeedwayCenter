@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using SpeedwayCenter.Models.Entity_Framework;
-using SpeedwayCenter.Models.Repository;
+using SpeedwayCenter.ORM.Models;
+using SpeedwayCenter.ORM.Repository;
+using SpeedwayCenter.ViewModels.Team;
 
 namespace SpeedwayCenter.Controllers
 {
@@ -19,8 +21,16 @@ namespace SpeedwayCenter.Controllers
 
         public ActionResult Index()
         {
-            var records = _queryRepository.GetAll().Take(10);
-            return View(records);
+            var records = _queryRepository
+                .GetAll()
+                .ToList();
+
+            var viewModel = records.Select(t => new TeamIndexViewModel(
+                    $"{t.FullName}",
+                    t.StadiumName,
+                    t.Capacity));
+
+            return View(viewModel);
         }
     }
 }

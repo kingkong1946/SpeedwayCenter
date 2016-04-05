@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Security;
 using Ninject;
 using Ninject.Web.Common;
-using SpeedwayCenter.Models.FluentApi;
-using SpeedwayCenter.Models.Repository;
+using SpeedwayCenter.ORM;
+using SpeedwayCenter.ORM.Repository;
 
 namespace SpeedwayCenter.Infrastructure
 {
@@ -22,25 +23,12 @@ namespace SpeedwayCenter.Infrastructure
 
         private void AddBindings()
         {
-            _kernel
-                .Bind<IQueryRepository<Rider>>()
-                .To<QueryRepository<SpeedwayCenterContext, Rider>>()
-                .WithConstructorArgument("context", new SpeedwayCenterContext());
-
-            //_kernel
-            //    .Bind<IQueryRepository<Team>>()
-            //    .To<QueryRepository<SpeedwayCenterContext, Team>>()
-            //    .WithConstructorArgument("context", new SpeedwayCenterContext());
-
-            //_kernel
-            //    .Bind<IQueryRepository<Meeting>>()
-            //    .To<QueryRepository<SpeedwayCenterContext, Meeting>>()
-            //    .WithConstructorArgument("context", new SpeedwayCenterContext());
-
-            //_kernel
-            //    .Bind<IQueryRepository<Score>>()
-            //    .To<QueryRepository<SpeedwayCenterContext, Score>>()
-            //    .WithConstructorArgument("context", new SpeedwayCenterContext());
+            _kernel.Bind(typeof(IQueryRepository<>)).To(typeof(QueryRepository<>));
+            _kernel.Bind(typeof(IRepository<>)).To(typeof(Repository<>));
+            _kernel.Bind<IDatabaseContext>().To<SpeedwayCenterContext>().InSingletonScope();
+            _kernel.Bind<IAuthenticationProvider>().To<FormsAuthenticationProvider>();
+            _kernel.Bind<MembershipProvider>().To<CustomMembershipProvider>();
+            _kernel.Bind<IUnitOfWork>().To<UnitOfWork>().InSingletonScope().WithConstructorArgument("list", new List<object>());
         }
 
         public object GetService(Type serviceType)

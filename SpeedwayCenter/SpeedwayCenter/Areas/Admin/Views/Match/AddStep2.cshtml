@@ -1,0 +1,114 @@
+﻿@model SpeedwayCenter.Areas.Admin.ViewModels.Match.AdminAddRidersMatchViewModel
+@{
+    ViewBag.Title = "Add";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminBasicLayout.cshtml";
+}
+
+<div class="col-xs-8 col-xs-offset-2">
+    <h2>Add - Choose riders: </h2>
+
+    @using (@Html.BeginForm("Add", "Match", FormMethod.Post, new { @class = "form-horizontal" }))
+    {
+        <h1>@Model.HomeTeam</h1>
+        <div class="form-group">
+            @Html.LabelFor(model => model.Rider9Id, new { @class = "control-label col-xs-3" })
+            <div class="col-xs-9">
+                @Html.DropDownListFor(model => model.Rider9Id, new SelectList(Model.HomeTeamRiders, "Id", "Name"), new { @class = "form-control" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Rider10Id, new { @class = "control-label col-xs-3" })
+            <div class="col-xs-9">
+                @Html.DropDownListFor(model => model.Rider10Id, new SelectList(Model.HomeTeamRiders, "Id", "Name"), new { @class = "form-control" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Rider11Id, new { @class = "control-label col-xs-3" })
+            <div class="col-xs-9">
+                @Html.DropDownListFor(model => model.Rider11Id, new SelectList(Model.HomeTeamRiders, "Id", "Name"), new { @class = "form-control" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Rider12Id, new { @class = "control-label col-xs-3" })
+            <div class="col-xs-9">
+                @Html.DropDownListFor(model => model.Rider12Id, new SelectList(Model.HomeTeamRiders, "Id", "Name"), new { @class = "form-control" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Rider13Id, new { @class = "control-label col-xs-3" })
+            <div class="col-xs-9">
+                @Html.DropDownListFor(model => model.Rider13Id, new SelectList(Model.HomeTeamRiders, "Id", "Name"), new { @class = "form-control" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Rider14Id, new { @class = "control-label col-xs-3" })
+            <div class="col-xs-9">
+                @Html.DropDownListFor(model => model.Rider14Id, new SelectList(Model.HomeTeamRiders, "Id", "Name"), new { @class = "form-control" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Rider15Id, new {@class = "control-label col-xs-3"})
+            <div class="col-xs-9">
+                @Html.DropDownListFor(model => model.Rider15Id, new SelectList(Model.HomeTeamRiders, "Id", "Name"), new {@class = "form-control"})
+            </div>
+        </div>
+
+        <h1>@Model.AwayTeam</h1>
+        <div class="form-group">
+            @Html.LabelFor(model => model.Rider1Id, new { @class = "control-label col-xs-3" })
+            <div class="col-xs-9">
+                @Html.DropDownListFor(model => model.Rider1Id, new SelectList(Model.AwayTeamRiders, "Id", "Name"), new { @class = "form-control" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Rider2Id, new { @class = "control-label col-xs-3" })
+            <div class="col-xs-9">
+                @Html.DropDownListFor(model => model.Rider2Id, new SelectList(Model.AwayTeamRiders, "Id", "Name"), new { @class = "form-control" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Rider3Id, new { @class = "control-label col-xs-3" })
+            <div class="col-xs-9">
+                @Html.DropDownListFor(model => model.Rider3Id, new SelectList(Model.AwayTeamRiders, "Id", "Name"), new { @class = "form-control" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Rider4Id, new { @class = "control-label col-xs-3" })
+            <div class="col-xs-9">
+                @Html.DropDownListFor(model => model.Rider4Id, new SelectList(Model.AwayTeamRiders, "Id", "Name"), new { @class = "form-control" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Rider5Id, new { @class = "control-label col-xs-3" })
+            <div class="col-xs-9">
+                @Html.DropDownListFor(model => model.Rider5Id, new SelectList(Model.AwayTeamRiders, "Id", "Name"), new { @class = "form-control" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Rider6Id, new { @class = "control-label col-xs-3" })
+            <div class="col-xs-9">
+                @Html.DropDownListFor(model => model.Rider6Id, new SelectList(Model.AwayTeamRiders, "Id", "Name"), new { @class = "form-control" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Rider7Id, new { @class = "control-label col-xs-3" })
+            <div class="col-xs-9">
+                @Html.DropDownListFor(model => model.Rider7Id, new SelectList(Model.AwayTeamRiders, "Id", "Name"), new { @class = "form-control" })
+            </div>
+        </div>
+
+        <input type="submit" class="btn btn-default" value="Next" />
+    }
+</div>
