@@ -1,12 +1,14 @@
 -- 2016-03-12
+DROP DATABASE [SpeedwayCenter]
+GO 
+
+CREATE DATABASE [SpeedwayCenter]
+GO
+
 USE [SpeedwayCenter]
 GO
 
-DECLARE @command AS nvarchar(MAX)
-IF OBJECT_ID(N'[Riders]') IS NULL 
-BEGIN
-
-SET @command = 'CREATE TABLE [Riders](
+CREATE TABLE [Riders](
      [Id]           uniqueidentifier    NOT NULL
     ,[Name]         nvarchar(20)        NOT NULL
     ,[Forname]      nvarchar(20)        NOT NULL
@@ -14,17 +16,10 @@ SET @command = 'CREATE TABLE [Riders](
     ,[BirthDate]    date                NOT NULL
 
      CONSTRAINT PK_RidersId PRIMARY KEY ([Id])
-)'
-
-END
-EXEC(@command)
+)
 GO
 
-DECLARE @command AS nvarchar(MAX)
-IF OBJECT_ID(N'[Teams]') IS NULL 
-BEGIN
-
-SET @command = 'CREATE TABLE [Teams] (
+CREATE TABLE [Teams] (
      [Id]           uniqueidentifier    NOT NULL
     ,[Name]         nvarchar(20)        NOT NULL
     ,[City]         nvarchar(20)        NOT NULL
@@ -32,17 +27,10 @@ SET @command = 'CREATE TABLE [Teams] (
     ,[Capacity]     int                 NOT NULL
 
      CONSTRAINT PK_TeamsId PRIMARY KEY ([Id])
-)'  
-
-END
-EXEC(@command)
+)
 GO
 
-DECLARE @command AS nvarchar(MAX)
-IF OBJECT_ID(N'[TeamsRiders]') IS NULL 
-BEGIN
-
-SET @command = 'CREATE TABLE [TeamsRiders] (
+CREATE TABLE [TeamsRiders] (
      [Id]       uniqueidentifier NOT NULL
     ,[RiderId]  uniqueidentifier NOT NULL
     ,[TeamId]   uniqueidentifier NOT NULL
@@ -51,49 +39,41 @@ SET @command = 'CREATE TABLE [TeamsRiders] (
 
      CONSTRAINT FK_RiderId  FOREIGN KEY ([RiderId]) REFERENCES [Riders]([Id])
     ,CONSTRAINT FK_TeamId   FOREIGN KEY ([TeamId])  REFERENCES [Teams]([Id])
-)'
-
-END
-EXEC(@command)
+)
 GO
 
-DECLARE @command AS nvarchar(MAX)
-IF OBJECT_ID(N'[Meetings]') IS NULL 
-BEGIN
-
-SET @command = 'CREATE TABLE [Meetings] (
+CREATE TABLE [Meetings] (
      [Id]   uniqueidentifier    NOT NULL
     ,[Date] datetime2           NOT NULL
 
      CONSTRAINT PK_MeetingsId PRIMARY KEY ([Id])
-)'
-
-END
-EXEC(@command)
+)
 GO
 
-DECLARE @command AS nvarchar(MAX)
-IF OBJECT_ID(N'[Heats]') IS NULL 
-BEGIN
+CREATE TABLE [HeatResults](
+	[Id]				uniqueidentifier	NOT NULL
+   ,[RiderId]			uniqueidentifier	NULL
+   ,[SubstitutionId]	uniqueidentifier	NULL
+   ,[Points]			int					NULL
 
-SET @command = 'CREATE TABLE [Heats] (
-     [Id]           uniqueidentifier NOT NULL
-    ,[GateARiderId] uniqueidentifier NOT NULL
-    ,[GateBRiderId] uniqueidentifier NOT NULL
-    ,[GateCRiderId] uniqueidentifier NOT NULL
-    ,[GateDRiderId] uniqueidentifier NOT NULL
+   	CONSTRAINT PK_HeatResults PRIMARY KEY ([Id])
+	CONSTRAINT FK_HeatResults FOREIGN KEY ([RiderId]) REFERENCES [Riders]([Id])
+)
+
+CREATE TABLE [Heats] (
+     [Id]       uniqueidentifier	NOT NULL
+	,[Number]	int					NOT NULL
+    ,[GateA]	uniqueidentifier	NOT NULL
+    ,[GateB]	uniqueidentifier	NOT NULL
+    ,[GateC]	uniqueidentifier	NOT NULL
+    ,[GateD]	uniqueidentifier	NOT NULL
     
-    ,[GateAPoints] int NOT NULL
-    ,[GateBPoints] int NOT NULL
-    ,[GateCPoints] int NOT NULL
-    ,[GateDPoints] int NOT NULL
-
-    ,[MeetingId] uniqueidentifier NOT NULL
+    ,[MeetingId] uniqueidentifier	NOT NULL
 
      CONSTRAINT PK_HeatsId PRIMARY KEY ([Id])
 
      CONSTRAINT FK_MeetingId FOREIGN KEY ([MeetingId]) REFERENCES [Meetings]([Id])
-)'
+)
 
 END
 EXEC(@command)
