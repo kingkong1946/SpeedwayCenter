@@ -1,0 +1,85 @@
+﻿@model SpeedwayCenter.Areas.Admin.ViewModels.Match.AdminAddScoresMatchViewModel
+@{
+    ViewBag.Title = "Add";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminBasicLayout.cshtml";
+}
+
+<div class="col-xs-8 col-xs-offset-2">
+    <h2>Add - Score: </h2>
+
+    @using (@Html.BeginForm("Add", "Match", FormMethod.Post, new { @class = "form-horizontal" }))
+    {
+        <div class="form-group">
+            @Html.LabelFor(model => model.Round, new {@class = "control-label col-xs-3"})
+            <div class="col-xs-9">
+                @Html.TextBoxFor(model => model.Round, new {@class = "form-control"})
+            </div>
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.Date, new { @class = "control-label col-xs-3" })
+            <div class="col-xs-9">
+                @Html.TextBoxFor(model => model.Date, new { @class = "form-control datepicker" })
+            </div>
+        </div>
+        foreach (var heat in Model.Heats.OrderBy(m => m.Number))
+        {
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>Heat</th>
+                        <th>Rider</th>
+                        <th>Points</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td rowspan="4">@heat.Number</td>
+                        <td>
+                            @Html.DropDownListFor(
+                                m => heat.RiderGateA,
+                                new SelectList(Model.HomeTeamACHeats.Contains(heat.Number) ? Model.HomeTeamRiders : Model.AwayTeamRiders, "Id", "Name", heat.RiderIdGateA),
+                                new { @class = "form-control" })
+                        </td>
+                        <td>@Html.TextBoxFor(m => heat.RiderScoreGateA, new { @class="form-control"})</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            @Html.DropDownListFor(
+                                m => heat.RiderGateB,
+                                new SelectList(Model.HomeTeamACHeats.Contains(heat.Number) ? Model.AwayTeamRiders : Model.HomeTeamRiders, "Id", "Name", heat.RiderIdGateB),
+                                new { @class = "form-control" })
+                        </td>
+                        <td>@Html.TextBoxFor(m => heat.RiderScoreGateA, new { @class = "form-control" })</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            @Html.DropDownListFor(
+                                m => heat.RiderGateC,
+                                new SelectList(Model.HomeTeamACHeats.Contains(heat.Number) ? Model.HomeTeamRiders : Model.AwayTeamRiders, "Id", "Name", heat.RiderIdGateC),
+                                new { @class = "form-control" })
+                        </td>
+                        <td>@Html.TextBoxFor(m => heat.RiderScoreGateA, new { @class = "form-control" })</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            @Html.DropDownListFor(
+                                m => heat.RiderGateC,
+                                new SelectList(Model.HomeTeamACHeats.Contains(heat.Number) ? Model.AwayTeamRiders : Model.HomeTeamRiders, "Id", "Name", heat.RiderIdGateD),
+                                new { @class = "form-control" })
+                        </td>
+                        <td>@Html.TextBoxFor(m => heat.RiderScoreGateA, new { @class = "form-control" })</td>
+                    </tr>
+                </tbody>
+            </table>
+        }
+        <input type="submit" class="btn btn-default" value="Next" />
+    }
+</div>
+<script type="text/javascript">
+    $(function () {
+        $(".datepicker").datepicker({
+            startDate: '-100y',
+            orientation: 'bottom'
+        });
+    });
+</script>

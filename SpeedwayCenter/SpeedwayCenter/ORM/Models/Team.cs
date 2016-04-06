@@ -14,7 +14,7 @@ namespace SpeedwayCenter.ORM.Models
         public string StadiumName { get; set; }
         public int Capacity { get; set; }
 
-    
+
         public virtual ICollection<TwoTeamMeeting> HomeMeetings { get; set; }
         public virtual ICollection<TwoTeamMeeting> AwayMeetings { get; set; }
 
@@ -23,7 +23,21 @@ namespace SpeedwayCenter.ORM.Models
 
         public string FullName => $"{Name} {City}";
 
-        public ICollection<TwoTeamMeeting> AllMeetings => HomeMeetings?.Concat(AwayMeetings).ToList();
+        public ICollection<TwoTeamMeeting> AllMeetings
+        {
+            get
+            {
+                if (HomeMeetings == null)
+                {
+                    return AwayMeetings;
+                }
+                if (AwayMeetings == null)
+                {
+                    return HomeMeetings;
+                }
+                return HomeMeetings.Concat(AwayMeetings).ToList();
+            }
+        }
 
         public int GetMatchCountFromSeason(Season season) => AllMeetings.Count(meeting => meeting.Season.Id == season.Id);
 

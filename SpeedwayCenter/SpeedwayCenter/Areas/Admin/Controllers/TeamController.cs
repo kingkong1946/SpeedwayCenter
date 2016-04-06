@@ -57,18 +57,18 @@ namespace SpeedwayCenter.Areas.Admin.Controllers
             };
 
             teams.Add(record);
-            teams.Save();
+            _unitOfWork.Save();
 
             return RedirectToAction("Index");
         }
 
-        [HttpGet]
+        [HttpPost]
         public ActionResult Delete(Guid id)
         {
             var teams = _unitOfWork.GetRepository<Team>();
             var record = teams.FindBy(r => r.Id == id);
             teams.Delete(record);
-            teams.Save();
+            _unitOfWork.Save();
 
             return RedirectToAction("Index");
         }
@@ -113,7 +113,7 @@ namespace SpeedwayCenter.Areas.Admin.Controllers
             record.Capacity = item.Capacity;
 
             teams.Edit(record);
-            teams.Save();
+            _unitOfWork.Save();
 
             return RedirectToAction("Index");
         }

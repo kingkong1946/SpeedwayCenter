@@ -32,5 +32,10 @@ namespace SpeedwayCenter.ORM
             }
             return _list.FirstOrDefault(o => o is IRepository<T>) as IRepository<T>;
         }
+
+        public void Save()
+        {
+            _context.Save();
+        }
     }
 }

@@ -33,5 +33,7 @@ namespace SpeedwayCenter.ORM.Models
                 .Where(result => result.Meeting.Id == meeting.Id)
                 .Select(result => result.Points));
         }
+
+        public string FullName => $"{Name} {Forname}";
     }
 }

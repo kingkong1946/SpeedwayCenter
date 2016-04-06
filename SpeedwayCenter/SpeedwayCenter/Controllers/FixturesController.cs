@@ -37,7 +37,7 @@ namespace SpeedwayCenter.Controllers
                 .ToList();
 
             var meetings = allMeetings.Select(m => new MeetingFixtureIndexViewModel(
-                    m.Date.ToString("f"),
+                    m.Date?.ToString("f"),
                     $"{m.HomeTeam.FullName} - {m.AwayTeam.FullName}",
                     null))
                 .ToList();

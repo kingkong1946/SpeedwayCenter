@@ -43,6 +43,8 @@ namespace SpeedwayCenter.ORM.Mapping
                 .Map(m => m.ToTable("TeamsRiders")
                     .MapLeftKey("TeamId")
                     .MapRightKey("RiderId"));
+
+            Ignore(e => e.AllMeetings);
         }
     }
 }

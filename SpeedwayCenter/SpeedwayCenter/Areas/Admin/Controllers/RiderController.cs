@@ -72,7 +72,7 @@ namespace SpeedwayCenter.Areas.Admin.Controllers
             }
 
             riders.Add(record);
-            riders.Save();
+            _unitOfWork.Save();
 
             return RedirectToAction("Index");
         }
@@ -83,7 +83,7 @@ namespace SpeedwayCenter.Areas.Admin.Controllers
             var riders = _unitOfWork.GetRepository<Rider>();
             var record = riders.FindBy(r => r.Id == id);
             riders.Delete(record);
-            riders.Save();
+            _unitOfWork.Save();
 
             return RedirectToAction("Index");
         }
@@ -144,7 +144,7 @@ namespace SpeedwayCenter.Areas.Admin.Controllers
             }
 
             riders.Edit(record);
-            riders.Save();
+            _unitOfWork.Save();
 
             return RedirectToAction("Index");
         }

@@ -20,10 +20,5 @@
         {
             _context.Update(entity);
         }
-
-        public void Save()
-        {
-            _context.Save();
-        }
     }
 }

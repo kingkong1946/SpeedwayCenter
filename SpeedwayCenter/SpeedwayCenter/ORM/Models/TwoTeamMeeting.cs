@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 
 namespace SpeedwayCenter.ORM.Models
@@ -24,5 +25,11 @@ namespace SpeedwayCenter.ORM.Models
         }
 
         public string Score => $"{HomeTeamPoints} : {AwayTeamPoints}";
+
+        public override ICollection<Rider> Riders
+        {
+            get { return new Collection<Rider>(HomeTeamRiders.Concat(AwayTeamRiders).ToList()); }
+            set { }
+        }
     }
 }

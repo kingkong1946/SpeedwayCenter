@@ -7,7 +7,7 @@ namespace SpeedwayCenter.ORM.Models
     public abstract class Meeting
     {
         public Guid Id { get; set; }
-        public DateTime Date { get; set; }
+        public DateTime? Date { get; set; }
         public Status Status { get; set; }
         public virtual string Name { get; set; }
 
