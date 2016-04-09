@@ -9,6 +9,7 @@
 
     @using (@Html.BeginForm("Add", "Match", FormMethod.Post, new { @class = "form-horizontal" }))
     {
+        @Html.HiddenFor(model => model.Id)
         <div class="form-group">
             @Html.LabelFor(model => model.Round, new {@class = "control-label col-xs-3"})
             <div class="col-xs-9">

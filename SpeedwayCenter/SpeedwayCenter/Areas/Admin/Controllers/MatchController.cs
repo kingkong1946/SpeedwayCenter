@@ -8,7 +8,6 @@ using SpeedwayCenter.Interface.Enums;
 using SpeedwayCenter.ORM;
 using SpeedwayCenter.ORM.Models;
 using SpeedwayCenter.ORM.Repository;
-using SpeedwayCenter.ViewModels.Meeting;
 
 namespace SpeedwayCenter.Areas.Admin.Controllers
 {
@@ -745,6 +744,20 @@ namespace SpeedwayCenter.Areas.Admin.Controllers
             _unitOfWork.Save();
 
             return View(viewModel);
+        }
+
+        [HttpPost]
+        public ActionResult(AdminAddScoresMatchViewModel item)
+        {
+            var matches = _unitOfWork.GetRepository<TwoTeamMeeting>();
+            var heats = _unitOfWork.GetRepository<Heat>();
+
+            var record = matches.FindBy(m => m.Id == item.Id);
+
+            record.Date = item.Date;
+            record.Round = item.Round;
+
+            var matchHeats = heats.FindMany(h => h.Meeting.Id == item.Id);
         }
 
         //[HttpPost]

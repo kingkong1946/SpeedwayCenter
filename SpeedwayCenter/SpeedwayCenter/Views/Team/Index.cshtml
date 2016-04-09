@@ -17,9 +17,9 @@
     @foreach (var item in Model)
     {
         <tr>
-            <td>Wlokniarz Czestochowa</td>
-            <td>@Html.DisplayFor(modelItem => item.StadiumName)</td>
-            <td>@Html.DisplayFor(modelItem => item.Capacity)</td>
+            <td>@Html.DisplayFor(model => item.FullName)</td>
+            <td>@Html.DisplayFor(model => item.StadiumName)</td>
+            <td>@Html.DisplayFor(model => item.Capacity)</td>
             @*<td>
                 <div class="btn-block">
                     <input type="button" value="edit" onclick="location.href = '@url.action("edit", new {id = item.id})'" class="btn btn-warning btn-xs" />
