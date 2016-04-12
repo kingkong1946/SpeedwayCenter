@@ -23,8 +23,9 @@ namespace SpeedwayCenter.Areas.Admin.Controllers
 
         public ActionResult Index()
         {
-            var matches = _unitOfWork.GetQueryRepository<TwoTeamMeeting>();
-            var records = matches.GetAll().ToList().Select(r => new AdminIndexMatchViewModel
+            var matchesRepository = _unitOfWork.GetQueryRepository<TwoTeamMeeting>();
+            var matches = matchesRepository.GetAll().ToList();
+            var records = matches.Select(r => new AdminIndexMatchViewModel
             {
                 Id = r.Id,
                 Name = r.Name,
@@ -738,8 +739,17 @@ namespace SpeedwayCenter.Areas.Admin.Controllers
 
                     RiderIdGateD = x.Gates.FirstOrDefault(r => r.Gate == Gate.D).Rider?.Id ?? Guid.Empty,
                     RiderGateD = x.Gates.FirstOrDefault(r => r.Gate == Gate.D).Rider?.FullName ?? string.Empty
-                })
+                }).OrderBy(m => m.Number).ToList()
             };
+
+            _unitOfWork.Save();
+
+            var results = record.Heats.SelectMany(h => h.Gates);
+
+            foreach (var riderResult in results)
+            {
+                riderResult.Meeting = record;
+            }
 
             _unitOfWork.Save();
 
@@ -747,8 +757,9 @@ namespace SpeedwayCenter.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public ActionResult(AdminAddScoresMatchViewModel item)
+        public ActionResult Add(AdminAddScoresMatchViewModel item)
         {
+            var riders = _unitOfWork.GetQueryRepository<Rider>();
             var matches = _unitOfWork.GetRepository<TwoTeamMeeting>();
             var heats = _unitOfWork.GetRepository<Heat>();
 
@@ -758,6 +769,33 @@ namespace SpeedwayCenter.Areas.Admin.Controllers
             record.Round = item.Round;
 
             var matchHeats = heats.FindMany(h => h.Meeting.Id == item.Id);
+
+            foreach (var matchHeat in matchHeats)
+            {
+                var number = matchHeat.Number;
+
+                var heat = item.Heats.FirstOrDefault(m => m.Number == number);
+
+                var gateA = matchHeat.Gates.FirstOrDefault(r => r.Gate == Gate.A);
+                gateA.Points = heat.RiderScoreGateA;
+                gateA.Rider = riders.FindBy(r => r.Id == heat.RiderIdGateA);
+
+                var gateB = matchHeat.Gates.FirstOrDefault(r => r.Gate == Gate.B);
+                gateB.Points = heat.RiderScoreGateB;
+                gateA.Rider = riders.FindBy(r => r.Id == heat.RiderIdGateB);
+
+                var gateC = matchHeat.Gates.FirstOrDefault(r => r.Gate == Gate.C);
+                gateC.Points = heat.RiderScoreGateC;
+                gateA.Rider = riders.FindBy(r => r.Id == heat.RiderIdGateC);
+
+                var gateD = matchHeat.Gates.FirstOrDefault(r => r.Gate == Gate.D);
+                gateD.Points = heat.RiderScoreGateD;
+                gateA.Rider = riders.FindBy(r => r.Id == heat.RiderIdGateD);
+            }
+
+            _unitOfWork.Save();
+
+            return RedirectToAction("Index", "Match");
         }
 
         //[HttpPost]
