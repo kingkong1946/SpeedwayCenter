@@ -2,6 +2,7 @@
 
 @{
     ViewBag.Title = "Index";
+    int i = 1;
 }
 
 <div class="col-xs-8 col-xs-offset-2">
@@ -22,7 +23,7 @@
             @foreach (var team in Model)
             {
                 <tr>
-                    <td></td>
+                    <td>@(i++)</td>
                     <th>@team.Name</th>
                     <th>@team.Matches</th>
                     <th>@team.Wins</th>

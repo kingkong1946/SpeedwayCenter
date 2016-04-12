@@ -782,15 +782,15 @@ namespace SpeedwayCenter.Areas.Admin.Controllers
 
                 var gateB = matchHeat.Gates.FirstOrDefault(r => r.Gate == Gate.B);
                 gateB.Points = heat.RiderScoreGateB;
-                gateA.Rider = riders.FindBy(r => r.Id == heat.RiderIdGateB);
+                gateB.Rider = riders.FindBy(r => r.Id == heat.RiderIdGateB);
 
                 var gateC = matchHeat.Gates.FirstOrDefault(r => r.Gate == Gate.C);
                 gateC.Points = heat.RiderScoreGateC;
-                gateA.Rider = riders.FindBy(r => r.Id == heat.RiderIdGateC);
+                gateC.Rider = riders.FindBy(r => r.Id == heat.RiderIdGateC);
 
                 var gateD = matchHeat.Gates.FirstOrDefault(r => r.Gate == Gate.D);
                 gateD.Points = heat.RiderScoreGateD;
-                gateA.Rider = riders.FindBy(r => r.Id == heat.RiderIdGateD);
+                gateD.Rider = riders.FindBy(r => r.Id == heat.RiderIdGateD);
             }
 
             _unitOfWork.Save();
@@ -798,16 +798,23 @@ namespace SpeedwayCenter.Areas.Admin.Controllers
             return RedirectToAction("Index", "Match");
         }
 
-        //[HttpPost]
-        //public ActionResult Delete(Guid id)
-        //{
-        //    var riders = _unitOfWork.GetRepository<Rider>();
-        //    var record = riders.FindBy(r => r.Id == id);
-        //    riders.Delete(record);
-        //    riders.Save();
+        [HttpPost]
+        public ActionResult Delete(Guid id)
+        {
+            var match = _unitOfWork.GetRepository<TwoTeamMeeting>();
+            var heats = _unitOfWork.GetRepository<Heat>();
 
-        //    return RedirectToAction("Index");
-        //}
+            var thisHeats = heats.FindMany(h => h.Meeting.Id == id);
+            foreach (var thisHeat in thisHeats)
+            {
+                heats.Delete(thisHeat);
+            }
+            var record = match.FindBy(r => r.Id == id);
+            match.Delete(record);
+            _unitOfWork.Save();
+
+            return RedirectToAction("Index");
+        }
 
         //[HttpGet]
         //public ActionResult Edit(Guid id)

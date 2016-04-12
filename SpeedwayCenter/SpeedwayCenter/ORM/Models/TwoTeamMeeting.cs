@@ -28,7 +28,12 @@ namespace SpeedwayCenter.ORM.Models
 
         public override ICollection<Rider> Riders
         {
-            get { return new Collection<Rider>(HomeTeamRiders.Concat(AwayTeamRiders).ToList()); }
+            get
+            {
+                if (HomeTeam == null) return AwayTeamRiders;
+                if (AwayTeam == null) return HomeTeamRiders;
+                return new Collection<Rider>(HomeTeamRiders.Concat(AwayTeamRiders).ToList());
+            }
             set { }
         }
     }
