@@ -415,6 +415,8 @@
     <Compile Include="Infrastructure\SpeedwayDependencyResolver.cs" />
     <Compile Include="Interface\Enums\Gate.cs" />
     <Compile Include="Interface\Enums\Status.cs" />
+    <Compile Include="ORM\Mapping\AwayTeamRidersMap.cs" />
+    <Compile Include="ORM\Mapping\HomeTeamRidersMap.cs" />
     <Compile Include="ORM\IDataBaseContext.cs" />
     <Compile Include="ORM\IUnitOfWork.cs" />
     <Compile Include="ORM\Mapping\HeatMap.cs" />
@@ -425,7 +427,9 @@
     <Compile Include="ORM\Mapping\TwoTeamMeetingMap.cs" />
     <Compile Include="ORM\Mapping\UserMap.cs" />
     <Compile Include="ORM\MigrationConfiguration.cs" />
+    <Compile Include="ORM\Models\AwayTeamRiders.cs" />
     <Compile Include="ORM\Models\Heat.cs" />
+    <Compile Include="ORM\Models\HomeTeamRiders.cs" />
     <Compile Include="ORM\Models\League.cs" />
     <Compile Include="ORM\Models\Meeting.cs" />
     <Compile Include="ORM\Models\RiderResult.cs" />

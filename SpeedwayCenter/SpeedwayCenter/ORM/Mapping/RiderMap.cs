@@ -38,10 +38,10 @@ namespace SpeedwayCenter.ORM.Mapping
                 .WillCascadeOnDelete(true);
 
             HasMany(e => e.HomeMeetings)
-                .WithMany(e => e.HomeTeamRiders);
+                .WithRequired(e => e.Rider);
 
             HasMany(e => e.AwayMeetings)
-                .WithMany(e => e.AwayTeamRiders);
+                .WithRequired(e => e.Rider);
         }
     }
 }

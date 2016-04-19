@@ -8,7 +8,7 @@ namespace SpeedwayCenter.ORM.Mapping
         public HeatMap()
         {
             //Table
-            ToTable("Results");
+            ToTable("Heats");
 
             //Primary Key
             HasKey(e => e.Id);

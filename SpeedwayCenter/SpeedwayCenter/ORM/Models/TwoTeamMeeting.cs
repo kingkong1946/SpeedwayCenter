@@ -11,8 +11,8 @@ namespace SpeedwayCenter.ORM.Models
         public virtual Team HomeTeam { get; set; }
         public virtual Team AwayTeam { get; set; }
 
-        public virtual ICollection<Rider> HomeTeamRiders { get; set; }
-        public virtual ICollection<Rider> AwayTeamRiders { get; set; }
+        public virtual ICollection<HomeTeamRiders> HomeTeamRiders { get; set; }
+        public virtual ICollection<AwayTeamRiders> AwayTeamRiders { get; set; }
 
         public virtual Season Season { get; set; }
 
@@ -26,15 +26,18 @@ namespace SpeedwayCenter.ORM.Models
 
         public string Score => $"{HomeTeamPoints} : {AwayTeamPoints}";
 
-        public override ICollection<Rider> Riders
-        {
-            get
-            {
-                if (HomeTeam == null) return AwayTeamRiders;
-                if (AwayTeam == null) return HomeTeamRiders;
-                return new Collection<Rider>(HomeTeamRiders.Concat(AwayTeamRiders).ToList());
-            }
-            set { }
-        }
+        //public override ICollection<Rider> Riders
+        //{
+        //    get
+        //    {
+        //        if (HomeTeam == null) return AwayTeamRiders;
+        //        if (AwayTeam == null) return HomeTeamRiders.Select(r => r.Rider).ToList();
+        //        return new Collection<Rider>(HomeTeamRiders
+        //            .Select(r => r.Rider)
+        //            .Concat(AwayTeamRiders)
+        //            .ToList());
+        //    }
+        //    set { }
+        //}
     }
 }

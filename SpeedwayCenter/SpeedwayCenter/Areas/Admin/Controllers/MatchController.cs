@@ -104,6 +104,7 @@ namespace SpeedwayCenter.Areas.Admin.Controllers
             var matches = _unitOfWork.GetRepository<TwoTeamMeeting>();
 
             var record = new TwoTeamMeeting();
+            record.Season = seasons.FindBy(s => s.Name == "2016" && s.League.Name == "Speedway Ekstraliga");
 
             var heat1GateA = new RiderResult
             {
@@ -673,27 +674,125 @@ namespace SpeedwayCenter.Areas.Admin.Controllers
                 heat14,
                 heat15
             };
+            matches.Add(record);
 
-            var homeTeamRiders = new List<Rider>
+            var homeTeamRider9 = new HomeTeamRiders
             {
-                riders.FindBy(r => r.Id == item.Rider9Id),
-                riders.FindBy(r => r.Id == item.Rider10Id),
-                riders.FindBy(r => r.Id == item.Rider11Id),
-                riders.FindBy(r => r.Id == item.Rider12Id),
-                riders.FindBy(r => r.Id == item.Rider13Id),
-                riders.FindBy(r => r.Id == item.Rider14Id),
-                riders.FindBy(r => r.Id == item.Rider15Id)
+                Rider = riders.FindBy(r => r.Id == item.Rider9Id),
+                Match = record,
+                Number = 9
             };
 
-            var awayTeamRiders = new List<Rider>
+            var homeTeamRider10 = new HomeTeamRiders
             {
-                riders.FindBy(r => r.Id == item.Rider1Id),
-                riders.FindBy(r => r.Id == item.Rider2Id),
-                riders.FindBy(r => r.Id == item.Rider3Id),
-                riders.FindBy(r => r.Id == item.Rider4Id),
-                riders.FindBy(r => r.Id == item.Rider5Id),
-                riders.FindBy(r => r.Id == item.Rider6Id),
-                riders.FindBy(r => r.Id == item.Rider7Id)
+                Rider = riders.FindBy(r => r.Id == item.Rider10Id),
+                Match = record,
+                Number = 10
+            };
+
+            var homeTeamRider11 = new HomeTeamRiders
+            {
+                Rider = riders.FindBy(r => r.Id == item.Rider11Id),
+                Match = record,
+                Number = 11
+            };
+
+            var homeTeamRider12 = new HomeTeamRiders
+            {
+                Rider = riders.FindBy(r => r.Id == item.Rider12Id),
+                Match = record,
+                Number =12
+            };
+
+            var homeTeamRider13 = new HomeTeamRiders
+            {
+                Rider = riders.FindBy(r => r.Id == item.Rider13Id),
+                Match = record,
+                Number = 13
+            };
+
+            var homeTeamRider14 = new HomeTeamRiders
+            {
+                Rider = riders.FindBy(r => r.Id == item.Rider14Id),
+                Match = record,
+                Number = 14
+            };
+
+            var homeTeamRider15 = new HomeTeamRiders
+            {
+                Rider = riders.FindBy(r => r.Id == item.Rider15Id),
+                Match = record,
+                Number = 15
+            };
+
+            var homeTeamRiders = new List<HomeTeamRiders>
+            {
+                homeTeamRider9,
+                homeTeamRider10,
+                homeTeamRider11,
+                homeTeamRider12,
+                homeTeamRider13,
+                homeTeamRider14,
+                homeTeamRider15,
+            };
+
+            var awayTeamRider1 = new AwayTeamRiders
+            {
+                Rider = riders.FindBy(r => r.Id == item.Rider1Id),
+                Match = record,
+                Number = 1
+            };
+
+            var awayTeamRider2 = new AwayTeamRiders
+            {
+                Rider = riders.FindBy(r => r.Id == item.Rider2Id),
+                Match = record,
+                Number = 2
+            };
+            var awayTeamRider3 = new AwayTeamRiders
+            {
+                Rider = riders.FindBy(r => r.Id == item.Rider3Id),
+                Match = record,
+                Number = 3
+            };
+
+            var awayTeamRider4 = new AwayTeamRiders
+            {
+                Rider = riders.FindBy(r => r.Id == item.Rider4Id),
+                Match = record,
+                Number = 4
+            };
+
+            var awayTeamRider5 = new AwayTeamRiders
+            {
+                Rider = riders.FindBy(r => r.Id == item.Rider5Id),
+                Match = record,
+                Number = 5
+            };
+
+            var awayTeamRider6 = new AwayTeamRiders
+            {
+                Rider = riders.FindBy(r => r.Id == item.Rider6Id),
+                Match = record,
+                Number = 6
+            };
+
+            var awayTeamRider7 = new AwayTeamRiders
+            {
+                Rider = riders.FindBy(r => r.Id == item.Rider7Id),
+                Match = record,
+                Number = 7
+            };
+
+            var awayTeamRiders = new List<AwayTeamRiders>
+            {
+                awayTeamRider1,
+                awayTeamRider2,
+                awayTeamRider3,
+                awayTeamRider4,
+                awayTeamRider5,
+                awayTeamRider6,
+                awayTeamRider7,
             };
 
             record = new TwoTeamMeeting
@@ -707,15 +806,17 @@ namespace SpeedwayCenter.Areas.Admin.Controllers
                 Heats = heats,
                 HomeTeamRiders = homeTeamRiders,
                 AwayTeamRiders = awayTeamRiders,
-                Riders = homeTeamRiders.Concat(awayTeamRiders).ToList()
+                //Riders = homeTeamRiders.Concat(awayTeamRiders).ToList()
             };
 
-            matches.Add(record);
+            //record.AwayTeam.AwayMeetings.Add(record);
+            
+            _unitOfWork.Save();
             var homeTeamRidersViewModel =
-                record.HomeTeamRiders.Select(r => new AdminBasicInfoViewModel { Id = r.Id, Name = r.FullName }).ToList();
+                record.HomeTeamRiders.Select(r => new AdminBasicInfoViewModel { Id = r.Rider.Id, Name = r.Rider.FullName }).ToList();
 
             var awayTeamRidersViewModel =
-                record.AwayTeamRiders.Select(r => new AdminBasicInfoViewModel { Id = r.Id, Name = r.FullName }).ToList();
+                record.AwayTeamRiders.Select(r => new AdminBasicInfoViewModel { Id = r.Rider.Id, Name = r.Rider.FullName }).ToList();
 
             homeTeamRidersViewModel.Insert(0, new AdminBasicInfoViewModel());
             awayTeamRidersViewModel.Insert(0, new AdminBasicInfoViewModel());
@@ -803,46 +904,28 @@ namespace SpeedwayCenter.Areas.Admin.Controllers
         {
             var match = _unitOfWork.GetRepository<TwoTeamMeeting>();
             var heats = _unitOfWork.GetRepository<Heat>();
+            var meetings = _unitOfWork.GetRepository<Meeting>();
 
             var thisHeats = heats.FindMany(h => h.Meeting.Id == id);
             foreach (var thisHeat in thisHeats)
             {
                 heats.Delete(thisHeat);
             }
+            var meeting = meetings.FindBy(m => m.Id == id);
             var record = match.FindBy(r => r.Id == id);
+            meetings.Delete(meeting);
             match.Delete(record);
             _unitOfWork.Save();
 
             return RedirectToAction("Index");
         }
 
-        //[HttpGet]
-        //public ActionResult Edit(Guid id)
-        //{
-        //    var riders = _unitOfWork.GetQueryRepository<Rider>();
-        //    var teams = _unitOfWork.GetQueryRepository<Team>();
-        //    var allTeams = GetTeamsList(teams);
-        //    var rider = riders.FindBy(r => r.Id == id);
-        //    var teamId = rider.Teams?
-        //        .Where(t =>
-        //            t.Seasons.Any(s =>
-        //                s.Name == "2016" &&
-        //                s.League.Name == "Speedway Ekstraliga"))
-        //        .Select(t => t.Id)
-        //        .FirstOrDefault() ?? Guid.Empty;
-        //    var viewModel = new AdminEditRiderViewModel
-        //    {
-        //        Id = rider.Id,
-        //        Name = rider.Name,
-        //        Forname = rider.Forname,
-        //        BirthDate = rider.BirthDate,
-        //        Country = rider.Country,
-        //        Teams = allTeams,
-        //        TeamId = teamId
-        //    };
+        [HttpGet]
+        public ActionResult Edit(Guid id)
+        {
 
-        //    return View(viewModel);
-        //}
+            return View();
+        }
 
         //[HttpPost]
         //public ActionResult Edit(AdminEditRiderViewModel item)

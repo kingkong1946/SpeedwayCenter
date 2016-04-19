@@ -30,10 +30,10 @@ namespace SpeedwayCenter.ORM.Mapping
                 .WithMany(e => e.TwoTeamMeetings);
 
             HasMany(e => e.HomeTeamRiders)
-                .WithMany(r => r.HomeMeetings);
+                .WithRequired(r => r.Match);
 
             HasMany(e => e.AwayTeamRiders)
-                .WithMany(r => r.AwayMeetings);
+                .WithRequired(r => r.Match);
         }
     }
 }
