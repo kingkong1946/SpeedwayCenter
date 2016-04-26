@@ -284,6 +284,7 @@
     <Content Include="Areas\Admin\Views\Match\AddStep1.cshtml" />
     <Content Include="Areas\Admin\Views\Match\AddStep2.cshtml" />
     <Content Include="Areas\Admin\Views\Match\AddStep3.cshtml" />
+    <Content Include="Areas\Admin\Views\Match\Edit.cshtml" />
     <None Include="compilerconfig.json" />
     <None Include="compilerconfig.json.defaults">
       <DependentUpon>compilerconfig.json</DependentUpon>
@@ -389,6 +390,7 @@
     <Compile Include="Areas\Admin\Controllers\TeamController.cs" />
     <Compile Include="Areas\Admin\ViewModels\Match\AdminAddRidersMatchViewModel.cs" />
     <Compile Include="Areas\Admin\ViewModels\Match\AdminAddScoresMatchViewModel.cs" />
+    <Compile Include="Areas\Admin\ViewModels\Match\AdminEditMatchViewModel.cs" />
     <Compile Include="Areas\Admin\ViewModels\Match\AdminHeatMatchViewModel.cs" />
     <Compile Include="Areas\Admin\ViewModels\Match\AdminIndexMatchViewModel.cs" />
     <Compile Include="Areas\Admin\ViewModels\Rider\AdminAddRiderViewModel.cs" />
