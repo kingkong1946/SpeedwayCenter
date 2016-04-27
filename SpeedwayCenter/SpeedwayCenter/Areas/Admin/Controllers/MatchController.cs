@@ -678,6 +678,7 @@ namespace SpeedwayCenter.Areas.Admin.Controllers
 
             var homeTeamRider9 = new HomeTeamRiders
             {
+                Id = Guid.NewGuid(),
                 Rider = riders.FindBy(r => r.Id == item.Rider9Id),
                 Match = record,
                 Number = 9
@@ -685,6 +686,7 @@ namespace SpeedwayCenter.Areas.Admin.Controllers
 
             var homeTeamRider10 = new HomeTeamRiders
             {
+                Id = Guid.NewGuid(),
                 Rider = riders.FindBy(r => r.Id == item.Rider10Id),
                 Match = record,
                 Number = 10
@@ -692,6 +694,7 @@ namespace SpeedwayCenter.Areas.Admin.Controllers
 
             var homeTeamRider11 = new HomeTeamRiders
             {
+                Id = Guid.NewGuid(),
                 Rider = riders.FindBy(r => r.Id == item.Rider11Id),
                 Match = record,
                 Number = 11
@@ -699,6 +702,7 @@ namespace SpeedwayCenter.Areas.Admin.Controllers
 
             var homeTeamRider12 = new HomeTeamRiders
             {
+                Id = Guid.NewGuid(),
                 Rider = riders.FindBy(r => r.Id == item.Rider12Id),
                 Match = record,
                 Number =12
@@ -706,6 +710,7 @@ namespace SpeedwayCenter.Areas.Admin.Controllers
 
             var homeTeamRider13 = new HomeTeamRiders
             {
+                Id = Guid.NewGuid(),
                 Rider = riders.FindBy(r => r.Id == item.Rider13Id),
                 Match = record,
                 Number = 13
@@ -713,6 +718,7 @@ namespace SpeedwayCenter.Areas.Admin.Controllers
 
             var homeTeamRider14 = new HomeTeamRiders
             {
+                Id = Guid.NewGuid(),
                 Rider = riders.FindBy(r => r.Id == item.Rider14Id),
                 Match = record,
                 Number = 14
@@ -720,6 +726,7 @@ namespace SpeedwayCenter.Areas.Admin.Controllers
 
             var homeTeamRider15 = new HomeTeamRiders
             {
+                Id = Guid.NewGuid(),
                 Rider = riders.FindBy(r => r.Id == item.Rider15Id),
                 Match = record,
                 Number = 15
@@ -738,6 +745,7 @@ namespace SpeedwayCenter.Areas.Admin.Controllers
 
             var awayTeamRider1 = new AwayTeamRiders
             {
+                Id = Guid.NewGuid(),
                 Rider = riders.FindBy(r => r.Id == item.Rider1Id),
                 Match = record,
                 Number = 1
@@ -745,12 +753,14 @@ namespace SpeedwayCenter.Areas.Admin.Controllers
 
             var awayTeamRider2 = new AwayTeamRiders
             {
+                Id = Guid.NewGuid(),
                 Rider = riders.FindBy(r => r.Id == item.Rider2Id),
                 Match = record,
                 Number = 2
             };
             var awayTeamRider3 = new AwayTeamRiders
             {
+                Id = Guid.NewGuid(),
                 Rider = riders.FindBy(r => r.Id == item.Rider3Id),
                 Match = record,
                 Number = 3
@@ -758,6 +768,7 @@ namespace SpeedwayCenter.Areas.Admin.Controllers
 
             var awayTeamRider4 = new AwayTeamRiders
             {
+                Id = Guid.NewGuid(),
                 Rider = riders.FindBy(r => r.Id == item.Rider4Id),
                 Match = record,
                 Number = 4
@@ -765,6 +776,7 @@ namespace SpeedwayCenter.Areas.Admin.Controllers
 
             var awayTeamRider5 = new AwayTeamRiders
             {
+                Id = Guid.NewGuid(),
                 Rider = riders.FindBy(r => r.Id == item.Rider5Id),
                 Match = record,
                 Number = 5
@@ -772,6 +784,7 @@ namespace SpeedwayCenter.Areas.Admin.Controllers
 
             var awayTeamRider6 = new AwayTeamRiders
             {
+                Id = Guid.NewGuid(),
                 Rider = riders.FindBy(r => r.Id == item.Rider6Id),
                 Match = record,
                 Number = 6
@@ -779,6 +792,7 @@ namespace SpeedwayCenter.Areas.Admin.Controllers
 
             var awayTeamRider7 = new AwayTeamRiders
             {
+                Id = Guid.NewGuid(),
                 Rider = riders.FindBy(r => r.Id == item.Rider7Id),
                 Match = record,
                 Number = 7
@@ -795,19 +809,16 @@ namespace SpeedwayCenter.Areas.Admin.Controllers
                 awayTeamRider7,
             };
 
-            record = new TwoTeamMeeting
-            {
-                Id = Guid.NewGuid(),
-                HomeTeam = teams.FindBy(t => t.Id == item.HomeTeamId),
-                AwayTeam = teams.FindBy(t => t.Id == item.AwayTeamId),
-                Season = seasons.FindBy(s => s.Name == "2016"),
-                Status = Status.Finished,
-                Name = $"{item.HomeTeam} - {item.AwayTeam}",
-                Heats = heats,
-                HomeTeamRiders = homeTeamRiders,
-                AwayTeamRiders = awayTeamRiders,
-                //Riders = homeTeamRiders.Concat(awayTeamRiders).ToList()
-            };
+            record.Id = Guid.NewGuid();
+            record.HomeTeam = teams.FindBy(t => t.Id == item.HomeTeamId);
+            record.AwayTeam = teams.FindBy(t => t.Id == item.AwayTeamId);
+            record.Season = seasons.FindBy(s => s.Name == "2016");
+            record.Status = Status.Finished;
+            record.Name = $"{item.HomeTeam} - {item.AwayTeam}";
+            record.Heats = heats;
+            record.HomeTeamRiders = homeTeamRiders;
+            record.AwayTeamRiders = awayTeamRiders;
+            //Riders = homeTeamRiders.Concat(awayTeamRiders).ToList()
 
             //record.AwayTeam.AwayMeetings.Add(record);
             
