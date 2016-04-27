@@ -105,7 +105,7 @@ namespace SpeedwayCenter.Areas.Admin.Controllers
 
             var record = new TwoTeamMeeting();
             record.Season = seasons.FindBy(s => s.Name == "2016" && s.League.Name == "Speedway Ekstraliga");
-
+            
             var heat1GateA = new RiderResult
             {
                 Id = Guid.NewGuid(),
@@ -674,7 +674,6 @@ namespace SpeedwayCenter.Areas.Admin.Controllers
                 heat14,
                 heat15
             };
-            matches.Add(record);
 
             var homeTeamRider9 = new HomeTeamRiders
             {
@@ -808,7 +807,10 @@ namespace SpeedwayCenter.Areas.Admin.Controllers
                 awayTeamRider6,
                 awayTeamRider7,
             };
+            _unitOfWork.Save();
 
+            //record = new TwoTeamMeeting
+            //{
             record.Id = Guid.NewGuid();
             record.HomeTeam = teams.FindBy(t => t.Id == item.HomeTeamId);
             record.AwayTeam = teams.FindBy(t => t.Id == item.AwayTeamId);
@@ -818,11 +820,12 @@ namespace SpeedwayCenter.Areas.Admin.Controllers
             record.Heats = heats;
             record.HomeTeamRiders = homeTeamRiders;
             record.AwayTeamRiders = awayTeamRiders;
-            //Riders = homeTeamRiders.Concat(awayTeamRiders).ToList()
+                //Riders = homeTeamRiders.Concat(awayTeamRiders).ToList()
+            //};
 
-            //record.AwayTeam.AwayMeetings.Add(record);
-            
+        matches.Add(record);
             _unitOfWork.Save();
+
             var homeTeamRidersViewModel =
                 record.HomeTeamRiders.Select(r => new AdminBasicInfoViewModel { Id = r.Rider.Id, Name = r.Rider.FullName }).ToList();
 
@@ -937,43 +940,165 @@ namespace SpeedwayCenter.Areas.Admin.Controllers
             var matches = _unitOfWork.GetQueryRepository<TwoTeamMeeting>();
             var match = matches.FindBy(m => m.Id == id);
 
-            var viewModel = new AdminEditMatchViewModel();
+            var homeTeamRiders = match.HomeTeam.Riders.Select(r => new AdminBasicInfoViewModel
+            {
+                Id = r.Id,
+                Name = r.FullName
+            }).ToList();
 
-            return View(viewModel);
+            var awayTeamRiders = match.AwayTeam.Riders.Select(r => new AdminBasicInfoViewModel
+            {
+                Id = r.Id,
+                Name = r.FullName
+            }).ToList();
+
+            homeTeamRiders.Insert(0, new AdminBasicInfoViewModel
+            {
+                Id = Guid.Empty,
+                Name = ""
+            });
+
+            awayTeamRiders.Insert(0, new AdminBasicInfoViewModel
+            {
+                Id = Guid.Empty,
+                Name = ""
+            });
+
+            var viewmodel = new AdminEditMatchViewModel
+            {
+                Id = match.Id,
+                Heats = match.Heats.Select(h => new AdminHeatMatchViewModel
+                {
+                    Number = h.Number,
+
+                    RiderIdGateA = h.Gates.FirstOrDefault(r => r.Gate == Gate.A).Rider.Id,
+                    RiderGateA = h.Gates.FirstOrDefault(r => r.Gate == Gate.A).Rider.FullName,
+                    RiderScoreGateA = h.Gates.FirstOrDefault(r => r.Gate == Gate.A).Points,
+
+                    RiderIdGateB = h.Gates.FirstOrDefault(r => r.Gate == Gate.B).Rider.Id,
+                    RiderGateB = h.Gates.FirstOrDefault(r => r.Gate == Gate.B).Rider.FullName,
+                    RiderScoreGateB = h.Gates.FirstOrDefault(r => r.Gate == Gate.B).Points,
+
+                    RiderIdGateC = h.Gates.FirstOrDefault(r => r.Gate == Gate.C).Rider.Id,
+                    RiderGateC = h.Gates.FirstOrDefault(r => r.Gate == Gate.C).Rider.FullName,
+                    RiderScoreGateC = h.Gates.FirstOrDefault(r => r.Gate == Gate.C).Points,
+
+                    RiderIdGateD = h.Gates.FirstOrDefault(r => r.Gate == Gate.D).Rider.Id,
+                    RiderGateD = h.Gates.FirstOrDefault(r => r.Gate == Gate.D).Rider.FullName,
+                    RiderScoreGateD = h.Gates.FirstOrDefault(r => r.Gate == Gate.D).Points
+
+                }).OrderBy(m => m.Number).ToList(),
+                HomeTeamsRiders = homeTeamRiders,
+                AwayTeamsRiders = awayTeamRiders,
+                HomeTeamSelectedRiders = match.HomeTeamRiders.OrderBy(r => r.Number).ToList(),
+                AwayTeamSelectedRiders = match.AwayTeamRiders.OrderBy(r => r.Number).ToList(),
+                HomeTeam = match.HomeTeam.FullName,
+                AwayTeam = match.AwayTeam.FullName,
+                Round = match.Round,
+                Date = match.Date.Value
+            };
+
+            return View(viewmodel);
         }
 
-        //[HttpPost]
-        //public ActionResult Edit(AdminEditRiderViewModel item)
-        //{
-        //    var riders = _unitOfWork.GetRepository<Rider>();
-        //    var teams = _unitOfWork.GetQueryRepository<Team>();
+        [HttpPost]
+        public ActionResult Edit(AdminEditMatchViewModel item)
+        {
+            var matches = _unitOfWork.GetRepository<TwoTeamMeeting>();
+            var riders = _unitOfWork.GetQueryRepository<Rider>();
+            var match = matches.FindBy(m => m.Id == item.Id);
 
-        //    var record = riders.FindBy(r => r.Id == item.Id);
+            match.Round = item.Round;
+            match.Date = item.Date;
 
-        //    record.Id = item.Id;
-        //    record.Name = item.Name;
-        //    record.Forname = item.Forname;
-        //    record.BirthDate = item.BirthDate;
-        //    record.Country = item.Country;
+            match.HomeTeamRiders = new List<HomeTeamRiders>();
+            match.AwayTeamRiders = new List<AwayTeamRiders>();
 
-        //    if (item.TeamId != Guid.Empty)
-        //    {
-        //        var team = teams.FindBy(t => t.Id == item.TeamId);
-        //        record.Teams = new List<Team>
-        //        {
-        //            team
-        //        };
-        //    }
-        //    else
-        //    {
-        //        record.Teams = null;
-        //    }
+            foreach (var selectedRider in item.HomeTeamSelectedRiders)
+            {
+                var rider = riders.FindBy(r => r.Id == selectedRider.Rider.Id);
+                match.HomeTeamRiders.Add(new HomeTeamRiders
+                {
+                    Id = selectedRider.Id,
+                    Match = match,
+                    Number = selectedRider.Number,
+                    Rider = rider
+                });
+            }
 
-        //    riders.Edit(record);
-        //    riders.Save();
+            foreach (var selectedRider in item.AwayTeamSelectedRiders)
+            {
+                var rider = riders.FindBy(r => r.Id == selectedRider.Rider.Id);
+                match.AwayTeamRiders.Add(new AwayTeamRiders
+                {
+                    Id = selectedRider.Id,
+                    Match = match,
+                    Number = selectedRider.Number,
+                    Rider = rider
+                });
+            }
 
-        //    return RedirectToAction("Index");
-        //}
+            match.Heats = new List<Heat>();
+
+            foreach (var heat in match.Heats)
+            {
+                var selectedHeat = new Heat
+                {
+                    Id = heat.Id,
+                    Meeting = match,
+                    Number = heat.Number,
+                    Gates = new List<RiderResult>()
+                };
+
+                var modifiedHeat = item.Heats.FirstOrDefault(m => m.Number == heat.Number);
+
+                selectedHeat.Gates.Add(new RiderResult
+                {
+                    Gate = Gate.A,
+                    Heat = selectedHeat,
+                    Rider = riders.FindBy(r => r.Id == modifiedHeat.RiderIdGateA),
+                    Meeting = match,
+                    Id = item.Id,
+                    Points = modifiedHeat.RiderScoreGateA
+                });
+
+                selectedHeat.Gates.Add(new RiderResult
+                {
+                    Gate = Gate.B,
+                    Heat = selectedHeat,
+                    Rider = riders.FindBy(r => r.Id == modifiedHeat.RiderIdGateB),
+                    Meeting = match,
+                    Id = item.Id,
+                    Points = modifiedHeat.RiderScoreGateB
+                });
+
+                selectedHeat.Gates.Add(new RiderResult
+                {
+                    Gate = Gate.C,
+                    Heat = selectedHeat,
+                    Rider = riders.FindBy(r => r.Id == modifiedHeat.RiderIdGateC),
+                    Meeting = match,
+                    Id = item.Id,
+                    Points = modifiedHeat.RiderScoreGateC
+                });
+
+                selectedHeat.Gates.Add(new RiderResult
+                {
+                    Gate = Gate.D,
+                    Heat = selectedHeat,
+                    Rider = riders.FindBy(r => r.Id == modifiedHeat.RiderIdGateD),
+                    Meeting = match,
+                    Id = item.Id,
+                    Points = modifiedHeat.RiderScoreGateD
+                });
+
+                match.Heats.Add(selectedHeat);
+            }
+
+            //matches.Edit();
+
+            return RedirectToAction("Index");
+        }
 
         private static IEnumerable<AdminBasicInfoViewModel> GetTeamsList(IQueryRepository<Team> teams)
         {

@@ -4,32 +4,127 @@
     Layout = "~/Areas/Admin/Views/Shared/_AdminBasicLayout.cshtml";
 }
 
-<h2>Edit</h2>
-@using (@Html.BeginForm("Edit", "Match", FormMethod.Post, new { @class = "form-horizontal" }))
-{
-    <h1>@Model.HomeTeam</h1>
-    for (var i = 9; i < 16; i++)
+<div class="col-xs-8 col-xs-offset-2">
+    <h2>Edit</h2>
+
+    @using (@Html.BeginForm("Edit", "Match", FormMethod.Post, new { @class = "form-horizontal" }))
     {
         <div class="form-group">
-            @Html.LabelFor(model => i, new { @class = "control-label col-xs-3" })
-            @Html.HiddenFor(model => model.HomeTeamRiders[i].Id)
+            @Html.LabelFor(model => model.Round, new { @class = "control-label col-xs-3" })
             <div class="col-xs-9">
-                @Html.DropDownListFor(model => model.HomeTeamRiders[i].Id, new SelectList(Model.HomeTeamRiders, "Id", "Name"), new { @class = "form-control" })
+                @Html.TextBoxFor(model => model.Round, new { @class = "form-control" })
             </div>
         </div>
-    }
-
-    <h1>@Model.AwayTeam</h1>
-    for (var i = 1; i < 8; i++)
-    {
         <div class="form-group">
-            @Html.LabelFor(model => i, new { @class = "control-label col-xs-3" })
-            @Html.HiddenFor(model => model.AwayTeamRiders[i].Id)
+            @Html.LabelFor(model => model.Date, new {@class = "control-label col-xs-3"})
             <div class="col-xs-9">
-                @Html.DropDownListFor(model => model.AwayTeamRiders[i].Id, new SelectList(Model.AwayTeamRiders, "Id", "Name"), new { @class = "form-control" })
+                @Html.TextBoxFor(model => model.Date, new {@class = "form-control datepicker"})
             </div>
         </div>
+
+        <h1>@Model.HomeTeam</h1>
+        for (var i = 9; i < 16; ++i)
+        {
+            <div class="form-group">
+                @Html.Label(i.ToString(), new { @class = "control-label col-xs-3" })
+                <div class="col-xs-9">
+                    @Html.Hidden(i.ToString())
+                    @Html.DropDownListFor(
+                        model => Model.HomeTeamSelectedRiders[i-9].Rider.Id,
+                        new SelectList(
+                            Model.HomeTeamsRiders,
+                            "Id",
+                            "Name",
+                            Model.HomeTeamSelectedRiders.FirstOrDefault(ri => ri.Number == i).Rider.Id),
+                        new { @class = "form-control" })
+                </div>
+            </div>
+        }
+
+        <h1>@Model.AwayTeam</h1>
+        for (var i = 1; i < 8; ++i)
+        {
+            <div class="form-group">
+                @Html.Label(i.ToString(), new { @class = "control-label col-xs-3" })
+                <div class="col-xs-9">
+                    @Html.DropDownListFor(
+                        model => Model.AwayTeamSelectedRiders[i - 1].Rider.Id,
+                        new SelectList(
+                            Model.AwayTeamsRiders,
+                            "Id",
+                            "Name",
+                            Model.AwayTeamSelectedRiders.FirstOrDefault(ri => ri.Number == i).Rider.Id),
+                        new { @class = "form-control" })
+                </div>
+            </div>
+        }
+
+        for (int i = 0; i < Model.Heats.Count(); i++)
+        {
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>Heat</th>
+                        <th>Rider</th>
+                        <th>Points</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td rowspan="4">
+                            @Html.ValueFor(m => Model.Heats[i].Number)
+                            @Html.HiddenFor(m => Model.Heats[i].Number)
+                        </td>
+                        <td>
+                            @Html.DropDownListFor(
+                            m => Model.Heats[i].RiderIdGateA,
+                            new SelectList(Model.HomeTeamACHeats.Contains(Model.Heats[i].Number) ? Model.HomeTeamsRiders : Model.AwayTeamsRiders, "Id", "Name", Model.Heats[i].RiderIdGateA),
+                            new { @class = "form-control" })
+                        </td>
+                        <td>@Html.TextBoxFor(m => Model.Heats[i].RiderScoreGateA, new { @class = "form-control" })</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            @Html.DropDownListFor(
+                            m => Model.Heats[i].RiderIdGateB,
+                            new SelectList(Model.HomeTeamACHeats.Contains(Model.Heats[i].Number) ? Model.AwayTeamsRiders : Model.HomeTeamsRiders, "Id", "Name", Model.Heats[i].RiderIdGateB),
+                            new { @class = "form-control" })
+                        </td>
+                        <td>@Html.TextBoxFor(m => Model.Heats[i].RiderScoreGateB, new { @class = "form-control" })</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            @Html.DropDownListFor(
+                            m => Model.Heats[i].RiderIdGateC,
+                            new SelectList(Model.HomeTeamACHeats.Contains(Model.Heats[i].Number) ? Model.HomeTeamsRiders : Model.AwayTeamsRiders, "Id", "Name", Model.Heats[i].RiderIdGateC),
+                            new { @class = "form-control" })
+                        </td>
+                        <td>@Html.TextBoxFor(m => Model.Heats[i].RiderScoreGateC, new { @class = "form-control" })</td>
+                    </tr>
+                    <tr>
+                        <td>
+                            @Html.DropDownListFor(
+                            m => Model.Heats[i].RiderIdGateD,
+                            new SelectList(Model.HomeTeamACHeats.Contains(Model.Heats[i].Number) ? Model.AwayTeamsRiders : Model.HomeTeamsRiders, "Id", "Name", Model.Heats[i].RiderIdGateD),
+                            new { @class = "form-control" })
+                        </td>
+                        <td>@Html.TextBoxFor(m => Model.Heats[i].RiderScoreGateD, new { @class = "form-control" })</td>
+                    </tr>
+                </tbody>
+            </table>
+        }
+
+        @Html.HiddenFor(model => model.Id)
+        <input type="submit" class="btn btn-default" value="Save" />
     }
 
-        <input type="submit" class="btn btn-default" value="Next" />
-}
+
+</div>
+<script type="text/javascript">
+    $(function () {
+        $(".datepicker").datepicker({
+            startDate: '-100y',
+            orientation: 'bottom'
+        });
+    });
+</script>
