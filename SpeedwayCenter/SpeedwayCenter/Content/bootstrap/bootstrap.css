@@ -4707,8 +4707,8 @@ fieldset[disabled] .navbar-inverse .btn-link:focus {
   line-height: 1.42857143;
   text-decoration: none;
   color: #007700;
-  background-color: #fff;
-  border: 1px solid #ddd;
+  background-color: #181818;
+  border: 1px solid #007700;
   margin-left: -1px;
 }
 .pagination > li:first-child > a,
@@ -4739,8 +4739,8 @@ fieldset[disabled] .navbar-inverse .btn-link:focus {
 .pagination > .active > span:focus {
   z-index: 3;
   color: #ffffff;
-  background-color: #f5f5f5;
-  border-color: #ddd;
+  background-color: #007700;
+  border-color: #007700;
   cursor: default;
 }
 .pagination > .disabled > span,
@@ -4750,8 +4750,8 @@ fieldset[disabled] .navbar-inverse .btn-link:focus {
 .pagination > .disabled > a:hover,
 .pagination > .disabled > a:focus {
   color: #ffffff;
-  background-color: #fff;
-  border-color: #ddd;
+  background-color: #181818;
+  border-color: #007700;
   cursor: not-allowed;
 }
 .pagination-lg > li > a,
@@ -4799,8 +4799,8 @@ fieldset[disabled] .navbar-inverse .btn-link:focus {
 .pager li > span {
   display: inline-block;
   padding: 5px 14px;
-  background-color: #fff;
-  border: 1px solid #ddd;
+  background-color: #181818;
+  border: 1px solid #007700;
   border-radius: 15px;
 }
 .pager li > a:hover,
@@ -4821,7 +4821,7 @@ fieldset[disabled] .navbar-inverse .btn-link:focus {
 .pager .disabled > a:focus,
 .pager .disabled > span {
   color: #ffffff;
-  background-color: #fff;
+  background-color: #181818;
   cursor: not-allowed;
 }
 .label {

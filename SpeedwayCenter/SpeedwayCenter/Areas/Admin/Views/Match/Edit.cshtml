@@ -1,0 +1,35 @@
+﻿@model SpeedwayCenter.Areas.Admin.ViewModels.Match.AdminEditMatchViewModel
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminBasicLayout.cshtml";
+}
+
+<h2>Edit</h2>
+@using (@Html.BeginForm("Edit", "Match", FormMethod.Post, new { @class = "form-horizontal" }))
+{
+    <h1>@Model.HomeTeam</h1>
+    for (var i = 9; i < 16; i++)
+    {
+        <div class="form-group">
+            @Html.LabelFor(model => i, new { @class = "control-label col-xs-3" })
+            @Html.HiddenFor(model => model.HomeTeamRiders[i].Id)
+            <div class="col-xs-9">
+                @Html.DropDownListFor(model => model.HomeTeamRiders[i].Id, new SelectList(Model.HomeTeamRiders, "Id", "Name"), new { @class = "form-control" })
+            </div>
+        </div>
+    }
+
+    <h1>@Model.AwayTeam</h1>
+    for (var i = 1; i < 8; i++)
+    {
+        <div class="form-group">
+            @Html.LabelFor(model => i, new { @class = "control-label col-xs-3" })
+            @Html.HiddenFor(model => model.AwayTeamRiders[i].Id)
+            <div class="col-xs-9">
+                @Html.DropDownListFor(model => model.AwayTeamRiders[i].Id, new SelectList(Model.AwayTeamRiders, "Id", "Name"), new { @class = "form-control" })
+            </div>
+        </div>
+    }
+
+        <input type="submit" class="btn btn-default" value="Next" />
+}

@@ -20,13 +20,14 @@ namespace SpeedwayCenter.Controllers
     public class RiderController : Controller
     {
         private readonly IQueryRepository<Rider> _repository;
+        private const int Take = 10;
 
         public RiderController(IQueryRepository<Rider> repository)
         {
             _repository = repository;
         }
 
-        public ActionResult Index()
+        public ActionResult Index(int page = 1, string searchValue = "")
         {
             var records = _repository
                 .GetAll()
@@ -36,15 +37,22 @@ namespace SpeedwayCenter.Controllers
                     r.Forname,
                     r.BirthDate,
                     r.Country
-                })
-                .ToList();
+                }).ToList();
 
-            var viewModel = records.Select(r => new RiderIndexViewModel(
-                r.Name,
-                r.Forname,
-                r.BirthDate.ToShortDateString(),
-                r.Country))
+            if (!string.IsNullOrEmpty(searchValue))
+            {
+                records = records.Where(a => $"{a.Name} {a.Forname}".ToLower().Contains(searchValue.ToLower())).ToList();
+            }
+
+            var viewModel = records.Skip((page - 1) * Take).Take(Take).Select(r => new RiderIndexViewModel(
+                    r.Name,
+                    r.Forname,
+                    r.BirthDate.ToShortDateString(),
+                    r.Country))
             .ToEnumerable();
+
+            ViewBag.NumberOfPages = (int)Math.Ceiling((decimal)records.Count / Take);
+            ViewBag.Page = page;
 
             return View(viewModel);
         }

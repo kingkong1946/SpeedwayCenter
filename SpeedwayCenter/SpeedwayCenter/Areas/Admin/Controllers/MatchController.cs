@@ -923,8 +923,12 @@ namespace SpeedwayCenter.Areas.Admin.Controllers
         [HttpGet]
         public ActionResult Edit(Guid id)
         {
+            var matches = _unitOfWork.GetQueryRepository<TwoTeamMeeting>();
+            var match = matches.FindBy(m => m.Id == id);
 
-            return View();
+            var viewModel = new AdminEditMatchViewModel();
+
+            return View(viewModel);
         }
 
         //[HttpPost]
