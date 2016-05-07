@@ -1,21 +1,22 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace SpeedwayCenter.ViewModels.Rider
 {
     public class RiderIndexViewModel
     {
+        public Guid Id { get; }
         public string Name { get; } 
-        public string Forname { get; }
 
         [Display(Name = "Birth Date")]
         public string BirthDate { get; }
 
         public string Country { get; }
 
-        public RiderIndexViewModel(string name, string forname, string birthDate, string country)
+        public RiderIndexViewModel(Guid id, string name, string birthDate, string country)
         {
+            Id = id;
             Name = name;
-            Forname = forname;
             BirthDate = birthDate;
             Country = country;
         }

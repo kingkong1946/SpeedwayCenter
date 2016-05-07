@@ -1,17 +1,22 @@
-﻿@model SpeedwayCenter.ViewModels.Rider.RiderDetailsViewModel
-
+﻿@model SpeedwayCenter.ViewModels.Team.TeamDetailsViewModel
 @{
     ViewBag.Title = "Details";
 }
+
 <div class=" col-xs-8 col-xs-offset-2">
     <div class="panel panel-default">
         <div class="panel-heading">
             <h1 class="text-center">@Model.Name</h1>
+            <p class="lead text-center">@Html.LabelFor(model => model.StadiumName): <small>@Model.StadiumName</small><br/>
+            @Html.LabelFor(model => model.Capacity): <small>@Model.Capacity</small></p>
         </div>
         <div class="panel-body">
-            <p class="lead text-center">@Html.LabelFor(model => model.BirthDate): <small>@Model.BirthDate</small></p>
-            <p class="lead text-center">@Html.LabelFor(model => model.Country): <small>@Model.Country</small></p>
-            <a href="@Url.Action("Details", "Team", new {id = Model.Team.Id})" class="btn btn-default btn-block">@Model.Team.Name</a>
+            <ul class="nav nav-pills nav-stacked">
+                @foreach (var item in Model.Riders)
+                {
+                    <li>@Html.ActionLink(item.Name, "Details", "Rider", new { id = item.Id }, null)</li>
+                }
+            </ul>
         </div>
         <div class="panel-footer">
             <table class="table table-bordered">
@@ -20,8 +25,6 @@
                     <tr>
                         <td>@item.Date</td>
                         <td>@item.Name</td>
-                        <td>@item.Points</td>
-                        <td>@item.Total</td>
                         <td>@Html.ActionLink(item.Score, "Details", "Fixtures", new { id = item.Id }, null)</td>
                     </tr>
                 }

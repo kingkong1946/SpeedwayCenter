@@ -13,6 +13,7 @@ using System.Web.UI.WebControls;
 using Ninject.Infrastructure.Language;
 using SpeedwayCenter.ORM.Models;
 using SpeedwayCenter.ORM.Repository;
+using SpeedwayCenter.ViewModels;
 using SpeedwayCenter.ViewModels.Rider;
 
 namespace SpeedwayCenter.Controllers
@@ -33,6 +34,7 @@ namespace SpeedwayCenter.Controllers
                 .GetAll()
                 .Select(r => new
                 {
+                    r.Id,
                     r.Name,
                     r.Forname,
                     r.BirthDate,
@@ -41,15 +43,20 @@ namespace SpeedwayCenter.Controllers
 
             if (!string.IsNullOrEmpty(searchValue))
             {
-                records = records.Where(a => $"{a.Name} {a.Forname}".ToLower().Contains(searchValue.ToLower())).ToList();
+                records = records
+                    .Where(a => $"{a.Name} {a.Forname}".ToLower().Contains(searchValue.ToLower()))
+                    .ToList();
             }
 
-            var viewModel = records.Skip((page - 1) * Take).Take(Take).Select(r => new RiderIndexViewModel(
-                    r.Name,
-                    r.Forname,
+            var viewModel = records
+                .Skip((page - 1) * Take)
+                .Take(Take)
+                .Select(r => new RiderIndexViewModel(
+                    r.Id,
+                    $"{r.Name} {r.Forname}",
                     r.BirthDate.ToShortDateString(),
                     r.Country))
-            .ToEnumerable();
+                .ToEnumerable();
 
             ViewBag.NumberOfPages = (int)Math.Ceiling((decimal)records.Count / Take);
             ViewBag.Page = page;
@@ -57,84 +64,46 @@ namespace SpeedwayCenter.Controllers
             return View(viewModel);
         }
 
-        //[HttpGet]
-        //public ActionResult Add()
-        //{
-        //    return View();
-        //}
+        public ViewResult Details(Guid id)
+        {
+            var rider = _repository.FindBy(r => r.Id == id);
+            var team = rider.Teams.FirstOrDefault();
 
-        //[HttpPost]
-        //public RedirectToRouteResult Add(Rider rider, HttpPostedFileBase file)
-        //{
-        //    if (rider == null)
-        //    {
-        //        throw new ArgumentNullException("Rider is null");
-        //    }
-        //    if (file != null)
-        //    {
-        //        HttpServerUtilityBase server = HttpContext.Server;
-        //        var serverPath = $"~/Photos/{rider.GetHashCode()}.png";
-        //        var path = server.MapPath(serverPath);
-        //        file.SaveAs(path);
-        //        rider.Image = serverPath;
-        //    }
-        //    _repository.Add(rider);
-        //    _repository.Save();
-        //    return RedirectToAction("Index");
-        //}
+            BasicInfoViewModel viewModelTeam = null;
 
-        //public RedirectToRouteResult Delete(int id)
-        //{
-        //    var entity = _repository.FindBy(rider => rider.Id == id).FirstOrDefault();
-        //    if (entity != null)
-        //    {
-        //        RemovePhoto(entity);
-        //        _repository.Delete(entity);
-        //        _repository.Save();
-        //    }
-        //    return RedirectToAction("Index");
-        //}
+            if (team != null)
+            {
+                viewModelTeam = new BasicInfoViewModel
+                {
+                    Id = team.Id,
+                    Name = team.FullName
+                };
+            }
 
-        //public ActionResult Details(int id)
-        //{
-        //    var entity = _repository.FindBy(rider => rider.Id == id).FirstOrDefault();
-        //    return View(entity);
-        //}
+            IList<RiderMatchViewModel> viewModelMatches = rider
+                .HomeMeetings
+                .Select(r => r.Match)
+                .Concat(rider.AwayMeetings.Select(r => r.Match))
+                .Select(m => new RiderMatchViewModel
+                {
+                    Id = m.Id,
+                    Name = m.Name,
+                    Date = m.Date?.ToShortDateString() ?? m.Status.ToString(),
+                    Score = $"{m.HomeTeamPoints}:{m.AwayTeamPoints}",
+                    Points = rider.GetPointsFromMeeting(m),
+                    Total = rider.GetTotalPointsFromMeeting(m)
+                }).ToList();
 
-        //[HttpGet]
-        //public ActionResult Edit(int id)
-        //{
-        //    var entity = _repository.FindBy(rider => rider.Id == id).FirstOrDefault();
-        //    return View(entity);
-        //}
+            var viewModel = new RiderDetailsViewModel
+            {
+                Name = rider.FullName,
+                BirthDate = rider.BirthDate.ToShortDateString(),
+                Country = rider.Country,
+                Team = viewModelTeam,
+                Matches = viewModelMatches
+            };
 
-        //[HttpPost]
-        //public RedirectToRouteResult Edit(Rider rider, HttpPostedFileBase file, bool? remove)
-        //{
-        //    if (remove == true)
-        //    {
-        //        RemovePhoto(rider);
-        //        rider.Image = string.Empty;
-        //    }
-        //    if (file != null)
-        //    {
-        //        RemovePhoto(rider);
-        //        var serverPath = $"~/Photos/{rider.GetHashCode()}.png";
-        //        var path = HttpContext.Server.MapPath(serverPath);
-        //        file.SaveAs(path);
-        //        rider.Image = serverPath;
-        //    }
-        //    _repository.Edit(rider);
-        //    _repository.Save();
-        //    return RedirectToAction("Index");
-        //}
-
-        //private static void RemovePhoto(Rider rider)
-        //{
-        //    if (System.IO.File.Exists(rider.Image))
-        //    {
-        //        System.IO.File.Delete(rider.Image);
-        //    }
-        //}
+            return View(viewModel);
+        }
     }
 }

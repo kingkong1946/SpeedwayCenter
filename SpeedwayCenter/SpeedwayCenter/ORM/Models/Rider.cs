@@ -15,8 +15,8 @@ namespace SpeedwayCenter.ORM.Models
         public virtual ICollection<Team> Teams { get; set; }
 
         public virtual ICollection<RiderResult> Results { get; set; }
-        public virtual ICollection<Meeting> Meetings { get; set; }
 
+        public virtual ICollection<Meeting> Meetings { get; set; }
         public virtual ICollection<HomeTeamRiders> HomeMeetings { get; set; }
         public virtual ICollection<AwayTeamRiders> AwayMeetings { get; set; }
 

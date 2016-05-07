@@ -1,9 +1,11 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace SpeedwayCenter.ViewModels.Team
 {
     public class TeamIndexViewModel
     {
+        public Guid Id { get; }
         [Display(Name = "Name")]
         public string FullName { get; }
 
@@ -12,8 +14,9 @@ namespace SpeedwayCenter.ViewModels.Team
 
         public int Capacity { get; }
 
-        public TeamIndexViewModel(string fullName, string stadiumName, int capacity)
+        public TeamIndexViewModel(Guid id, string fullName, string stadiumName, int capacity)
         {
+            Id = id;
             FullName = fullName;
             StadiumName = stadiumName;
             Capacity = capacity;

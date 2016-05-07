@@ -16,7 +16,7 @@
 
     @foreach (var item in Model)
     {
-        <tr>
+        <tr class="clickable-row" data-href="@Url.Action("Details", new {id = item.Id})">
             <td>@Html.DisplayFor(model => item.FullName)</td>
             <td>@Html.DisplayFor(model => item.StadiumName)</td>
             <td>@Html.DisplayFor(model => item.Capacity)</td>
@@ -30,3 +30,8 @@
         </tr>
     }
 </table>
+<script>
+    $(".clickable-row").click(function () {
+        window.document.location = $(this).data("href");
+    });
+</script>

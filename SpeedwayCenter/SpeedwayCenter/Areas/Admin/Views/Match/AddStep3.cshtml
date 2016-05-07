@@ -82,8 +82,16 @@
 <script type="text/javascript">
     $(function () {
         $(".datepicker").datepicker({
+            format: 'dd.mm.yyyy',
             startDate: '-100y',
             orientation: 'bottom'
         });
     });
+    $.validator.methods.date = function (value, element) {
+        Globalize.culture("pl-PL");
+        // you can alternatively pass the culture to parseDate instead of
+        // setting the culture above, like so:
+        // parseDate(value, null, "en-AU")
+        return this.optional(element) || Globalize.parseDate(value) !== null;
+    }
 </script>

@@ -33,7 +33,7 @@ namespace SpeedwayCenter.Controllers
                 .ToList();
 
             var viewModel = records.Select(x => new TableIndexViewModel(
-                x.Name,
+                $"{x.Name} {x.City}",
                 x.GetMatchCountFromSeason(thisSeason),
                 x.GetStatisticsFromSeason(thisSeason, i => i > 0 ? 1 : 0),
                 x.GetStatisticsFromSeason(thisSeason, i => i == 0 ? 1 : 0),

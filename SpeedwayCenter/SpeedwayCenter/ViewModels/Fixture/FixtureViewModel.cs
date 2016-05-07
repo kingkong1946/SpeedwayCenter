@@ -5,12 +5,12 @@ namespace SpeedwayCenter.ViewModels.Fixture
 {
     public class FixtureViewModel
     {
-        public int RoundsCount { get; }
+        public IEnumerable<int> Rounds { get; }
         public IEnumerable<MeetingFixtureIndexViewModel> Meetings { get; }
 
-        public FixtureViewModel(int roundsCount, IEnumerable<MeetingFixtureIndexViewModel> meetings)
+        public FixtureViewModel(IEnumerable<int> rounds, IEnumerable<MeetingFixtureIndexViewModel> meetings)
         {
-            RoundsCount = roundsCount;
+            Rounds = rounds;
             Meetings = meetings;
         }
     }

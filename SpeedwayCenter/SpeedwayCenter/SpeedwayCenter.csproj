@@ -453,9 +453,18 @@
     <Compile Include="ViewModels\Fixture\FixtureViewModel.cs" />
     <Compile Include="ViewModels\LoginViewModel.cs" />
     <Compile Include="Areas\Admin\ViewModels\Match\AdminAddMatchViewModel.cs" />
+    <Compile Include="ViewModels\Meeting\MatchDetalisViewModel.cs" />
+    <Compile Include="ViewModels\Meeting\MatchHeatViewModel.cs" />
+    <Compile Include="ViewModels\Meeting\MatchRiderViewModel.cs" />
     <Compile Include="ViewModels\Meeting\MeetingFixtureIndexViewModel.cs" />
+    <Compile Include="ViewModels\Rider\HeatRiderViewModel.cs" />
+    <Compile Include="ViewModels\Rider\RiderDetailsViewModel.cs" />
     <Compile Include="ViewModels\Rider\RiderIndexViewModel.cs" />
+    <Compile Include="ViewModels\Rider\RiderMatchViewModel.cs" />
     <Compile Include="ViewModels\Table\TableIndexViewModel.cs" />
+    <Compile Include="ViewModels\BasicInfoViewModel.cs" />
+    <Compile Include="ViewModels\Team\TeamDetailsViewModel.cs" />
+    <Compile Include="ViewModels\Team\TeamMatchViewModel.cs" />
     <Compile Include="ViewModels\Team\TeamIndexViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -471,14 +480,14 @@
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\BootstrapMenuHelperModel.cshtml" />
     <Content Include="Views\Rider\Index.cshtml" />
-    <Content Include="Views\Rider\Add.cshtml" />
     <Content Include="Views\Rider\Details.cshtml" />
-    <Content Include="Views\Rider\Edit.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\BootstrapSpeedwayMenuHelperModel.cshtml" />
     <Content Include="Views\Team\Index.cshtml" />
     <Content Include="Views\Fixtures\Index.cshtml" />
     <Content Include="Views\Table\Index.cshtml" />
     <Content Include="Views\Login\Index.cshtml" />
+    <Content Include="Views\Team\Details.cshtml" />
+    <Content Include="Views\Fixtures\Details.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

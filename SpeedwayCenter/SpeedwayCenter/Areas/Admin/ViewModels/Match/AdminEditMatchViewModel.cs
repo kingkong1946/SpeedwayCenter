@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using SpeedwayCenter.ORM.Models;
 
 namespace SpeedwayCenter.Areas.Admin.ViewModels.Match
@@ -9,7 +10,9 @@ namespace SpeedwayCenter.Areas.Admin.ViewModels.Match
         public Guid Id { get; set; }
 
         public int Round { get; set; }
-        public DateTime Date { get; set; }
+        
+        [DisplayFormat(DataFormatString = "{0:d}", ApplyFormatInEditMode = true)]
+        public DateTime? Date { get; set; }
 
         public string HomeTeam { get; set; }
         public string AwayTeam { get; set; }

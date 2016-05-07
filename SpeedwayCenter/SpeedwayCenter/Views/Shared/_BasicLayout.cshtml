@@ -2,7 +2,7 @@
     string about = ViewContext.RouteData.Values["action"].ToString() == "About" ? "active" : "";
     string contact = ViewContext.RouteData.Values["action"].ToString() == "Contact" ? "active" : "";
     string rider = ViewContext.RouteData.Values["controller"].ToString() == "Rider" ? "active" : "";
-    string teams = ViewContext.RouteData.Values["controller"].ToString() == "Teams" ? "active" : "";
+    string teams = ViewContext.RouteData.Values["controller"].ToString() == "Team" ? "active" : "";
     string fixtures = ViewContext.RouteData.Values["controller"].ToString() == "Fixtures" ? "active" : "";
     string table = ViewContext.RouteData.Values["controller"].ToString() == "Table" ? "active" : "";
 }
@@ -39,16 +39,22 @@
                         <li class="@teams"><a href="@Url.Action("Index", "Team")">Teams</a></li>
                         <li class="@fixtures"><a href="@Url.Action("Index", "Fixtures")">Fixtures</a></li>
                         <li class="@table"><a href="@Url.Action("Index", "Table")">Table</a></li>
-                        <li>
-                            @using (Html.BeginForm("Index", ViewContext.RouteData.Values["controller"].ToString(), null, FormMethod.Get, new { @class = "navbar-form navbar-left" }))
-                            {
-                                <div class="form-group">
-                                    @Html.TextBox("searchValue", null, new { @class = "form-control input-sm" })
-                                </div>
-                                <button type="submit" class="btn btn-default btn-sm">Submit</button>
-                            }
-                        </li>
+                        @if ((ViewContext.RouteData.Values["controller"].ToString() == "Rider"
+                                || ViewContext.RouteData.Values["controller"].ToString() == "Team")
+                                && ViewContext.RouteData.Values["action"].ToString() == "Index")
+                        {
+                            <li>
+                                @using (Html.BeginForm("Index", ViewContext.RouteData.Values["controller"].ToString(), null, FormMethod.Get, new { @class = "navbar-form navbar-left" }))
+                                {
+                                    <div class="form-group">
+                                        @Html.TextBox("searchValue", null, new { @class = "form-control input-sm" })
+                                    </div>
+                                    <button type="submit" class="btn btn-default btn-sm">Submit</button>
+                                }
+                            </li>
+                        }
                     </ul>
+
                     <ul class="nav navbar-nav navbar-right">
                         <li class="@about"><a href="@Url.Action("About", "Home")">About</a></li>
                         <li class="@contact"><a href="@Url.Action("Contact", "Home")">Contact</a></li>
@@ -61,30 +67,50 @@
             @RenderBody()
         </section>
         <footer class="row">
-            <nav>
-                <ul class="pagination pagination-sm">
-                    <li class="@(ViewBag.Page < 3 ? "disabled" : "")" >
-                        <a href="@(ViewBag.Page < 3 ? "" : Url.Action("Index", new {page = ViewBag.Page - 3}))" aria-label="Previous">
-                            <span aria-hidden="true">&laquo;</span>
-                        </a>
-                    </li>
-                    @for (var i = ViewBag.Page-2; i <= ViewBag.Page+2; ++i)
-                    {
-                        if (i < 1 || i > ViewBag.NumberOfPages)
+            @if ((ViewContext.RouteData.Values["controller"].ToString() == "Rider"
+                    || ViewContext.RouteData.Values["controller"].ToString() == "Team")
+                    && ViewContext.RouteData.Values["action"].ToString() == "Index")
+            {
+                <nav>
+                    <ul class="pagination pagination-sm">
+                        <li class="@(ViewBag.Page < 3 ? "disabled" : "")">
+                            @if (ViewBag.Page > 2)
+                            {
+                                <a href="@(Url.Action("Index", new {page = ViewBag.Page - 3}))" aria-label="Previous">
+                                    <span aria-hidden="true">&laquo;</span>
+                                </a>
+                            }
+                            else
+                            {
+                                <span aria-hidden="true">&laquo;</span>
+                            }
+                        </li>
+                        @for (var i = ViewBag.Page - 2; i <= ViewBag.Page + 2; ++i)
                         {
-                            continue;
+                            if (i < 1 || i > ViewBag.NumberOfPages)
+                            {
+                                continue;
+                            }
+                            <li class="@(ViewBag.Page == i ? "active" : "")"><a href="@Url.Action("Index", new {page = i})">@i</a></li>
                         }
-                        <li class="@(ViewBag.Page == i ? "active" : "")"><a href="@Url.Action("Index", new {page = i})">@i</a></li>
-                    }
-                    <li>
-                        <a href="#" aria-label="Next">
-                            <span aria-hidden="true">&raquo;</span>
-                        </a>
-                    </li>
-                </ul>
-            </nav>
+                        <li class="@(ViewBag.Page + 2 > ViewBag.NumberOfPages ? "disabled" : "")">
+                            @if (ViewBag.Page + 2 > ViewBag.NumberOfPages)
+                            {
+                                <span aria-hidden="true">&raquo;</span>
+                            }
+                            else
+                            {
+                                <a href="@(Url.Action("Index", new {page = ViewBag.Page + 3}))" aria-label="Next">
+                                    <span aria-hidden="true">&raquo;</span>
+                                </a>
+                            }
+                        </li>
+                    </ul>
+                </nav>
+            }
             <kbd>Copyright Łukasz Adler @DateTime.Now.Year</kbd>
         </footer>
+
     </div>
 </body>
 </html>
