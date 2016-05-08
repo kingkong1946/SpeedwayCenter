@@ -23,11 +23,10 @@ namespace SpeedwayCenter.Areas.Admin.Controllers
         public ActionResult Index()
         {
             var riders = _unitOfWork.GetQueryRepository<Rider>();
-            var records = riders.GetAll().Select(r => new AdminIndexRiderViewModel
+            var records = riders.GetAll().ToList().Select(r => new AdminIndexRiderViewModel
             {
                 Id = r.Id,
-                Name = r.Name,
-                Forname = r.Forname,
+                Name = r.FullName,
                 BirthDate = r.BirthDate,
                 Country = r.Country
             });

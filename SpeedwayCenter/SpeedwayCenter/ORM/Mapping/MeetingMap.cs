@@ -15,7 +15,6 @@ namespace SpeedwayCenter.ORM.Mapping
 
             //Properties
             Property(e => e.Date)
-                .IsRequired()
                 .HasColumnType("datetime2");
 
             //Property(e => e.Status)

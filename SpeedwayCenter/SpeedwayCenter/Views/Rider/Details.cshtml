@@ -7,14 +7,20 @@
     <div class="panel panel-default">
         <div class="panel-heading">
             <h1 class="text-center">@Model.Name</h1>
+            <ul class="nav nav-pills nav-stacked">
+                <li>@Html.ActionLink(Model.Team.Name, "Details", "Team", new { id = Model.Team.Id }, new { @class = "text-center" })</li>
+            </ul>
         </div>
         <div class="panel-body">
-            <p class="lead text-center">@Html.LabelFor(model => model.BirthDate): <small>@Model.BirthDate</small></p>
-            <p class="lead text-center">@Html.LabelFor(model => model.Country): <small>@Model.Country</small></p>
-            <a href="@Url.Action("Details", "Team", new {id = Model.Team.Id})" class="btn btn-default btn-block">@Model.Team.Name</a>
+            <p class="lead text-center">
+                @Html.LabelFor(model => model.BirthDate):<br /> <small>@Model.BirthDate</small>
+            </p>
+            <p class="lead text-center">
+                @Html.LabelFor(model => model.Country):<br /> <small>@Model.Country</small>
+            </p>
         </div>
         <div class="panel-footer">
-            <table class="table table-bordered">
+            <table class="table table-bordered hidden-xs">
                 @foreach (var item in Model.Matches)
                 {
                     <tr>
@@ -26,6 +32,19 @@
                     </tr>
                 }
             </table>
+
+            @foreach (var item in Model.Matches)
+            {
+                <div class="panel panel-primary visible-xs-block">
+                    <div class="panel-heading">
+                        <p>@item.Date</p>
+                        <p>@item.Name</p>
+                    </div>
+                    <div class="panel-body">
+                        @item.Total - (@item.Points)
+                    </div>
+                </div>
+            }
         </div>
     </div>
 </div>

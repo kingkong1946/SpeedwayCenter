@@ -3,25 +3,22 @@
     ViewBag.Title = "Add";
     Layout = "~/Areas/Admin/Views/Shared/_AdminBasicLayout.cshtml";
 }
-
-<div class="col-xs-8 col-xs-offset-2">
-    <h2>Add - Choose teams: </h2>
-
     @using (@Html.BeginForm("AddStep2", "Match", FormMethod.Post, new { @class = "form-horizontal" }))
     {
+        <h2 class="hidden-xs">Add - Choose teams: </h2>
+        <h4 class="visible-xs"> Add - Choose teams </h4>
         <div class="form-group">
-            @Html.LabelFor(model => model.HomeTeamId, new { @class = "control-label col-xs-3" })
-            <div class="col-xs-9">
+            @Html.LabelFor(model => model.HomeTeamId, new { @class = "control-label col-sm-4 col-md-3" })
+            <div class="col-sm-8 col-md-9">
                 @Html.DropDownListFor(model => model.HomeTeamId, new SelectList(Model.Teams, "Id", "Name"), new { @class = "form-control" })
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.AwayTeamId, new { @class = "control-label col-xs-3" })
-            <div class="col-xs-9">
+            @Html.LabelFor(model => model.AwayTeamId, new { @class = "control-label col-sm-4 col-md-3" })
+            <div class="col-sm-8 col-md-9">
                 @Html.DropDownListFor(model => model.AwayTeamId, new SelectList(Model.Teams, "Id", "Name"), new { @class = "form-control" })
             </div>
         </div>
         <input type="submit" class="btn btn-default" value="Add" />
     }
-</div>

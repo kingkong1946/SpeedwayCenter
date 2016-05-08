@@ -22,11 +22,10 @@ namespace SpeedwayCenter.Areas.Admin.Controllers
         public ActionResult Index()
         {
             var teams = _unitOfWork.GetQueryRepository<Team>();
-            var records = teams.GetAll().Select(r => new AdminIndexTeamViewModel
+            var records = teams.GetAll().ToList().Select(r => new AdminIndexTeamViewModel
             {
                 Id = r.Id,
-                Name = r.Name,
-                City = r.City,
+                Name = $"{r.Name} {r.City}",
                 StadiumName = r.StadiumName,
                 Capacity = r.Capacity
             });

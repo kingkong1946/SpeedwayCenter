@@ -10,9 +10,7 @@
 <table class="table table-hover">
     <thead>
         <tr>
-            <th>@Html.DisplayNameFor(model => model.Id)</th>
             <th>@Html.DisplayNameFor(model => model.Name)</th>
-            <th>@Html.DisplayNameFor(model => model.Forname)</th>
             <th>@Html.DisplayNameFor(model => model.Country)</th>
             <th>@Html.DisplayNameFor(model => model.BirthDate)</th>
             <th></th>
@@ -22,9 +20,7 @@
         @foreach (var item in Model)
         {
             <tr data-href="@Url.Action("Edit", "Rider", new {Id = item.Id})">
-                <td>@Html.DisplayFor(model => item.Id)</td>
                 <td>@Html.DisplayFor(model => item.Name)</td>
-                <td>@Html.DisplayFor(model => item.Forname)</td>
                 <td>@Html.DisplayFor(model => item.Country)</td>
                 <td>@Html.DisplayFor(model => item.BirthDate)</td>
                 <td>

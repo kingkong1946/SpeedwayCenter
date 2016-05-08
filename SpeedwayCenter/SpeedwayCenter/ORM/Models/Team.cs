@@ -21,7 +21,7 @@ namespace SpeedwayCenter.ORM.Models
         public virtual ICollection<Season> Seasons { get; set; }
         public virtual ICollection<Rider> Riders { get; set; }
 
-        public string FullName => $"{Name} {City}";
+        public string FullName => $"{Name}\u00A0{City}";
 
         public ICollection<TwoTeamMeeting> AllMeetings
         {

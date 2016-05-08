@@ -10,7 +10,6 @@
 <table class="table table-hover">
     <thead>
         <tr>
-            <th>@Html.DisplayNameFor(model => model.Id)</th>
             <th>@Html.DisplayNameFor(model => model.Name)</th>
             <th>@Html.DisplayNameFor(model => model.Score)</th>
             <th></th>
@@ -20,7 +19,6 @@
         @foreach (var item in Model)
         {
             <tr data-href="@Url.Action("Edit", "Match", new {Id = item.Id})">
-                <td>@Html.DisplayFor(model => item.Id)</td>
                 <td>@Html.DisplayFor(model => item.Name)</td>
                 <td>@Html.DisplayFor(model => item.Score)</td>
                 <td>

@@ -279,7 +279,6 @@
     <Content Include="Areas\Admin\Views\Team\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Team\Add.cshtml" />
     <Content Include="Areas\Admin\Views\Team\Edit.cshtml" />
-    <Content Include="Areas\Admin\Views\Rider\Details.cshtml" />
     <Content Include="Areas\Admin\Views\Match\Index.cshtml" />
     <Content Include="Areas\Admin\Views\Match\AddStep1.cshtml" />
     <Content Include="Areas\Admin\Views\Match\AddStep2.cshtml" />

@@ -43,7 +43,8 @@ namespace SpeedwayCenter.Controllers
                     if (i > 0) return 2;
                     if (i == 0) return 1;
                     return 0;
-                }), x.GetPlusMinusPointsFromSeason(thisSeason)));
+                }), x.GetPlusMinusPointsFromSeason(thisSeason)))
+                .OrderByDescending(m => m.Points);
 
             return View(viewModel);
         }

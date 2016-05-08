@@ -7,9 +7,13 @@
     <div class="panel panel-default">
         <div class="panel-heading">
             <h1 class="text-center">@Model.Name</h1>
-            <p class="lead text-center">@Html.LabelFor(model => model.StadiumName): <small>@Model.StadiumName</small><br/>
-            @Html.LabelFor(model => model.Capacity): <small>@Model.Capacity</small></p>
-        </div>
+            <p class="lead text-center">
+                @Html.LabelFor(model => model.StadiumName):<br /> <small>@Model.StadiumName</small><br />
+            </p>
+            <p class="lead text-center">
+                @Html.LabelFor(model => model.Capacity):<br /> <small>@Model.Capacity</small>
+            </p>
+</div>
         <div class="panel-body">
             <ul class="nav nav-pills nav-stacked">
                 @foreach (var item in Model.Riders)
@@ -19,16 +23,28 @@
             </ul>
         </div>
         <div class="panel-footer">
-            <table class="table table-bordered">
+            <table class="table table-bordered hidden-xs">
                 @foreach (var item in Model.Matches)
                 {
                     <tr>
                         <td>@item.Date</td>
                         <td>@item.Name</td>
-                        <td>@Html.ActionLink(item.Score, "Details", "Fixtures", new { id = item.Id }, null)</td>
+                        <td>@Html.ActionLink(item.Score, "Details", "Fixtures", new {id = item.Id}, null)</td>
                     </tr>
                 }
             </table>
+            @foreach (var item in Model.Matches)
+            {
+                <div class="panel panel-primary visible-xs-block">
+                    <div class="panel-heading">
+                        <p class="text-center">@item.Date</p>
+                        <p class="text-center">@item.Name</p>
+                        <ul class="nav nav-pills nav-stacked">
+                            <li>@Html.ActionLink(item.Score, "Details", "Fixtures", new { id = item.Id }, new { @class = "text-center" })</li>
+                        </ul>
+                    </div>
+                </div>
+            }
         </div>
     </div>
 </div>

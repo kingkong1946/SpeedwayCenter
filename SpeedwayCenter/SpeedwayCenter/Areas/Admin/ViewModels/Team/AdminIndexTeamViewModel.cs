@@ -7,7 +7,6 @@ namespace SpeedwayCenter.Areas.Admin.ViewModels.Team
     {
         public Guid Id { get; set; }
         public string Name { get; set; }
-        public string City { get; set; }
 
         [Display(Name = "Stadium Name")]
         public string StadiumName { get; set; }

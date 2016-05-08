@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity.Validation;
 using System.IO;
 using System.Linq;
 using System.Web.Mvc;
@@ -86,9 +87,9 @@ namespace SpeedwayCenter.Areas.Admin.Controllers
             var viewModel = new AdminAddRidersMatchViewModel
             {
                 HomeTeamId = item.HomeTeamId,
-                HomeTeam = homeTeam.FullName,
+                HomeTeam = $"{homeTeam.Name} {homeTeam.City}",
                 AwayTeamId = item.AwayTeamId,
-                AwayTeam = awayTeam.FullName,
+                AwayTeam = $"{awayTeam.Name} {awayTeam.City}",
                 HomeTeamRiders = homeTeamRiders,
                 AwayTeamRiders = awayTeamRiders
             };
@@ -106,7 +107,7 @@ namespace SpeedwayCenter.Areas.Admin.Controllers
 
             var record = new TwoTeamMeeting();
             record.Season = seasons.FindBy(s => s.Name == "2016" && s.League.Name == "Speedway Ekstraliga");
-            
+
             var heat1GateA = new RiderResult
             {
                 Id = Guid.NewGuid(),
@@ -705,7 +706,7 @@ namespace SpeedwayCenter.Areas.Admin.Controllers
                 Id = Guid.NewGuid(),
                 Rider = riders.FindBy(r => r.Id == item.Rider12Id),
                 Match = record,
-                Number =12
+                Number = 12
             };
 
             var homeTeamRider13 = new HomeTeamRiders
@@ -808,10 +809,7 @@ namespace SpeedwayCenter.Areas.Admin.Controllers
                 awayTeamRider6,
                 awayTeamRider7,
             };
-            //_unitOfWork.Save();
 
-            //record = new TwoTeamMeeting
-            //{
             record.Id = Guid.NewGuid();
             record.HomeTeam = teams.FindBy(t => t.Id == item.HomeTeamId);
             record.AwayTeam = teams.FindBy(t => t.Id == item.AwayTeamId);
@@ -821,11 +819,7 @@ namespace SpeedwayCenter.Areas.Admin.Controllers
             record.Heats = heats;
             record.HomeTeamRiders = homeTeamRiders;
             record.AwayTeamRiders = awayTeamRiders;
-                //Riders = homeTeamRiders.Concat(awayTeamRiders).ToList()
-            //};
 
-        matches.Add(record);
-            //_unitOfWork.Save();
 
             var homeTeamRidersViewModel =
                 record.HomeTeamRiders.Select(r => new AdminBasicInfoViewModel { Id = r.Rider.Id, Name = r.Rider.FullName }).ToList();
@@ -858,7 +852,8 @@ namespace SpeedwayCenter.Areas.Admin.Controllers
                 }).OrderBy(m => m.Number).ToList()
             };
 
-            //_unitOfWork.Save();
+            matches.Add(record);
+            _unitOfWork.Save();
 
             var results = record.Heats.SelectMany(h => h.Gates);
 
@@ -907,7 +902,7 @@ namespace SpeedwayCenter.Areas.Admin.Controllers
                 gateD.Rider = riders.FindBy(r => r.Id == heat.RiderIdGateD);
             }
 
-            //_unitOfWork.Save();
+            _unitOfWork.Save();
 
             return RedirectToAction("Index", "Match");
         }
@@ -991,8 +986,8 @@ namespace SpeedwayCenter.Areas.Admin.Controllers
                 AwayTeamsRiders = awayTeamRiders,
                 HomeTeamSelectedRiders = match.HomeTeamRiders.OrderBy(r => r.Number).ToList(),
                 AwayTeamSelectedRiders = match.AwayTeamRiders.OrderBy(r => r.Number).ToList(),
-                HomeTeam = match.HomeTeam.FullName,
-                AwayTeam = match.AwayTeam.FullName,
+                HomeTeam = $"{match.HomeTeam.Name} {match.HomeTeam.City}",
+                AwayTeam = $"{match.AwayTeam.Name} {match.AwayTeam.City}",
                 Round = match.Round,
                 Date = match.Date.Value
             };
@@ -1054,7 +1049,7 @@ namespace SpeedwayCenter.Areas.Admin.Controllers
                 var gateB = heat.Gates.FirstOrDefault(r => r.Gate == Gate.B);
                 var gateC = heat.Gates.FirstOrDefault(r => r.Gate == Gate.C);
                 var gateD = heat.Gates.FirstOrDefault(r => r.Gate == Gate.D);
-                
+
                 gateA.Rider = riders.FindBy(r => r.Id == modifiedHeat.RiderIdGateA);
                 gateA.Points = modifiedHeat.RiderScoreGateA;
 

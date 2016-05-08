@@ -20,11 +20,11 @@ namespace SpeedwayCenter.ORM.Models
         public int AwayTeamPoints => AwayTeamRiders.Sum(rider => rider.GetTotalPointsFromMeeting(this));
 
         public override string Name {
-            get { return $"{HomeTeam?.Name} - {AwayTeam?.Name}"; }
+            get { return $"{HomeTeam?.FullName} - {AwayTeam?.FullName}"; }
             set { }
         }
 
-        public string Score => $"{HomeTeamPoints} : {AwayTeamPoints}";
+        public string Score => $"{HomeTeamPoints}:{AwayTeamPoints}";
 
         //public override ICollection<Rider> Riders
         //{

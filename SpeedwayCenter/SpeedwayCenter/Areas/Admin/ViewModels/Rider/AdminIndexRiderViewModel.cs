@@ -9,8 +9,6 @@ namespace SpeedwayCenter.Areas.Admin.ViewModels.Rider
 
         public string Name { get; set; }
         
-        public string Forname { get; set; }
-        
         [Display(Name = "Birth Date")]
         [DisplayFormat(DataFormatString = "{0:d}")]
         public DateTime BirthDate { get; set; }
